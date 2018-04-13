@@ -1,0 +1,16 @@
+server:
+  port: 4050
+
+spring:
+  rabbitmq:
+    host: 123.206.129.162
+    port: 5672
+    username: redis
+    password: redis
+
+sms:
+  aliyun:
+    accessKey: accessKey
+    secretKey: secretKey
+    channels:
+      loginCodeChannel: SMS_34630023

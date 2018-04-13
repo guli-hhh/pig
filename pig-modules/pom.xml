@@ -24,6 +24,7 @@
         <module>pig-mc-service</module>
         <module>pig-sso-client-demo</module>
         <module>pig-upms-service</module>
+        <module>pig-wx-service</module>
     </modules>
 
 </project>
