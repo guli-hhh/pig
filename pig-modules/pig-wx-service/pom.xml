@@ -24,10 +24,14 @@
 
 
     <dependencies>
-        <dependency>
+        <!--<dependency>
             <groupId>com.github.pig</groupId>
             <artifactId>pig-common</artifactId>
             <version>${pig.version}</version>
+        </dependency>-->
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-feign</artifactId>
         </dependency>
     </dependencies>
 
