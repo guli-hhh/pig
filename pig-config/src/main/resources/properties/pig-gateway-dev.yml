@@ -18,7 +18,7 @@ zuul:
   ribbon:
     eager-load:
       enabled: true
-      clients: pig-auth,pig-upms-service
+      clients: pig-auth,pig-upms-service,pig-wx-mp-service
   ignoredServices: '*'
   host:
     connect-timeout-millis: 30000
@@ -32,6 +32,11 @@ zuul:
     pig-upms-service:
       path: /admin/**
       serviceId: pig-upms-service
+      stripPrefix: true
+      sensitiveHeaders:
+    pig-wx-mp-service:
+      path: /wx/mp/**
+      serviceId: pig-wx-mp-service
       stripPrefix: true
       sensitiveHeaders:
   ratelimit:
@@ -73,6 +78,6 @@ urls:
     - /*/v2/api-docs
     - /swagger/api-docs
     - /webjars/**
-       
+    - /wx/mp/**
 logging:
   config: classpath:logback.xml

@@ -4,7 +4,7 @@ server:
 zipkin:
   collector:
     rabbitmq:
-      addresses: 123.206.129.162:5682
+      addresses: 123.206.129.162:5672
       password: redis
       username: redis
       queue: zipkin

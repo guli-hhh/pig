@@ -15,4 +15,9 @@ public interface ServiceNameConstant {
      * UMPS模块
      */
     String UMPS_SERVICE = "pig-upms-service";
+
+    /**
+     * WX MP 模块
+     */
+    String WX_MP_SERVICE = "pig-wx-mp-service";
 }

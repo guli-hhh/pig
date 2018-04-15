@@ -3,6 +3,8 @@ package com.github.pig.zipkin;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
+import org.springframework.context.annotation.Bean;
+import org.springframework.cloud.netflix.feign.EnableFeignClients;
 import zipkin.server.EnableZipkinServer;
 
 /**
@@ -18,4 +20,10 @@ public class PigZipkinElkApplication {
     public static void main(String[] args) {
         SpringApplication.run(PigZipkinElkApplication.class, args);
     }
+
+    @Bean(value = "zipkinElasticsearchHttp")
+    public okhttp3.OkHttpClient client(){
+        return new okhttp3.OkHttpClient.Builder().build();
+    }
+
 }
