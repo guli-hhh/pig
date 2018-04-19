@@ -4,11 +4,11 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.github.pig</groupId>
-    <artifactId>pig-wx-service</artifactId>
-    <version>${pig.version}</version>
+    <artifactId>pig-cms-service</artifactId>
+    <version>${pig.version}T</version>
     <packaging>jar</packaging>
 
-    <name>pig-wx-service</name>
+    <name>pig-cms-service</name>
     <description>Demo project for Spring Boot</description>
 
     <parent>
@@ -17,22 +17,11 @@
         <version>${pig.version}</version>
     </parent>
 
-    <modules>
-        <module>pig-wx-mp-service</module>
-        <module>pig-wx-minapp-service</module>
-        <module>pig-wx-common</module>
-    </modules>
-
-
     <dependencies>
-        <!--<dependency>
+        <dependency>
             <groupId>com.github.pig</groupId>
             <artifactId>pig-common</artifactId>
             <version>${pig.version}</version>
-        </dependency>-->
-        <dependency>
-            <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-starter-feign</artifactId>
         </dependency>
     </dependencies>
 
@@ -47,5 +36,6 @@
             </plugin>
         </plugins>
     </build>
+
 
 </project>
