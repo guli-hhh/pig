@@ -1,34 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.github.pig</groupId>
-    <artifactId>pig-wx-service</artifactId>
+    <groupId>com.github.pig.cms</groupId>
+    <artifactId>pig-cms-common</artifactId>
     <version>${pig.version}</version>
     <packaging>jar</packaging>
 
-    <name>pig-wx-service</name>
-    <description>Demo project for Spring Boot</description>
 
     <parent>
         <groupId>com.github.pig</groupId>
-        <artifactId>pig-modules</artifactId>
+        <artifactId>pig-cms-service</artifactId>
         <version>${pig.version}</version>
     </parent>
 
-    <modules>
-        <module>pig-wx-mp-service</module>
-        <module>pig-wx-minapp-service</module>
-        <module>pig-wx-common</module>
-    </modules>
-
-
     <dependencies>
-        <dependency>
-            <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-starter-feign</artifactId>
-        </dependency>
+
     </dependencies>
 
     <build>

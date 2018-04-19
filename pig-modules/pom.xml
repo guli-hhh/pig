@@ -5,6 +5,7 @@
         <groupId>com.github</groupId>
         <version>${pig.version}</version>
     </parent>
+
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.github.pig</groupId>
