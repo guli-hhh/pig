@@ -39,6 +39,11 @@ zuul:
       serviceId: pig-wx-mp-service
       stripPrefix: true
       sensitiveHeaders:
+    pig-cms-blog-service:
+      path: /blog/**
+      serviceId: pig-cms-blog-service
+      stripPrefix: true
+      sensitiveHeaders:
   ratelimit:
     key-prefix: pig-ratelimite 
     enabled: true 

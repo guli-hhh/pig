@@ -20,4 +20,9 @@ public interface ServiceNameConstant {
      * WX MP 模块
      */
     String WX_MP_SERVICE = "pig-wx-mp-service";
+
+    /**
+     * CMS BLOG MP 模块
+     */
+    String CMS_BLOG_SERVICE = "pig-cms-blog-service";
 }

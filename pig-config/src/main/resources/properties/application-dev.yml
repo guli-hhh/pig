@@ -26,7 +26,7 @@ redis:
 ribbon:
   eager-load:
     enabled: true
-    clients: pig-auth,pig-upms-service,pig-wx-mp-service
+    clients: pig-auth,pig-upms-service,pig-wx-mp-service,pig-cms-blog-service
   Httpclient:
     enabled: false
   OkHttp:

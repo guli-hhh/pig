@@ -1,5 +1,50 @@
 server:
   port: 9003
 
+##########################################################
+#                      数据库访问配置
+##########################################################
+spring:
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://123.206.129.162:3306/boot?useUnicode=true&characterEncoding=utf-8&useSSL=false
+    username: root
+    password: root@1234
+    druid:
+      initial-size: 1
+      min-idle: 1
+      max-active: 20
+      test-on-borrow: true
+
+##########################################################
+#                       配置JPA
+##########################################################
+  jpa:
+    show-sql: false
+    database: mysql
+    database-platform: org.hibernate.dialect.MySQL5Dialect
+    generate-ddl: true
+    hibernate:
+      ddl-auto: update
+###########################################################
+#                   settings freemarker
+###########################################################
+  freemarker:
+    cache: false
+    suffix: .ftl
+    prefer-file-system-access: true
+    expose-spring-macro-helpers: true
+    template-loader-path: classpath:/templates/
+    request-context-attribute: request
+##########################################################
+#                       国际化配置
+##########################################################
+  messages:
+      encoding: UTF-8
+      always-use-message-format: false
+      basename: i18n/message
+      cache-seconds: -1
+      fallback-to-system-locale: true
+
 logging:
   config: classpath:logback.xml
