@@ -31,7 +31,7 @@ import java.io.PrintWriter;
 @Component("validateCodeFilter")
 public class ValidateCodeFilter extends OncePerRequestFilter {
     private static final Logger logger = LoggerFactory.getLogger(ValidateCodeFilter.class);
-    @Value("${security.validate.code:true}")
+    @Value("${security.validate.code:false}")
     private boolean isValidate;
     @Autowired
     private RedisTemplate redisTemplate;

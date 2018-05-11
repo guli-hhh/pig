@@ -4,6 +4,7 @@ import com.github.pig.common.web.BaseController;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -15,7 +16,7 @@ import javax.servlet.http.HttpSession;
  * @Description: ${todo}
  * @date 2018/4/2014:04
  */
-@Controller
+@RestController
 @RequestMapping("/article")
 public class ArticleController extends BaseController {
 
