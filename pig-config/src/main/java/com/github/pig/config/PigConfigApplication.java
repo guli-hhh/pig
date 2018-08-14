@@ -22,11 +22,12 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.SpringCloudApplication;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.cloud.config.server.EnableConfigServer;
+import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
 
 /**
  * @author lengleng
  */
-@EnableDiscoveryClient
+@EnableEurekaClient
 @EnableConfigServer
 @SpringBootApplication
 public class PigConfigApplication {
