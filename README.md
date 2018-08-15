@@ -10,8 +10,6 @@
 ## 简介
 - [项目官网](https://pig4cloud.com) 
 
-- [在线体验](http://preview.pig4cloud.com)
-
 - [入门视频](https://www.bilibili.com/video/av20229859/)  
 
 - [部署文档](https://www.kancloud.cn/lengleng/pig-guide/550736)  
@@ -19,6 +17,9 @@
 - [问题反馈](https://gitee.com/log4j/pig/issues)  
 
 - [pig-ui](https://gitee.com/log4j/pig-ui)、[pig-config](https://gitee.com/cqzqxq_lxh/pig-config)
+
+- <a target="_blank" href="https://jq.qq.com/?_wv=1027&k=5zWEvg5">交流群：23754102 （人数有限，需要Spring Cloud 基础，小白必清，谢谢！）</a>   
+
 
 ## pigX
 - 全网最新的Cloud 权限系统
@@ -73,51 +74,46 @@ pig
      └── pig-cache-cloud -- 缓存管理、统一监控[5005]
 ```
 
-
-### 交流群
-一键加群：<a target="_blank" href="https://jq.qq.com/?_wv=1027&k=5zWEvg5"><img border="0" src="//pub.idqqimg.com/wpa/images/group.png"></a>   
-![image](http://oss.wjg95.cn/pig_qq_qun.png)
-
 ### 截图 （点击可大图预览）
 <table>
     <tr>
-        <td><img src="https://oss.pig4cloud.com/pic/201806/login.png"/></td>
-        <td><img src="https://oss.pig4cloud.com/pic/201806/1.png"/></td>
+        <td><img src="https://oss.pigx.top/pic/201806/login.png"/></td>
+        <td><img src="https://oss.pigx.top/pic/201806/1.png"/></td>
     </tr>
     <tr>
-        <td><img src="https://oss.pig4cloud.com/pic/201806/2.png"/></td>
-        <td><img src="https://oss.pig4cloud.com/pic/201806/3.png"/></td>
+        <td><img src="https://oss.pigx.top/pic/201806/2.png"/></td>
+        <td><img src="https://oss.pigx.top/pic/201806/3.png"/></td>
     </tr>
     <tr>
-        <td><img src="https://oss.pig4cloud.com/pic/201806/4.png"/></td>
-        <td><img src="https://oss.pig4cloud.com/pic/201806/5.png"/></td>
+        <td><img src="https://oss.pigx.top/pic/201806/4.png"/></td>
+        <td><img src="https://oss.pigx.top/pic/201806/5.png"/></td>
     </tr>
     <tr>
-        <td><img src="https://oss.pig4cloud.com/pic/201806/6.png"/></td>
-        <td><img src="https://oss.pig4cloud.com/pic/201806/7.png"/></td>
+        <td><img src="https://oss.pigx.top/pic/201806/6.png"/></td>
+        <td><img src="https://oss.pigx.top/pic/201806/7.png"/></td>
     </tr>
     <tr>
-        <td><img src="https://oss.pig4cloud.com/pic/201806/12321.png"/></td>
-        <td><img src="https://oss.pig4cloud.com/pic/201806/WX20180522-182107@2x.png"/></td>
+        <td><img src="https://oss.pigx.top/pic/201806/12321.png"/></td>
+        <td><img src="https://oss.pigx.top/pic/201806/WX20180522-182107@2x.png"/></td>
     </tr>
     <tr>
-        <td><img src="https://oss.pig4cloud.com/pic/201806/8.png"/></td>
-        <td><img src="https://oss.pig4cloud.com/pic/201806/9.png"/></td>
+        <td><img src="https://oss.pigx.top/pic/201806/8.png"/></td>
+        <td><img src="https://oss.pigx.top/pic/201806/9.png"/></td>
     </tr>
     <tr>
-        <td><img src="https://oss.pig4cloud.com/pic/201806/10.png"/></td>
-        <td><img src="https://oss.pig4cloud.com/pic/201806/11.png"/></td>
+        <td><img src="https://oss.pigx.top/pic/201806/10.png"/></td>
+        <td><img src="https://oss.pigx.top/pic/201806/11.png"/></td>
     </tr>
     <tr>
-        <td><img src="https://oss.pig4cloud.com/pic/201806/12.png"/></td>
-        <td><img src="https://oss.pig4cloud.com/pic/201806/13.png"/></td>
+        <td><img src="https://oss.pigx.top/pic/201806/12.png"/></td>
+        <td><img src="https://oss.pigx.top/pic/201806/13.png"/></td>
     </tr>
     <tr>
-        <td><img src="https://oss.pig4cloud.com/pic/201806/14.png"/></td>
-        <td><img src="https://oss.pig4cloud.com/pic/201806/15.png"/></td>
+        <td><img src="https://oss.pigx.top/pic/201806/14.png"/></td>
+        <td><img src="https://oss.pigx.top/pic/201806/15.png"/></td>
     </tr>
     <tr>
-        <td><img src="https://oss.pig4cloud.com/pic/201806/16.png"/></td>
-        <td><img src="https://oss.pig4cloud.com/pic/201806/17.png"/></td>
+        <td><img src="https://oss.pigx.top/pic/201806/16.png"/></td>
+        <td><img src="https://oss.pigx.top/pic/201806/17.png"/></td>
     </tr>
 </table>
