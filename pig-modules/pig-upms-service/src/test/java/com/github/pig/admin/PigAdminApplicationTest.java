@@ -41,6 +41,6 @@ public class PigAdminApplicationTest {
         //加密方法
         System.out.println(stringEncryptor.encrypt("123456"));
         //解密方法
-        System.out.println(stringEncryptor.decrypt("saRv7ZnXsNAfsl3AL9OpCQ=="));
+        System.out.println(stringEncryptor.decrypt("hs13f7820xKqSqTbb/KgxQ=="));
     }
 }
