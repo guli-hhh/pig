@@ -14,6 +14,8 @@ services:
 
   pig-redis:
     image: redis:5.0
+    restart: always
+    container_name: pig-redis
     ports:
       - 6379:6379
     restart: always
@@ -35,6 +37,8 @@ services:
     build:
       context: ./
       dockerfile: ./pig-config/Dockerfile
+    depends_on:
+      - pig-eureka
     restart: always
     container_name: pig-config
     hostname: pig-config
@@ -44,6 +48,8 @@ services:
     build:
       context: ./
       dockerfile: ./pig-gateway/Dockerfile
+    depends_on:
+      - pig-config
     restart: always
     ports:
       - 9999:9999
@@ -56,6 +62,8 @@ services:
       context: ./
       dockerfile: ./pig-auth/Dockerfile
     restart: always
+    depends_on:
+      - pig-gateway
     container_name: pig-auth
     hostname: pig-auth
     image: pig-auth
@@ -65,6 +73,8 @@ services:
       context: ./
       dockerfile: ./pig-upms/pig-upms-biz/Dockerfile
     restart: always
+    depends_on:
+      - pig-gateway
     container_name: pig-upms
     hostname: pig-upms
     image: pig-upms
@@ -76,6 +86,8 @@ services:
     restart: always
     ports:
       - 5001:5001
+    depends_on:
+      - pig-gateway
     container_name: pig-monitor
     hostname: pig-monitor
     image: pig-monitor
@@ -87,6 +99,8 @@ services:
     restart: always
     container_name: pig-codegen
     hostname: pig-codegen
+    depends_on:
+      - pig-gateway
     image: pig-codegen
 
   pig-zipkin:
@@ -94,6 +108,8 @@ services:
       context: ./
       dockerfile: ./pig-visual/pig-zipkin/Dockerfile
     restart: always
+    depends_on:
+      - pig-gateway
     image: pig-zipkin
     container_name: pig-zipkin
     ports:
