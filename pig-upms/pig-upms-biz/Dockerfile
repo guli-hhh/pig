@@ -14,4 +14,4 @@ EXPOSE 4000
 
 ADD ./target/pig-upms-biz.jar ./
 
-CMD sleep 150;java -Djava.security.egd=file:/dev/./urandom -jar pig-upms-biz.jar
+CMD sleep 240;java -Djava.security.egd=file:/dev/./urandom -jar pig-upms-biz.jar
