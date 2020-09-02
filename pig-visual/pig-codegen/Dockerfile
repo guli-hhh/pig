@@ -14,4 +14,4 @@ EXPOSE 5002
 
 ADD ./target/pig-codegen.jar ./
 
-CMD sleep 240;java -Djava.security.egd=file:/dev/./urandom -jar pig-codegen.jar
+CMD sleep 360;java -Djava.security.egd=file:/dev/./urandom -jar pig-codegen.jar

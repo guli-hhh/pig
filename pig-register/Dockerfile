@@ -14,6 +14,6 @@ EXPOSE 8848
 
 ADD ./target/pig-register.jar ./
 
-CMD sleep 180;java -Djava.security.egd=file:/dev/./urandom -jar pig-register.jar
+CMD sleep 300;java -Djava.security.egd=file:/dev/./urandom -jar pig-register.jar
 
 
