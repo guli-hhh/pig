@@ -14,7 +14,7 @@ services:
   pig-redis:
     image: redis:6.0
     ports:
-      - 6379:6379
+      - 6380:6379
     restart: always
     container_name: pig-redis
     hostname: pig-redis
