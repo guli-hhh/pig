@@ -9,12 +9,12 @@ services:
     container_name: pig-mysql
     image: pig-mysql
     ports:
-      - 3306:3306
+      - 3308:3306
 
   pig-redis:
     image: redis:6.0
     ports:
-      - 6379:6379
+      - 6380:6379
     restart: always
     container_name: pig-redis
     hostname: pig-redis
@@ -28,6 +28,9 @@ services:
     container_name: pig-register
     hostname: pig-register
     image: pig-register
+    depends_on:
+      - pig-mysql
+      - pig-redis
 
   pig-gateway:
     build:
@@ -38,6 +41,8 @@ services:
     container_name: pig-gateway
     hostname: pig-gateway
     image: pig-gateway
+    depends_on:
+      - pig-register
 
   pig-auth:
     build:
@@ -46,6 +51,8 @@ services:
     container_name: pig-auth
     hostname: pig-auth
     image: pig-auth
+    depends_on:
+      - pig-register
 
   pig-upms:
     build:
@@ -54,6 +61,8 @@ services:
     container_name: pig-upms
     hostname: pig-upms
     image: pig-upms
+    depends_on:
+      - pig-gateway
 
   pig-monitor:
     build:
