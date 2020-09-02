@@ -28,6 +28,8 @@ services:
     container_name: pig-register
     hostname: pig-register
     image: pig-register
+    depends_on:
+      - pig-mysql
 
   pig-gateway:
     build:
