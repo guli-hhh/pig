@@ -14,4 +14,4 @@ EXPOSE 9999
 
 ADD ./target/pig-gateway.jar ./
 
-CMD sleep 60;java -Djava.security.egd=file:/dev/./urandom -jar pig-gateway.jar
+CMD sleep 150;java -Djava.security.egd=file:/dev/./urandom -jar pig-gateway.jar
