@@ -64,24 +64,24 @@ services:
     depends_on:
       - pig-gateway
 
-  pig-monitor:
-    build:
-      context: ./pig-visual/pig-monitor
-    restart: always
-    ports:
-      - 5001:5001
-    container_name: pig-monitor
-    hostname: pig-monitor
-    image: pig-monitor
-
-  pig-sentinel:
-    build:
-      context: ./pig-visual/pig-sentinel-dashboard
-    restart: always
-    image: pig-sentinel
-    container_name: pig-sentinel
-    ports:
-      - 5003:5003
+#  pig-monitor:
+#    build:
+#      context: ./pig-visual/pig-monitor
+#    restart: always
+#    ports:
+#      - 5001:5001
+#    container_name: pig-monitor
+#    hostname: pig-monitor
+#    image: pig-monitor
+#
+#  pig-sentinel:
+#    build:
+#      context: ./pig-visual/pig-sentinel-dashboard
+#    restart: always
+#    image: pig-sentinel
+#    container_name: pig-sentinel
+#    ports:
+#      - 5003:5003
 
   pig-codegen:
     build:
