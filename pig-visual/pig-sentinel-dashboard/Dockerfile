@@ -14,4 +14,4 @@ EXPOSE 5003
 
 ADD ./target/pig-sentinel-dashboard.jar ./
 
-CMD sleep 360;java -Djava.security.egd=file:/dev/./urandom -jar pig-sentinel-dashboard.jar
+CMD sleep 60;java -Djava.security.egd=file:/dev/./urandom -jar pig-sentinel-dashboard.jar
