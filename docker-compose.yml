@@ -52,7 +52,6 @@ services:
     restart: always
     container_name: pig-auth
     hostname: pig-auth
-    network_mode: host
     image: pig-auth
     ports:
       - 3000:3000
