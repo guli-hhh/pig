@@ -8,7 +8,7 @@ spring:
     nacos:
       discovery:
         server-addr: ${NACOS_HOST:pig-register}:${NACOS_PORT:8848}
-        ip: pig-upms-biz
+        ip: pig-upms
       config:
         server-addr: ${spring.cloud.nacos.discovery.server-addr}
         file-extension: yml
