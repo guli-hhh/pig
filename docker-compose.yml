@@ -66,6 +66,8 @@ services:
     container_name: pig-upms
     hostname: pig-upms
     image: pig-upms
+    ports:
+      - 4000:4000
     depends_on:
       - pig-gateway
 
