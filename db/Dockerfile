@@ -2,7 +2,7 @@ FROM mysql:8.0.20
 
 MAINTAINER lengleng(wangiegie@gmail.com)
 
-ENV TZ=Asia/Shanghai
+ENV TZ Asia/Shanghai
 
 RUN ln -sf /usr/share/zoneinfo/$TZ /etc/localtime
 
