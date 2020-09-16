@@ -4,7 +4,9 @@ MAINTAINER lengleng(wangiegie@gmail.com)
 
 ENV TZ=Asia/Shanghai
 
-RUN ln -sf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
+RUN ln -sf /usr/share/zoneinfo/$TZ /etc/localtime
+
+# && echo $TZ > /etc/timezone
 
 # 除了新部署需要初始化 其他时候不需要初始化
 #COPY ./pig.sql /docker-entrypoint-initdb.d
