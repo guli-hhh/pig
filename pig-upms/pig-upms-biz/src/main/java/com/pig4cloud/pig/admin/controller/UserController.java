@@ -34,6 +34,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.List;
 
 /**
  * @author lengleng
@@ -165,4 +166,17 @@ public class UserController {
 		return R.ok(userService.listAncestorUsersByUsername(username));
 	}
 
+	/**
+	 * 获取所有用户全部信息
+	 * @return 用户信息
+	 */
+	@Inner
+	@GetMapping("/infos")
+	public R infos() {
+		List<SysUser> allUser = userService.list();
+		if (allUser == null) {
+			return R.failed(String.format("用户信息为空 %s", allUser));
+		}
+		return R.ok(allUser);
+	}
 }

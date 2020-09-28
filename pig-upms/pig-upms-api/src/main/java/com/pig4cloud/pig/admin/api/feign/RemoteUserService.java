@@ -19,6 +19,7 @@
 package com.pig4cloud.pig.admin.api.feign;
 
 import com.pig4cloud.pig.admin.api.dto.UserInfo;
+import com.pig4cloud.pig.admin.api.entity.SysUser;
 import com.pig4cloud.pig.admin.api.feign.factory.RemoteUserServiceFallbackFactory;
 import com.pig4cloud.pig.common.core.constant.SecurityConstants;
 import com.pig4cloud.pig.common.core.constant.ServiceNameConstants;
@@ -27,6 +28,8 @@ import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestHeader;
+
+import java.util.List;
 
 /**
  * @author lengleng
@@ -44,6 +47,14 @@ public interface RemoteUserService {
 	 */
 	@GetMapping("/user/info/{username}")
 	R<UserInfo> info(@PathVariable("username") String username, @RequestHeader(SecurityConstants.FROM) String from);
+
+	/**
+	 * 获取所有用户全部信息
+	 * @param from 调用标志
+	 * @return R
+	 */
+	@GetMapping("/user/infos")
+	R<List<SysUser>> infos(@RequestHeader(SecurityConstants.FROM) String from);
 
 	/**
 	 * 通过社交账号查询用户、角色信息
