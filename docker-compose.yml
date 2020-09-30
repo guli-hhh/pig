@@ -118,6 +118,6 @@ services:
     hostname: sf-ui
     image: sf-ui
     ports:
-      - 8080:80
+      - 10001:80
     depends_on:
       - sf-task
