@@ -97,3 +97,11 @@ services:
     container_name: pig-codegen
     hostname: pig-codegen
     image: pig-codegen
+
+  sf-task:
+    build:
+      context: ./sf-task/sf-task-biz
+    restart: always
+    container_name: sf-task
+    hostname: sf-task
+    image: sf-task
