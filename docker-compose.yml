@@ -97,6 +97,8 @@ services:
     container_name: pig-codegen
     hostname: pig-codegen
     image: pig-codegen
+    depends_on:
+      - pig-gateway
 
   sf-task:
     build:
@@ -105,6 +107,8 @@ services:
     container_name: sf-task
     hostname: sf-task
     image: sf-task
+    depends_on:
+      - pig-gateway
 
   sf-ui:
     build:
@@ -113,3 +117,7 @@ services:
     container_name: sf-ui
     hostname: sf-ui
     image: sf-ui
+    ports:
+      - 8080:80
+    depends_on:
+      - sf-task
