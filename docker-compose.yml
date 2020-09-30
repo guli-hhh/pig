@@ -112,7 +112,7 @@ services:
 
   sf-ui:
     build:
-      context: ./sf-ui/src/docker
+      context: ./sf-ui/docker
     restart: always
     container_name: sf-ui
     hostname: sf-ui
