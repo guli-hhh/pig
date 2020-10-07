@@ -9,7 +9,7 @@ services:
     container_name: pig-mysql
     image: pig-mysql
     volumes:
-      - /opt/sf-cloud/docker-db-data:/var/lib/mysql
+      - /home/tzl/tu_files/docker-db-data:/var/lib/mysql
     ports:
       - 3308:3306
 
