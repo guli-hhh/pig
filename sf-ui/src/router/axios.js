@@ -6,6 +6,8 @@ import router from "@/router/router"
 import {Message} from 'element-ui'
 import 'nprogress/nprogress.css'
 import store from "@/store"; // progress bar style
+import { isNginx } from '@/config/env'
+
 axios.defaults.timeout = 30000
 // 返回其他状态吗
 axios.defaults.validateStatus = function (status) {
@@ -20,7 +22,11 @@ NProgress.configure({
 
 // HTTPrequest拦截
 axios.interceptors.request.use(config => {
-  // config.url = '/api' + config.url
+  // 如果是nginx环境部署，需要配置后台接口的反向代理，这里给所有后台接口加上api前缀，方便nginx里面配置反向代理
+  if(isNginx){
+    config.url = '/api' + config.url
+  }
+
   NProgress.start() // start progress bar
   const isToken = (config.headers || {}).isToken === false
   let token =  store.getters.access_token
