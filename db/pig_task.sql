@@ -1,17 +1,4 @@
-/*
-Navicat MySQL Data Transfer
 
-Source Server         : 192.168.7.151_3308_docker
-Source Server Version : 80020
-Source Host           : 192.168.7.151:3308
-Source Database       : pig_task
-
-Target Server Type    : MYSQL
-Target Server Version : 80020
-File Encoding         : 65001
-
-Date: 2020-09-28 16:31:08
-*/
 DROP DATABASE IF EXISTS `pig_task`;
 
 CREATE DATABASE  `pig_task` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
