@@ -6,7 +6,7 @@
 # EXPOSE 443
 
 # node镜像
-FROM node
+FROM node:8-slim
 # 维护者信息
 #MAINTAINER zhengqing "960869719@qq.com"
 
