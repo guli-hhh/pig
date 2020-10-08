@@ -63,9 +63,10 @@ public class Project extends BasePo {
     @Column(name = "project_name")
     private String projectName;
 
+	@ApiModelProperty(value = "所属用户角色")
     @Convert(converter = ListToIntegerConverter.class)
-    @Column(name = "user_id")
-    private List<Integer> userIds;
+    @Column(name = "role_id")
+    private List<Integer> roleIds;
     /**
      * 创建时间
      */
