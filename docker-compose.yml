@@ -110,14 +110,14 @@ services:
     depends_on:
       - pig-gateway
 
-  sf-ui:
-    build:
-      context: ./sf-ui
-    restart: always
-    container_name: sf-ui
-    hostname: sf-ui
-    image: sf-ui
-    ports:
-      - 10001:80
-    depends_on:
-      - sf-task
+#  sf-ui:
+#    build:
+#      context: ./sf-ui
+#    restart: always
+#    container_name: sf-ui
+#    hostname: sf-ui
+#    image: sf-ui
+#    ports:
+#      - 10001:80
+#    depends_on:
+#      - sf-task
