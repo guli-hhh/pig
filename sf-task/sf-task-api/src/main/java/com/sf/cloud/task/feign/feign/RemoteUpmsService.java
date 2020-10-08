@@ -1,5 +1,6 @@
 package com.sf.cloud.task.feign.feign;
 
+import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.pig4cloud.pig.common.core.constant.SecurityConstants;
 import com.pig4cloud.pig.common.core.constant.ServiceNameConstants;
 import com.pig4cloud.pig.common.core.util.R;
@@ -24,4 +25,7 @@ public interface RemoteUpmsService {
      */
     @GetMapping("/dict/type/{type}")
     R getDictByType(@PathVariable("type") String type, @RequestHeader(SecurityConstants.FROM) String from);
+
+	@GetMapping("/role/list")
+	R listRoles();
 }

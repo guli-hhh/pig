@@ -1,10 +1,12 @@
 package com.sf.cloud.task.task.controller;
 
 import cn.hutool.core.map.MapUtil;
+import com.pig4cloud.pig.admin.api.entity.SysRole;
 import com.pig4cloud.pig.admin.api.entity.SysUser;
 import com.pig4cloud.pig.admin.api.feign.RemoteUserService;
 import com.pig4cloud.pig.common.core.constant.SecurityConstants;
 import com.pig4cloud.pig.common.core.util.R;
+import com.sf.cloud.task.feign.feign.RemoteUpmsService;
 import com.sf.cloud.task.task.domain.po.Project;
 import com.sf.cloud.task.task.domain.vo.ProjectDicVo;
 import io.swagger.annotations.Api;
@@ -26,28 +28,28 @@ import java.util.stream.Collectors;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/user" )
-@Api(value = "task", tags = "任务表管理")
-public class UserController {
+@RequestMapping("/role" )
+@Api(value = "task", tags = "角色查询")
+public class RoleController {
 
-    private final RemoteUserService remoteUserService;
+    private final RemoteUpmsService remoteUpmsService;
 
     /**
      * 查询用户(用于前台下拉框使用)
      * @return R
      */
-    @ApiOperation(value = "项目用户数据字典(用于前台下拉框使用)", notes = "项目用户数据字典(用于前台下拉框使用)")
+    @ApiOperation(value = "项目用户角色数据字典(用于前台下拉框使用)", notes = "项目用户角色数据字典(用于前台下拉框使用)")
     @GetMapping("/dic" )
     @PreAuthorize("@pms.hasPermission('task_project_get')" )
     public R getById(@PageableDefault(value = 20, sort = { "id" }, direction = Sort.Direction.DESC)
                              Pageable pageable) {
-        R<List<SysUser>> infos = remoteUserService.infos(SecurityConstants.FROM_IN);
+		R<List<SysRole>> infos = remoteUpmsService.listRoles();
         List<HashMap<String, Object>> selectOptions = infos.getData()
                 .stream()
-                .map(user -> {
+                .map(role -> {
                     HashMap<String, Object> selectOption = MapUtil.newHashMap();
-                    selectOption.put("label", user.getUsername());
-                    selectOption.put("value", user.getUserId());
+                    selectOption.put("label", role.getRoleName());
+                    selectOption.put("value", role.getRoleId());
                     return selectOption;
                 })
                 .collect(Collectors.toList());

@@ -15,7 +15,7 @@ export const tableOption = {
     {
       "prop": "userIds",
       "type": "input",
-      "label": "负责人",
+      "label": "所属角色",
       "formslot": true,
       "slot": true
     },

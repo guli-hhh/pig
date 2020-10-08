@@ -11,8 +11,7 @@
         <span>
           <el-collapse v-model="activeNames">
             <el-collapse-item name="1">
-              <div>统计界面待开发</div>
-              <div>统计界面待开发</div>
+              <avue-data-tabs :option="option"></avue-data-tabs>
             </el-collapse-item>
             <el-collapse-item name="2">
               <div>统计界面待开发</div>
@@ -47,7 +46,39 @@
         text: '',
         actor: '',
         count: 0,
-        isText: false
+        isText: false,
+        option: {
+                  data: [
+                            {
+                              title: '短信统计',
+                              subtitle: '已发送',
+                              count: 3,
+                              allcount: 32000,
+                              text: '短信总数',
+                              color: 'rgb(27, 201, 142)',
+                              key: '已发送'
+                            }
+                            // ,
+                            // {
+                            //   title: '附件统计',
+                            //   subtitle: '实时',
+                            //   count: 3112,
+                            //   allcount: 10222,
+                            //   text: '当前上传的附件数',
+                            //   color: 'rgb(230, 71, 88)',
+                            //   key: '附'
+                            // },
+                            // {
+                            //   title: '文章统计',
+                            //   subtitle: '实时',
+                            //   count: 908,
+                            //   allcount: 10222,
+                            //   text: '评论次数',
+                            //   color: 'rgb(178, 159, 255)',
+                            //   key: '评'
+                            // }
+                          ]
+                }
       }
     },
     computed: {

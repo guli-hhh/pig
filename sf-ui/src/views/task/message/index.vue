@@ -37,6 +37,7 @@
                   <el-tag v-if="scope.row.state == 'NOT_SEND'" type="danger" effect="dark" v-text="messageStateText(scope)"></el-tag>
               </template>
             </avue-crud>
+
         </basic-container>
     </div>
 </template>
@@ -74,29 +75,16 @@
         },
         methods: {
             getList(page, params) {
+              console.log('------')
                 this.tableLoading = true
                 fetchList(Object.assign({
                   current: page.currentPage,
                   size: page.pageSize
                 }, params, this.searchForm)).then(response => {
-
                   this.tableData = response.data.data.content
-
-                  this.tableData.forEach(item => {
-                    if(item.project.id){
-                      item.projectId = item.project.id
-                    }
-
-                    if(item.platform.id){
-                      item.platformId = item.platform.id
-                    }
-
-                    if(item.handler.id){
-                      item.handlerId = item.handler.id
-                    }
-                  })
                   this.page.total = response.data.data.totalPages
                   this.tableLoading = false
+                  console.log(this.page)
                 }).catch(() => {
                   this.tableLoading = false
                 })

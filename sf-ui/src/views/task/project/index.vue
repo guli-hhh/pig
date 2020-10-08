@@ -96,7 +96,6 @@
                     current: page.currentPage,
                     size: page.pageSize
                 }, params, this.searchForm )).then(response => {
-                  console.log(response)
                     this.tableData = response.data.data.content
                     this.page.total = response.data.data.totalPages
                     this.tableLoading = false
