@@ -150,7 +150,7 @@
             },
             initUserDictSelectOption(){
               request({
-                url: '/task/user/dic',
+                url: '/task/role/dic',
                 method: 'get'
               }).then(response => {
                 this.userIdsDict = response.data.data

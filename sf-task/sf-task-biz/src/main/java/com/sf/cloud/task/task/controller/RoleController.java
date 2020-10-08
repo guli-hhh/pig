@@ -43,7 +43,7 @@ public class RoleController {
     @PreAuthorize("@pms.hasPermission('task_project_get')" )
     public R getById(@PageableDefault(value = 20, sort = { "id" }, direction = Sort.Direction.DESC)
                              Pageable pageable) {
-		R<List<SysRole>> infos = remoteUpmsService.listRoles();
+		R<List<SysRole>> infos = (R<List<SysRole>>) remoteUpmsService.listRoles().getData();
         List<HashMap<String, Object>> selectOptions = infos.getData()
                 .stream()
                 .map(role -> {
