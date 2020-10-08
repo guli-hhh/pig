@@ -43,16 +43,17 @@ public class RoleController {
     @PreAuthorize("@pms.hasPermission('task_project_get')" )
     public R getById(@PageableDefault(value = 20, sort = { "id" }, direction = Sort.Direction.DESC)
                              Pageable pageable) {
-		List<SysRole> infos = (List<SysRole>) remoteUpmsService.listRoles().getData();
-        List<HashMap<String, Object>> selectOptions = infos
-                .stream()
-                .map(role -> {
-                    HashMap<String, Object> selectOption = MapUtil.newHashMap();
-                    selectOption.put("label", role.getRoleName());
-                    selectOption.put("value", role.getRoleId());
-                    return selectOption;
-                })
-                .collect(Collectors.toList());
-        return R.ok(selectOptions);
+		return remoteUpmsService.listRoles();
+//		List<SysRole> infos = (List<SysRole>) remoteUpmsService.listRoles().getData();
+//        List<HashMap<String, Object>> selectOptions = infos
+//                .stream()
+//                .map(role -> {
+//                    HashMap<String, Object> selectOption = MapUtil.newHashMap();
+//                    selectOption.put("label", role.getRoleName());
+//                    selectOption.put("value", role.getRoleId());
+//                    return selectOption;
+//                })
+//                .collect(Collectors.toList());
+//        return R.ok(selectOptions);
     }
 }
