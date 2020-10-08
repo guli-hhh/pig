@@ -1,6 +1,8 @@
 package com.sf.cloud.task.task.controller;
 
+import cn.hutool.core.bean.BeanUtil;
 import cn.hutool.core.map.MapUtil;
+import cn.hutool.core.util.ReflectUtil;
 import com.pig4cloud.pig.admin.api.entity.SysRole;
 import com.pig4cloud.pig.admin.api.entity.SysUser;
 import com.pig4cloud.pig.admin.api.feign.RemoteUserService;
@@ -43,17 +45,16 @@ public class RoleController {
     @PreAuthorize("@pms.hasPermission('task_project_get')" )
     public R getById(@PageableDefault(value = 20, sort = { "id" }, direction = Sort.Direction.DESC)
                              Pageable pageable) {
-		return remoteUpmsService.listRoles();
-//		List<SysRole> infos = (List<SysRole>) remoteUpmsService.listRoles().getData();
-//        List<HashMap<String, Object>> selectOptions = infos
-//                .stream()
-//                .map(role -> {
-//                    HashMap<String, Object> selectOption = MapUtil.newHashMap();
-//                    selectOption.put("label", role.getRoleName());
-//                    selectOption.put("value", role.getRoleId());
-//                    return selectOption;
-//                })
-//                .collect(Collectors.toList());
-//        return R.ok(selectOptions);
+		List<Map> data = (List<Map>) remoteUpmsService.listRoles().getData();
+		List<HashMap<String, Object>> selectOptions = data.stream()
+			.map(o -> BeanUtil.mapToBean(o, SysRole.class, true))
+			.map(role -> {
+				HashMap<String, Object> selectOption = MapUtil.newHashMap();
+				selectOption.put("label", role.getRoleName());
+				selectOption.put("value", role.getRoleId());
+				return selectOption;
+			})
+			.collect(Collectors.toList());
+		return R.ok(selectOptions);
     }
 }
