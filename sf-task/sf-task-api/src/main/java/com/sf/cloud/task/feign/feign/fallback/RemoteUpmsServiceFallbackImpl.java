@@ -20,7 +20,13 @@ public class RemoteUpmsServiceFallbackImpl implements RemoteUpmsService {
      */
     @Override
     public R getDictByType(String type, String from) {
-        log.error("获取Dict失败", cause);
+        log.error("获取user Dict失败", cause);
         return null;
     }
+
+	@Override
+	public R listRoles() {
+		log.error("获取role Dict失败", cause);
+		return null;
+	}
 }
