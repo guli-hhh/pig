@@ -133,7 +133,7 @@ public class RoleController {
 	 * @param roleId ID
 	 * @return 用户信息
 	 */
-	@GetMapping("user/{roleId}")
+	@GetMapping("/user/{roleId}")
 	public R user(@PathVariable Integer roleId) {
 		return R.ok(sysUserService.findUserByRoleId(roleId));
 	}
