@@ -24,6 +24,7 @@ import com.pig4cloud.pig.admin.api.entity.SysRole;
 import com.pig4cloud.pig.admin.api.vo.RoleVo;
 import com.pig4cloud.pig.admin.service.SysRoleMenuService;
 import com.pig4cloud.pig.admin.service.SysRoleService;
+import com.pig4cloud.pig.admin.service.SysUserService;
 import com.pig4cloud.pig.common.core.util.R;
 import com.pig4cloud.pig.common.log.annotation.SysLog;
 import io.swagger.annotations.Api;
@@ -46,6 +47,8 @@ public class RoleController {
 	private final SysRoleService sysRoleService;
 
 	private final SysRoleMenuService sysRoleMenuService;
+
+	private final SysUserService sysUserService;
 
 	/**
 	 * 通过ID查询角色信息
@@ -125,4 +128,13 @@ public class RoleController {
 		return R.ok(sysRoleMenuService.saveRoleMenus(sysRole.getRoleCode(), roleVo.getRoleId(), roleVo.getMenuIds()));
 	}
 
+	/**
+	 * 通过角色ID查询用户信息
+	 * @param roleId ID
+	 * @return 用户信息
+	 */
+	@GetMapping("user/{roleId}")
+	public R user(@PathVariable Integer roleId) {
+		return R.ok(sysUserService.findUserByRoleId(roleId));
+	}
 }

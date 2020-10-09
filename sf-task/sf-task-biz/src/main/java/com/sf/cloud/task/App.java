@@ -40,8 +40,11 @@ public class App implements ApplicationRunner {
 
     @Override
     public void run(ApplicationArguments args) throws Exception {
-        taskService.initLocalTask();
-        CronUtil.getScheduler().addListener(timeListener);
-        CronUtil.start();
+		// 每30分钟从后台获取任务，重新初始化任务
+		CronUtil.schedule("0/20 * * * * ? *", (Task) taskService::initLocalTask);
+
+		// 支持秒级别定时任务
+		CronUtil.setMatchSecond(true);
+		CronUtil.start();
     }
 }

@@ -13,7 +13,7 @@ export const tableOption = {
       "label": "项目名称"
     },
     {
-      "prop": "userIds",
+      "prop": "roleIds",
       "type": "input",
       "label": "所属角色",
       "formslot": true,

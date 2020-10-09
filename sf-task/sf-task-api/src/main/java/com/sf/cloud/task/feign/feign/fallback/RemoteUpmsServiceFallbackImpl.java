@@ -29,4 +29,10 @@ public class RemoteUpmsServiceFallbackImpl implements RemoteUpmsService {
 		log.error("获取role Dict失败", cause);
 		return null;
 	}
+
+	@Override
+	public R getUserByRoleId(Integer roleId) {
+		log.error("根据roleId获取user失败", cause);
+		return null;
+	}
 }

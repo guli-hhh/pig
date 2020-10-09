@@ -28,4 +28,7 @@ public interface RemoteUpmsService {
 
 	@GetMapping("/role/list")
 	R listRoles();
+
+	@GetMapping("/role/user/{roleId}")
+	R getUserByRoleId(@PathVariable("roleId") Integer roleId);
 }

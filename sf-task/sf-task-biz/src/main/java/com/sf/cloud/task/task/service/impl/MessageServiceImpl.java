@@ -9,11 +9,21 @@ import com.sf.cloud.task.task.domain.po.Message;
 import com.sf.cloud.task.task.service.MessageService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.*;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Predicate;
+import javax.persistence.criteria.Root;
 import java.time.Duration;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.time.temporal.ChronoUnit;
+import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 
@@ -85,5 +95,23 @@ public class MessageServiceImpl implements MessageService {
         long betweenDays = between.toDays();
         return betweenDays > 7;
     }
+
+	@Override
+	public List<Message> findNotSend() {
+		Specification<Message> specification = new Specification<Message>() {
+			@Override
+			public Predicate toPredicate(Root root, CriteriaQuery query, CriteriaBuilder cb) {
+				//增加筛选条件
+				Predicate predicate = cb.conjunction();
+				predicate.getExpressions().add(cb.equal(root.get("state"), MessageState.NOT_SEND));
+				// 7天以内
+				LocalDateTime ago = LocalDateTimeUtil.offset(LocalDateTimeUtil.now(), -7, ChronoUnit.DAYS);
+				Date agoDate = Date.from(ago.atZone(ZoneId.systemDefault()).toInstant());
+				predicate.getExpressions().add(cb.greaterThanOrEqualTo(root.get("createTime").as(Date.class), agoDate));
+				return predicate;
+			}
+		};
+		return messageRepository.findAll(specification);
+	}
 
 }

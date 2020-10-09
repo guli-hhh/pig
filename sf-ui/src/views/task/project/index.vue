@@ -33,10 +33,10 @@
                        @row-del="rowDel">
 
                 <!-- 项目负责人编辑选项 -->
-                <template slot="userIdsForm" slot-scope="scope" >
-                    <el-select v-model="scope.row.userIds" multiple placeholder="请选择">
+                <template slot="roleIdsForm" slot-scope="scope" >
+                    <el-select v-model="scope.row.roleIds" multiple placeholder="请选择">
                         <el-option
-                          v-for="item in userIdsDict"
+                          v-for="item in roleIdsDict"
                           :key="item.value"
                           :label="item.label"
                           :value="item.value">
@@ -45,11 +45,11 @@
                 </template>
 
                 <!-- 项目负责人显示选项 -->
-                <template slot="userIds" slot-scope="scope" >
+                <template slot="roleIds" slot-scope="scope" >
                     <el-tag
-                      v-for="userId in scope.row.userIds"
-                      :key="userId"
-                      v-text="getUserName(userId)">
+                      v-for="roleId in scope.row.roleIds"
+                      :key="roleId"
+                      v-text="getUserName(roleId)">
                     </el-tag>
                 </template>
             </avue-crud>
@@ -76,7 +76,7 @@
                 },
                 tableLoading: false,
                 tableOption: tableOption,
-                userIdsDict: []
+                roleIdsDict: []
             }
         },
         computed: {
@@ -153,18 +153,18 @@
                 url: '/task/role/dic',
                 method: 'get'
               }).then(response => {
-                this.userIdsDict = response.data.data
+                this.roleIdsDict = response.data.data
               }).catch(() => {
               })
             },
-            getUserName(userId){
-              let username = ''
-              this.userIdsDict.forEach(userSelectOption => {
-                if(userId == userSelectOption.value){
-                  username = userSelectOption.label
+            getUserName(roleId){
+              let roleName = ''
+              this.roleIdsDict.forEach(userSelectOption => {
+                if(roleId == userSelectOption.value){
+                  roleName = userSelectOption.label
                 }
               })
-              return username
+              return roleName
             }
         },
         created: function() {

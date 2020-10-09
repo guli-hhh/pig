@@ -92,4 +92,5 @@ public interface SysUserService extends IService<SysUser> {
 	 */
 	Boolean saveUser(UserDTO userDto);
 
+	List<UserVO> findUserByRoleId(Integer roleId);
 }

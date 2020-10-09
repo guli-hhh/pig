@@ -62,4 +62,6 @@ public interface SysUserMapper extends BaseMapper<SysUser> {
 	 */
 	UserVO getUserVoById(Integer id);
 
+	List<UserVO> findUserByRoleId(Integer roleId);
+
 }

@@ -212,4 +212,8 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impl
 		return this.list(Wrappers.<SysUser>query().lambda().eq(SysUser::getDeptId, parentId));
 	}
 
+	@Override
+	public List<UserVO> findUserByRoleId(Integer roleId) {
+		return baseMapper.findUserByRoleId(roleId);
+	}
 }
