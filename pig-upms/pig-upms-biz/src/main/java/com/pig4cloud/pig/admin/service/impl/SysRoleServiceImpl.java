@@ -49,8 +49,6 @@ public class SysRoleServiceImpl extends ServiceImpl<SysRoleMapper, SysRole> impl
 
 	private final SysRoleMenuMapper sysRoleMenuMapper;
 
-	private final SysUserService sysUserService;
-
 	/**
 	 * 通过用户ID，查询角色信息
 	 * @param userId
