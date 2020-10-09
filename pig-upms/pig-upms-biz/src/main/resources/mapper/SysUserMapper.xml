@@ -163,7 +163,7 @@
 		WHERE
 		`user`.user_id in
 		(
-			select userId from sys_user_role where role_id = #{roleId}
+			select user_id from sys_user_role where role_id = #{roleId}
 		)
 	</select>
 </mapper>
