@@ -74,4 +74,17 @@ public class RemoteUserServiceFallbackImpl implements RemoteUserService {
 		return null;
 	}
 
+	/**
+	 * @param roleId
+	 * @Description 通过roleId获取user
+	 * @Return
+	 * @Author tuzhaoliang
+	 * @Date 2020/10/10 8:48
+	 **/
+	@Override
+	public R<List<SysUser>> getUsersByRoleId(Integer roleId) {
+		log.error("feign 查询用户信息失败:{}", roleId, cause);
+		return null;
+	}
+
 }

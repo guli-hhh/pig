@@ -64,4 +64,14 @@ public interface RemoteUserService {
 	@GetMapping("/social/info/{inStr}")
 	R<UserInfo> social(@PathVariable("inStr") String inStr);
 
+	/**
+	  * @Description 通过roleId获取user
+	   * @param roleId
+	  * @Return
+	  * @Author tuzhaoliang
+	  * @Date 2020/10/10 8:48
+	  **/
+	@GetMapping("/role/user/{roleId}")
+	R<List<SysUser>> getUsersByRoleId(@PathVariable(value = "roleId") Integer roleId);
+
 }
