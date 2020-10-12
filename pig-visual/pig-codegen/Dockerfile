@@ -14,4 +14,4 @@ EXPOSE 5002
 
 ADD ./target/pig-codegen.jar ./
 
-CMD sleep 60;java -XX:MetaspaceSize=128m -XX:MaxMetaspaceSize=56m -Xms512m -Xmx512m -Xmn256m -Xss256k -XX:SurvivorRatio=8 -XX:+UseConcMarkSweepGC -Djava.security.egd=file:/dev/./urandom -jar pig-codegen.jar
+CMD sleep 60;java -Xms512m -Xmx512m -Xmn256m -Xss256k -XX:+UseConcMarkSweepGC -Djava.security.egd=file:/dev/./urandom -jar pig-codegen.jar
