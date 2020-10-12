@@ -14,4 +14,4 @@ EXPOSE 3000
 
 ADD ./target/pig-auth.jar ./
 
-CMD sleep 60;java -Djava.security.egd=file:/dev/./urandom -jar pig-auth.jar
+CMD sleep 60;java -XX:MetaspaceSize=128m -XX:MaxMetaspaceSize=56m -Xms128m -Xmx128m -Xmn32m -Xss256k -XX:SurvivorRatio=8 -XX:+UseConcMarkSweepGC -Djava.security.egd=file:/dev/./urandom -jar pig-auth.jar
