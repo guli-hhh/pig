@@ -14,4 +14,4 @@ EXPOSE 9999
 
 ADD ./target/pig-gateway.jar ./
 
-CMD sleep 60;java -XX:MetaspaceSize=128m -XX:MaxMetaspaceSize=56m -Xms512m -Xmx512m -Xmn256m -Xss256k -XX:SurvivorRatio=8 -XX:+UseConcMarkSweepGC -Djava.security.egd=file:/dev/./urandom -jar pig-gateway.jar
+CMD sleep 60;java -Xms512m -Xmx512m -Xmn256m -Xss256k -XX:+UseConcMarkSweepGC -Djava.security.egd=file:/dev/./urandom -jar pig-gateway.jar
