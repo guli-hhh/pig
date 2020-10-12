@@ -15,6 +15,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.SpringApplicationRunListener;
 import org.springframework.cloud.client.SpringCloudApplication;
 import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
+import org.springframework.web.context.request.RequestContextHolder;
 
 import java.util.List;
 
@@ -39,7 +40,8 @@ public class App implements ApplicationRunner {
     }
 
     @Override
-    public void run(ApplicationArguments args) throws Exception {
+    public void run(ApplicationArguments args) {
+		RequestContextHolder.setRequestAttributes(RequestContextHolder.getRequestAttributes(), true);
 		// 每30分钟从后台获取任务，重新初始化任务
 		CronUtil.schedule("0/20 * * * * ? *", (Task) taskService::initLocalTask);
 

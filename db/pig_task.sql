@@ -71,8 +71,8 @@ CREATE TABLE `message` (
 -- ----------------------------
 -- Records of message
 -- ----------------------------
-INSERT INTO `message` VALUES ('3', '公司平台', 'JAVA_ENERGY', '电表在线检测', '(公司平台最近电表离线)位置: 盛帆工业园..1号楼集中器, 4201466500, 离线数量: 81, 总数量: 81。', 'NOT_SEND', null, null, '2020-09-27 17:23:16', '2020-09-27 17:23:16');
-INSERT INTO `message` VALUES ('4', '公司平台', 'JAVA_ENERGY', '电表在线检测', '(公司平台最近电表离线)位置: 盛帆工业园..11号楼(电表）, 4202087E00 , 离线数量: 91, 总数量: 91。', 'NOT_SEND', null, null, '2020-09-27 17:23:16', '2020-09-27 17:23:16');
+INSERT INTO `message` VALUES ('3', '公司平台', 'JAVA_ENERGY', '电表在线检测', '(公司平台最近电表离线)位置: 盛帆工业园..1号楼集中器, 4201466500, 离线数量: 81, 总数量: 81。', 'NOT_SEND', null, null, '2020-10-02 17:23:16', '2020-09-27 17:23:16');
+INSERT INTO `message` VALUES ('4', '公司平台', 'JAVA_ENERGY', '电表在线检测', '(公司平台最近电表离线)位置: 盛帆工业园..11号楼(电表）, 4202087E00 , 离线数量: 91, 总数量: 91。', 'NOT_SEND', null, null, '2020-10-10 17:23:16', '2020-09-27 17:23:16');
 INSERT INTO `message` VALUES ('5', '公司平台', 'JAVA_ENERGY', '电表在线检测', '(公司平台最近电表离线)位置: 盛帆工业园..5号楼5楼网关, 2301546B00 , 离线数量: 61, 总数量: 61。', 'NOT_SEND', null, null, '2020-09-27 17:23:17', '2020-09-27 17:23:17');
 
 -- ----------------------------
@@ -101,7 +101,7 @@ DROP TABLE IF EXISTS `project`;
 CREATE TABLE `project` (
   `id` int NOT NULL AUTO_INCREMENT COMMENT '主键',
   `project_name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL COMMENT '项目名称',
-  `user_id` varchar(200) DEFAULT NULL,
+  `role_id` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
   `create_time` datetime DEFAULT NULL COMMENT '创建时间',
   `modified_time` datetime DEFAULT NULL COMMENT '更新时间',
   PRIMARY KEY (`id`)
@@ -110,9 +110,25 @@ CREATE TABLE `project` (
 -- ----------------------------
 -- Records of project
 -- ----------------------------
-INSERT INTO `project` VALUES ('2', '公司平台', '1,2', '2020-09-09 00:00:00', '2020-09-28 16:06:44');
-INSERT INTO `project` VALUES ('3', '财大1', '1,2', '2020-09-09 08:17:19', '2020-09-28 16:06:50');
-INSERT INTO `project` VALUES ('4', '决策平台', '1', '2020-09-16 10:31:29', '2020-09-28 16:06:53');
+INSERT INTO `project` VALUES ('2', '公司平台', '5,1', '2020-09-09 00:00:00', '2020-10-09 15:29:53');
+INSERT INTO `project` VALUES ('3', '财大1', '', '2020-09-09 08:17:19', '2020-09-28 16:06:50');
+INSERT INTO `project` VALUES ('4', '决策平台', '1', '2020-09-16 10:31:29', '2020-10-08 17:20:57');
+
+-- ----------------------------
+-- Table structure for sms_count
+-- ----------------------------
+DROP TABLE IF EXISTS `sms_count`;
+CREATE TABLE `sms_count` (
+  `id` int NOT NULL AUTO_INCREMENT COMMENT '主键',
+  `remain` int NOT NULL COMMENT '剩余短信数量',
+  `has_send` int DEFAULT '0',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci ROW_FORMAT=DYNAMIC COMMENT='短信配置表';
+
+-- ----------------------------
+-- Records of sms_count
+-- ----------------------------
+INSERT INTO `sms_count` VALUES ('6', '200', '0');
 
 -- ----------------------------
 -- Table structure for task
@@ -137,9 +153,8 @@ CREATE TABLE `task` (
 -- ----------------------------
 -- Records of task
 -- ----------------------------
-INSERT INTO `task` VALUES ('1', '测试', 'START', '0', '2', '5', '2020-09-27 17:25:41', '2020-09-27 17:25:43', '3/5 * * * * ? *', '', '2020-09-14 11:27:53', '2020-09-27 17:25:41');
-INSERT INTO `task` VALUES ('3', '短信发送', 'STOPPED', '1', '4', '6', '2020-09-17 17:16:20', '2020-09-19 16:05:04', '3/5 * * * * ? *', '', '2020-09-16 10:32:35', '2020-09-19 16:05:01');
-INSERT INTO `task` VALUES ('4', '测试11', 'STOPPED', '0', '4', '5', null, '2020-09-22 16:54:04', '3/5 * * * * ? *', '', '2020-09-22 15:19:20', '2020-09-22 16:54:00');
+INSERT INTO `task` VALUES ('1', '测试', 'STOPPED', '0', '2', '5', '2020-09-27 17:25:41', '2020-09-30 16:09:29', '3/5 * * * * ? *', '', '2020-09-14 11:27:53', '2020-09-30 16:09:24');
+INSERT INTO `task` VALUES ('3', '短信发送', 'START', '1', '4', '6', '2020-09-30 16:09:03', '2020-10-10 17:43:43', '3/5 * * * * ? *', '', '2020-09-16 10:32:35', '2020-10-10 17:43:40');
 
 -- ----------------------------
 -- Table structure for task_data_source
@@ -152,9 +167,9 @@ CREATE TABLE `task_data_source` (
   `create_time` datetime DEFAULT NULL COMMENT '创建时间',
   `modified_time` datetime DEFAULT NULL COMMENT '更新时间',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci ROW_FORMAT=DYNAMIC COMMENT='任务数据源表';
+) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci ROW_FORMAT=DYNAMIC COMMENT='任务数据源表';
 
 -- ----------------------------
 -- Records of task_data_source
 -- ----------------------------
-INSERT INTO `task_data_source` VALUES ('17', '1', '1', null, null);
+INSERT INTO `task_data_source` VALUES ('20', '1', '1', null, null);

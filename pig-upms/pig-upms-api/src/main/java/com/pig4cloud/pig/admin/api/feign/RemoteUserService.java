@@ -72,6 +72,6 @@ public interface RemoteUserService {
 	  * @Date 2020/10/10 8:48
 	  **/
 	@GetMapping("/role/user/{roleId}")
-	R<List<SysUser>> getUsersByRoleId(@PathVariable(value = "roleId") Integer roleId);
+	R<List<SysUser>> getUsersByRoleId(@PathVariable(value = "roleId") Integer roleId, @RequestHeader(SecurityConstants.FROM) String from);
 
 }

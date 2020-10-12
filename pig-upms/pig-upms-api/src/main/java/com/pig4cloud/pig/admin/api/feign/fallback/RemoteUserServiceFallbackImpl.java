@@ -21,10 +21,12 @@ package com.pig4cloud.pig.admin.api.feign.fallback;
 import com.pig4cloud.pig.admin.api.dto.UserInfo;
 import com.pig4cloud.pig.admin.api.entity.SysUser;
 import com.pig4cloud.pig.admin.api.feign.RemoteUserService;
+import com.pig4cloud.pig.common.core.constant.SecurityConstants;
 import com.pig4cloud.pig.common.core.util.R;
 import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
+import org.springframework.web.bind.annotation.RequestHeader;
 
 import java.util.List;
 
@@ -82,7 +84,7 @@ public class RemoteUserServiceFallbackImpl implements RemoteUserService {
 	 * @Date 2020/10/10 8:48
 	 **/
 	@Override
-	public R<List<SysUser>> getUsersByRoleId(Integer roleId) {
+	public R<List<SysUser>> getUsersByRoleId(Integer roleId, String from) {
 		log.error("feign 查询用户信息失败:{}", roleId, cause);
 		return null;
 	}

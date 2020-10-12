@@ -483,6 +483,9 @@ INSERT INTO `sys_menu` VALUES ('10037', '报警消息查看', 'task_message_get'
 INSERT INTO `sys_menu` VALUES ('10038', '报警消息新增', 'task_message_add', null, '10036', '1', null, '1', '0', '1', '2018-05-15 21:35:18', '2018-07-29 13:38:59', '0');
 INSERT INTO `sys_menu` VALUES ('10039', '报警消息修改', 'task_message_edit', null, '10036', '1', null, '2', '0', '1', '2018-05-15 21:35:18', '2018-07-29 13:38:59', '0');
 INSERT INTO `sys_menu` VALUES ('10040', '报警消息删除', 'task_message_del', null, '10036', '1', null, '3', '0', '1', '2018-05-15 21:35:18', '2018-07-29 13:38:59', '0');
+INSERT INTO `sys_menu` VALUES ('10041', '短信配置表管理', '', '/task/smscount/index', '1000', 'icon-bangzhushouji', null, '8', '0', '0', '2018-01-20 13:17:19', '2018-07-29 13:38:19', '0');
+INSERT INTO `sys_menu` VALUES ('10042', '短信配置表查看', 'task_smscount_get', null, '10041', '1', null, '0', '0', '1', '2018-05-15 21:35:18', '2018-07-29 13:38:59', '0');
+INSERT INTO `sys_menu` VALUES ('10043', '短信配置表修改', 'task_smscount_edit', null, '10041', '1', null, '2', '0', '1', '2018-05-15 21:35:18', '2018-07-29 13:38:59', '0');
 
 -- ----------------------------
 -- Table structure for sys_oauth_client_details

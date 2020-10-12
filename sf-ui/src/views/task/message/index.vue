@@ -84,7 +84,6 @@
                   this.tableData = response.data.data.content
                   this.page.total = response.data.data.totalPages
                   this.tableLoading = false
-                  console.log(this.page)
                 }).catch(() => {
                   this.tableLoading = false
                 })
