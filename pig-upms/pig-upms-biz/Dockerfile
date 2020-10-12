@@ -14,4 +14,4 @@ EXPOSE 4000
 
 ADD ./target/pig-upms-biz.jar ./
 
-CMD sleep 60;java -XX:MetaspaceSize=128m -XX:MaxMetaspaceSize=56m -Xms128m -Xmx128m -Xmn32m -Xss256k -XX:SurvivorRatio=8 -XX:+UseConcMarkSweepGC -Djava.security.egd=file:/dev/./urandom -jar pig-upms-biz.jar
+CMD sleep 60;java -XX:MetaspaceSize=128m -XX:MaxMetaspaceSize=56m -Xms512m -Xmx512m -Xmn256m -Xss256k -XX:SurvivorRatio=8 -XX:+UseConcMarkSweepGC -Djava.security.egd=file:/dev/./urandom -jar pig-upms-biz.jar

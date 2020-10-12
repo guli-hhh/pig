@@ -14,6 +14,6 @@ EXPOSE 8848
 
 ADD ./target/pig-register.jar ./
 
-CMD sleep 30;java -XX:MetaspaceSize=128m -XX:MaxMetaspaceSize=56m -Xms128m -Xmx128m -Xmn32m -Xss256k -XX:SurvivorRatio=8 -XX:+UseConcMarkSweepGC -Djava.security.egd=file:/dev/./urandom -jar pig-register.jar
+CMD sleep 30;java -XX:MetaspaceSize=128m -XX:MaxMetaspaceSize=56m -Xms512m -Xmx512m -Xmn256m -Xss256k -XX:SurvivorRatio=8 -XX:+UseConcMarkSweepGC -Djava.security.egd=file:/dev/./urandom -jar pig-register.jar
 
 
