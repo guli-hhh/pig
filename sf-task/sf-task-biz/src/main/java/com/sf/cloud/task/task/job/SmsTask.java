@@ -10,6 +10,7 @@ import com.sf.cloud.task.task.domain.po.Project;
 import com.sf.cloud.task.task.service.MessageService;
 import com.sf.cloud.task.task.service.ProjectService;
 import com.sf.cloud.task.task.service.SmsCountService;
+import com.sf.cloud.task.task.utils.MessageUtil;
 import com.sf.cloud.task.task.utils.SpringBeanUtils;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
@@ -56,8 +57,8 @@ public class SmsTask implements Task {
 			List<SysUser> users = this.getUsers(project);
 
 			for (SysUser user : users) {
-//				MessageUtil.send(message.getMessage(), user.getPhone());
-//				smsCountService.reduceOne();
+				MessageUtil.send(message.getMessage(), user.getPhone());
+				smsCountService.useOne();
 				log.info("发送短信给:{},{}", user.getUsername(), user.getPhone());
 				log.info(message.getMessage());
 			}

@@ -17,7 +17,7 @@ public interface SmsCountService extends BaseService<SmsCount,Long> {
 	  * @Author tuzhaoliang
 	  * @Date 2020/10/10 15:47
 	  **/
-	void reduceOne();
+	void useOne();
 
 	/**
 	 * @Description 获取短信剩余条数

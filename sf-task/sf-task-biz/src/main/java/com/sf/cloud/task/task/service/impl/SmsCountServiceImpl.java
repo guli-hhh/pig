@@ -37,12 +37,12 @@ public class SmsCountServiceImpl implements SmsCountService {
 	}
 
 	/**
-	 * @Description 减少一条剩余量
+	 * @Description 剩余量-1,已发送+1
 	 * @Author tuzhaoliang
 	 * @Date 2020/10/10 15:47
 	 **/
 	@Override
-	public void reduceOne() {
+	public void useOne() {
 		List<SmsCount> smsCounts = this.getRepository().findAll();
 		if (smsCounts.isEmpty()) {
 			return;
@@ -52,6 +52,8 @@ public class SmsCountServiceImpl implements SmsCountService {
 			return;
 		}
 		smsCount.setRemain(smsCount.getRemain() - 1L);
+		Long smsHasSend = Optional.ofNullable(smsCount.getHasSend()).orElse(0L);
+		smsCount.setHasSend(smsHasSend + 1L);
 		this.getRepository().save(smsCount);
 	}
 
