@@ -65,12 +65,13 @@ public class SmsTask implements Task {
 			}
 			for (SysUser user : users) {
 				boolean isSuccess = MessageUtil.send(message.getMessage(), user.getPhone());
+				log.info(message.getMessage());
 				if (isSuccess) {
 					smsCountService.useOne();
 					log.info("发送短信给:{},{}  成功", user.getUsername(), user.getPhone());
+					continue;
 				}
 				log.info("发送短信给:{},{}  失败", user.getUsername(), user.getPhone());
-				log.info(message.getMessage());
 				sleep(10L);
 			}
 			// 消息存为已发送状态
