@@ -22,6 +22,7 @@ import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.pig4cloud.pig.admin.api.entity.SysRole;
 import com.pig4cloud.pig.admin.api.vo.RoleVo;
+import com.pig4cloud.pig.admin.api.vo.UserVO;
 import com.pig4cloud.pig.admin.service.SysRoleMenuService;
 import com.pig4cloud.pig.admin.service.SysRoleService;
 import com.pig4cloud.pig.admin.service.SysUserService;
@@ -30,15 +31,18 @@ import com.pig4cloud.pig.common.log.annotation.SysLog;
 import com.pig4cloud.pig.common.security.annotation.Inner;
 import io.swagger.annotations.Api;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.List;
 
 /**
  * @author lengleng
  * @date 2019/2/1
  */
+@Slf4j
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/role")
@@ -137,6 +141,12 @@ public class RoleController {
 	@Inner
 	@GetMapping("/user/{roleId}")
 	public R user(@PathVariable Integer roleId) {
-		return R.ok(sysUserService.findUserByRoleId(roleId));
+		List<UserVO> users = sysUserService.findUserByRoleId(roleId);
+		log.info("根据roleId = {} 查询出来 {} 个 user", roleId, users.size());
+		for (UserVO userVo :
+			users) {
+			log.info(userVo.getUsername() + "-----" + userVo.getPhone());
+		}
+		return R.ok(users);
 	}
 }
