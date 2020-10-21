@@ -38,12 +38,14 @@ public class SmsTask implements Task {
      */
     @Override
     public void execute() {
+    	log.info("开始执行短信发送程序");
 		messageService = SpringBeanUtils.getBean(MessageService.class);
 		projectService = SpringBeanUtils.getBean(ProjectService.class);
 		remoteUserService = SpringBeanUtils.getBean(RemoteUserService.class);
 		smsCountService = SpringBeanUtils.getBean(SmsCountService.class);
 		// 获取7天内未发送的短信
 		List<Message> notSend = messageService.findNotSend();
+		log.info("检测到未发送短信 {} 条", notSend.size());
 		for (Message message : notSend) {
 			// 获取短信的平台
 			Optional<Project> projectOptional = projectService.findByName(message.getProjectName());
@@ -55,10 +57,10 @@ public class SmsTask implements Task {
 				continue;
 			}
 			List<SysUser> users = this.getUsers(project);
-
+			log.info("需要个 {} 个人发短信", users.size());
 			for (SysUser user : users) {
-				MessageUtil.send(message.getMessage(), user.getPhone());
-				smsCountService.useOne();
+//				MessageUtil.send(message.getMessage(), user.getPhone());
+//				smsCountService.useOne();
 				log.info("发送短信给:{},{}", user.getUsername(), user.getPhone());
 				log.info(message.getMessage());
 			}
