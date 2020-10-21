@@ -58,6 +58,9 @@ public class SmsTask implements Task {
 			}
 			List<SysUser> users = this.getUsers(project);
 			log.info("需要个 {} 个人发短信", users.size());
+			for (SysUser user : users){
+				log.info(user.getUsername() + "----" + user.getPhone());
+			}
 			for (SysUser user : users) {
 //				MessageUtil.send(message.getMessage(), user.getPhone());
 //				smsCountService.useOne();
