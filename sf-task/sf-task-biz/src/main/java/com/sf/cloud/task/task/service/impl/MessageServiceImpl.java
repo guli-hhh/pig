@@ -70,6 +70,9 @@ public class MessageServiceImpl implements MessageService {
     }
 
     private boolean isNeedToSave(Message message) {
+    	if (message.getState() ==  MessageState.HAS_SEND){
+			return true;
+		}
         Message preMessageExample = Message.builder()
                 .projectName(message.getProjectName())
                 .platform(message.getPlatform())

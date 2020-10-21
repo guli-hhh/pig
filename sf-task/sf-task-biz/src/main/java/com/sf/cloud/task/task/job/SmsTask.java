@@ -64,9 +64,12 @@ public class SmsTask implements Task {
 				log.info(user.getUsername() + "----" + user.getPhone());
 			}
 			for (SysUser user : users) {
-				MessageUtil.send(message.getMessage(), user.getPhone());
-				smsCountService.useOne();
-				log.info("发送短信给:{},{}", user.getUsername(), user.getPhone());
+				boolean isSuccess = MessageUtil.send(message.getMessage(), user.getPhone());
+				if (isSuccess) {
+					smsCountService.useOne();
+					log.info("发送短信给:{},{}  成功", user.getUsername(), user.getPhone());
+				}
+				log.info("发送短信给:{},{}  失败", user.getUsername(), user.getPhone());
 				log.info(message.getMessage());
 				sleep(10L);
 			}
