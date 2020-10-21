@@ -142,11 +142,6 @@ public class RoleController {
 	@GetMapping("/user/{roleId}")
 	public R user(@PathVariable Integer roleId) {
 		List<UserVO> users = sysUserService.findUserByRoleId(roleId);
-		log.info("根据roleId = {} 查询出来 {} 个 user", roleId, users.size());
-		for (UserVO userVo :
-			users) {
-			log.info(userVo.getUsername() + "-----" + userVo.getPhone());
-		}
 		return R.ok(users);
 	}
 }

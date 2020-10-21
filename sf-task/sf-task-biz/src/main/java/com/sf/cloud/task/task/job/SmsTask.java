@@ -5,6 +5,7 @@ import com.pig4cloud.pig.admin.api.entity.SysUser;
 import com.pig4cloud.pig.admin.api.feign.RemoteUserService;
 import com.pig4cloud.pig.common.core.constant.SecurityConstants;
 import com.pig4cloud.pig.common.core.util.R;
+import com.sf.cloud.task.task.constant.MessageState;
 import com.sf.cloud.task.task.domain.po.Message;
 import com.sf.cloud.task.task.domain.po.Project;
 import com.sf.cloud.task.task.service.MessageService;
@@ -17,6 +18,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
 import java.util.*;
+import java.util.concurrent.TimeUnit;
 
 @Component
 @Slf4j
@@ -62,12 +64,15 @@ public class SmsTask implements Task {
 				log.info(user.getUsername() + "----" + user.getPhone());
 			}
 			for (SysUser user : users) {
-//				MessageUtil.send(message.getMessage(), user.getPhone());
-//				smsCountService.useOne();
+				MessageUtil.send(message.getMessage(), user.getPhone());
+				smsCountService.useOne();
 				log.info("发送短信给:{},{}", user.getUsername(), user.getPhone());
 				log.info(message.getMessage());
+				sleep(10L);
 			}
-
+			// 消息存为已发送状态
+			message.setState(MessageState.HAS_SEND);
+			messageService.save(message);
 		}
 	}
 
@@ -91,5 +96,10 @@ public class SmsTask implements Task {
 			users.addAll(sysUsers);
 		}
 		return users;
+	}
+
+	@SneakyThrows
+	private void sleep(long seconds) {
+		TimeUnit.SECONDS.sleep(seconds);
 	}
 }
