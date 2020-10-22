@@ -65,6 +65,7 @@ public class SmsTask implements Task {
 			}
 			for (SysUser user : users) {
 				boolean isSuccess = MessageUtil.send(message.getMessage(), user.getPhone());
+				sleep(10L);
 				log.info(message.getMessage());
 				if (isSuccess) {
 					smsCountService.useOne();
@@ -72,7 +73,6 @@ public class SmsTask implements Task {
 					continue;
 				}
 				log.info("发送短信给:{},{}  失败", user.getUsername(), user.getPhone());
-				sleep(10L);
 			}
 			// 消息存为已发送状态
 			message.setState(MessageState.HAS_SEND);
