@@ -122,7 +122,6 @@ public class HandlerController {
      */
     @ApiOperation(value = "处理器数据字典(用于前台下拉框使用)", notes = "处理器据字典(用于前台下拉框使用)")
     @GetMapping("/dic" )
-    @PreAuthorize("@pms.hasPermission('task_handler_get')" )
     public R getById(@PageableDefault(value = 20, sort = { "id" }, direction = Sort.Direction.DESC)
                              Pageable pageable) {
         Page<Handler> oldPage = handlerService.findAll(pageable);

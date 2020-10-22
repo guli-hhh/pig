@@ -47,7 +47,6 @@ public class SmsCountController {
      */
     @ApiOperation(value = "短信剩余条数", notes = "短信剩余条数")
     @GetMapping("/remain" )
-    @PreAuthorize("@pms.hasPermission('task_smscount_get')" )
     public R getSmsCountPage() {
         return R.ok(smsCountService.getRemain());
     }
@@ -71,7 +70,6 @@ public class SmsCountController {
 	 */
 	@ApiOperation(value = "短信已发送条数", notes = "短信已发送条数")
 	@GetMapping("/has_send" )
-	@PreAuthorize("@pms.hasPermission('task_smscount_get')" )
 	public R getSmsHasSend() {
 		return R.ok(smsCountService.getHasSendCount());
 	}
