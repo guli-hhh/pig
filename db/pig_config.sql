@@ -262,4 +262,40 @@ BEGIN;
 INSERT INTO `users` VALUES ('nacos', '$2a$10$EuWPZHzz32dJN7jexM34MOeYirDdFAZm2kuWj7VEOJhhZkDrxfvUu', 1);
 COMMIT;
 
+-- ----------------------------
+-- naocs 2.0.2 add
+-- ----------------------------
+
+DROP TABLE IF EXISTS `app_list`;
+CREATE TABLE app_list (
+                          id bigint NOT NULL ,
+                          app_name varchar(128) NOT NULL,
+                          is_dynamic_collect_disabled smallint DEFAULT 0,
+                          last_sub_info_collected_time datetime DEFAULT '1970-01-01 08:00:00.0',
+                          sub_info_lock_owner varchar(128),
+                          sub_info_lock_time datetime DEFAULT '1970-01-01 08:00:00.0',
+                          constraint applist_id_key PRIMARY KEY (id),
+                          constraint uk_appname UNIQUE (app_name));
+
+DROP TABLE IF EXISTS `app_configdata_relation_subs`;
+CREATE TABLE app_configdata_relation_subs (
+                                              id bigint NOT NULL,
+                                              app_name varchar(128) NOT NULL,
+                                              data_id varchar(255) NOT NULL,
+                                              group_id varchar(128) NOT NULL,
+                                              gmt_modified datetime DEFAULT '2010-05-05 00:00:00',
+                                              constraint configdatarelationsubs_id_key PRIMARY KEY (id),
+                                              constraint uk_app_sub_config_datagroup UNIQUE (app_name, data_id, group_id));
+
+DROP TABLE IF EXISTS `app_configdata_relation_pubs`;
+CREATE TABLE app_configdata_relation_pubs (
+                                              id bigint NOT NULL ,
+                                              app_name varchar(128) NOT NULL,
+                                              data_id varchar(255) NOT NULL,
+                                              group_id varchar(128) NOT NULL,
+                                              gmt_modified datetime DEFAULT '2010-05-05 00:00:00',
+                                              constraint configdatarelationpubs_id_key PRIMARY KEY (id),
+                                              constraint uk_app_pub_config_datagroup UNIQUE (app_name, data_id, group_id));
+
+
 SET FOREIGN_KEY_CHECKS = 1;
