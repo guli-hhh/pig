@@ -16,7 +16,6 @@
 
 package com.pig4cloud.pig.common.log.util;
 
-import cn.hutool.core.util.StrUtil;
 import cn.hutool.core.util.URLUtil;
 import cn.hutool.extra.servlet.ServletUtil;
 import cn.hutool.http.HttpUtil;
@@ -27,14 +26,12 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.oauth2.provider.OAuth2Authentication;
+import org.springframework.security.web.authentication.www.BasicAuthenticationConverter;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
 import javax.servlet.http.HttpServletRequest;
-import java.nio.charset.Charset;
-import java.util.Base64;
 import java.util.Objects;
-import java.util.Optional;
 
 /**
  * 系统日志工具类
@@ -70,14 +67,11 @@ public class SysLogUtils {
 			return auth2Authentication.getOAuth2Request().getClientId();
 		}
 		if (authentication instanceof UsernamePasswordAuthenticationToken) {
-			// 通过请求参数拿到clientId
-			String authorizationHeaderValue = request.getHeader("Authorization");
-			String base64AuthorizationHeader = Optional.ofNullable(authorizationHeaderValue)
-					.map(headerValue -> headerValue.substring("Basic ".length())).orElse("");
-			if (StrUtil.isNotEmpty(base64AuthorizationHeader)) {
-				String decodedAuthorizationHeader = new String(Base64.getDecoder().decode(base64AuthorizationHeader),
-						Charset.forName("UTF-8"));
-				return decodedAuthorizationHeader.split(":")[0];
+			BasicAuthenticationConverter basicAuthenticationConverter = new BasicAuthenticationConverter();
+			UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken = basicAuthenticationConverter
+					.convert(request);
+			if (usernamePasswordAuthenticationToken != null) {
+				return usernamePasswordAuthenticationToken.getName();
 			}
 		}
 		return null;
