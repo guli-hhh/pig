@@ -1,0 +1,8 @@
+{
+  "properties": [
+    {
+      "name": "spring.application.enabledAuto",
+      "type": "java.lang.Boolean",
+      "description": "是否启用自动配置，默认开启."
+    }
+  ] }
