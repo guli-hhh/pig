@@ -34,6 +34,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.time.LocalDateTime;
 
 /**
  * <p>
@@ -118,6 +119,7 @@ public class DictController {
 	@SysLog("修改字典")
 	@PreAuthorize("@pms.hasPermission('sys_dict_edit')")
 	public R updateById(@Valid @RequestBody SysDict sysDict) {
+		sysDict.setUpdateTime(LocalDateTime.now());
 		sysDictService.updateDict(sysDict);
 		return R.ok();
 	}

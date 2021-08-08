@@ -32,6 +32,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.time.LocalDateTime;
 
 /**
  * @author lengleng
@@ -129,6 +130,7 @@ public class UserController {
 	@PutMapping
 	@PreAuthorize("@pms.hasPermission('sys_user_edit')")
 	public R updateUser(@Valid @RequestBody UserDTO userDto) {
+		userDto.setUpdateTime(LocalDateTime.now());
 		return R.ok(userService.updateUser(userDto));
 	}
 

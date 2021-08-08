@@ -27,6 +27,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -123,6 +124,7 @@ public class MenuController {
 	@PutMapping
 	@PreAuthorize("@pms.hasPermission('sys_menu_edit')")
 	public R update(@Valid @RequestBody SysMenu sysMenu) {
+		sysMenu.setUpdateTime(LocalDateTime.now());
 		return R.ok(sysMenuService.updateMenuById(sysMenu));
 	}
 

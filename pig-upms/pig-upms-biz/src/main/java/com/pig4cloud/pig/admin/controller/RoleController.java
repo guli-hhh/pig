@@ -30,6 +30,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.time.LocalDateTime;
 
 /**
  * @author lengleng
@@ -76,6 +77,7 @@ public class RoleController {
 	@PutMapping
 	@PreAuthorize("@pms.hasPermission('sys_role_edit')")
 	public R update(@Valid @RequestBody SysRole sysRole) {
+		sysRole.setUpdateTime(LocalDateTime.now());
 		return R.ok(sysRoleService.updateById(sysRole));
 	}
 
