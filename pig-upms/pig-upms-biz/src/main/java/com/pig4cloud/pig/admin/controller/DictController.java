@@ -119,7 +119,6 @@ public class DictController {
 	@SysLog("修改字典")
 	@PreAuthorize("@pms.hasPermission('sys_dict_edit')")
 	public R updateById(@Valid @RequestBody SysDict sysDict) {
-		sysDict.setUpdateTime(LocalDateTime.now());
 		sysDictService.updateDict(sysDict);
 		return R.ok();
 	}

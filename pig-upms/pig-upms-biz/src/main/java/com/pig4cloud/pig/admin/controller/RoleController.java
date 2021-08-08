@@ -77,7 +77,6 @@ public class RoleController {
 	@PutMapping
 	@PreAuthorize("@pms.hasPermission('sys_role_edit')")
 	public R update(@Valid @RequestBody SysRole sysRole) {
-		sysRole.setUpdateTime(LocalDateTime.now());
 		return R.ok(sysRoleService.updateById(sysRole));
 	}
 

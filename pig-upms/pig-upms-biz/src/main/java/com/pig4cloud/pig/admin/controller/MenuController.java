@@ -124,7 +124,6 @@ public class MenuController {
 	@PutMapping
 	@PreAuthorize("@pms.hasPermission('sys_menu_edit')")
 	public R update(@Valid @RequestBody SysMenu sysMenu) {
-		sysMenu.setUpdateTime(LocalDateTime.now());
 		return R.ok(sysMenuService.updateMenuById(sysMenu));
 	}
 

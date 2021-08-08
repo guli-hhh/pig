@@ -130,7 +130,6 @@ public class UserController {
 	@PutMapping
 	@PreAuthorize("@pms.hasPermission('sys_user_edit')")
 	public R updateUser(@Valid @RequestBody UserDTO userDto) {
-		userDto.setUpdateTime(LocalDateTime.now());
 		return R.ok(userService.updateUser(userDto));
 	}
 
