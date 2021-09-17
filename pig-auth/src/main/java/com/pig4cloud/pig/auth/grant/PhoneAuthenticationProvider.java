@@ -5,6 +5,7 @@ import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.BeanCreationException;
 import org.springframework.security.authentication.AuthenticationProvider;
+import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -28,7 +29,7 @@ public class PhoneAuthenticationProvider implements AuthenticationProvider {
 
 		if (authentication.getCredentials() == null) {
 			log.debug("Failed to authenticate since no credentials provided");
-			throw new BeanCreationException("Bad credentials");
+			throw new BadCredentialsException("Bad credentials");
 		}
 
 		// 手机号
