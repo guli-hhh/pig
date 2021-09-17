@@ -3,7 +3,6 @@ package com.pig4cloud.pig.auth.grant;
 import com.pig4cloud.pig.common.security.service.PigUserDetailsServiceImpl;
 import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.BeanCreationException;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.core.Authentication;
@@ -46,7 +45,7 @@ public class PhoneAuthenticationProvider implements AuthenticationProvider {
 
 		boolean matches = passwordEncoder.matches(code, password);
 		if (!matches) {
-			throw new BeanCreationException("Bad credentials");
+			throw new BadCredentialsException("Bad credentials");
 		}
 
 		PhoneAuthenticationToken token = new PhoneAuthenticationToken(userDetails);
