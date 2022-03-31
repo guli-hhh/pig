@@ -117,6 +117,7 @@ public class PigTokenEndpoint {
 	@DeleteMapping("/logout")
 	public R<Boolean> logout(@RequestHeader(value = HttpHeaders.AUTHORIZATION, required = false) String authHeader) {
 		if (StrUtil.isBlank(authHeader)) {
+             R.ok()
 			return R.ok();
 		}
 
