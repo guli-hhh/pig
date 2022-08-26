@@ -75,12 +75,18 @@ public class AuthorizationServerConfiguration {
 						.consentPage(SecurityConstants.CUSTOM_CONSENT_PAGE_URI)));
 
 		RequestMatcher endpointsMatcher = authorizationServerConfigurer.getEndpointsMatcher();
+
+		// @formatter:off
 		DefaultSecurityFilterChain securityFilterChain = http.requestMatcher(endpointsMatcher)
 				.authorizeRequests(authorizeRequests -> authorizeRequests.anyRequest().authenticated())
 				.apply(authorizationServerConfigurer.authorizationService(authorizationService)// redis存储token的实现
-						.providerSettings(ProviderSettings.builder().issuer(SecurityConstants.PROJECT_LICENSE).build()))
+						.providerSettings(ProviderSettings.builder()
+								// 自定义修改 /oauth2/token
+								.tokenEndpoint("/oauth2/token")
+								.issuer(SecurityConstants.PROJECT_LICENSE).build()))
 				// 授权码登录的登录页个性化
 				.and().apply(new FormIdentityLoginConfigurer()).and().build();
+		// @formatter:on
 
 		// 注入自定义授权模式实现
 		addCustomOAuth2GrantAuthenticationProvider(http);
