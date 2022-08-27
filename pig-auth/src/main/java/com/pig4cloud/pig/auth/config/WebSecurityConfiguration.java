@@ -41,13 +41,6 @@ import org.springframework.security.web.SecurityFilterChain;
 @EnableWebSecurity(debug = true)
 public class WebSecurityConfiguration {
 
-	private TokenController tokenController;
-
-	@Autowired
-	public void setTokenController(TokenController tokenController) {
-		this.tokenController = tokenController;
-	}
-
 	/**
 	 * spring security 默认的安全策略
 	 * @param http security注入点
@@ -61,21 +54,6 @@ public class WebSecurityConfiguration {
 				.and().apply(new FormIdentityLoginConfigurer()); // 表单登录个性化
 		// 处理 UsernamePasswordAuthenticationToken
 		http.authenticationProvider(new PigDaoAuthenticationProvider());
-
-		// Q：为何使用 HttpSecurity 获取 Bean 然后放入 Controller 中？而不是直接在 Controller 中获取下列 Bean？
-		// A：因为配置方式不同，
-		// 如：有人使用创建 Bean 的形式来创建下列 Bean，还有人直接操作 HttpSecurity 来设置 Bean（这两种方式在 Security 中默认都支持），
-		// 为了兼容这两种防止，所以采用了下列做法，这也是 Security 中的默认做法
-
-		RegisteredClientRepository registeredClientRepository = OAuth2Utils.getRegisteredClientRepository(http);
-		OAuth2AuthorizationService authorizationService = OAuth2Utils.getAuthorizationService(http);
-		OAuth2TokenGenerator<? extends OAuth2Token> tokenGenerator = OAuth2Utils.getTokenGenerator(http);
-		ProviderSettings providerSettings = OAuth2Utils.getProviderSettings(http);
-
-		tokenController.setRegisteredClientRepository(registeredClientRepository);
-		tokenController.setAuthorizationService(authorizationService);
-		tokenController.setTokenGenerator(tokenGenerator);
-		tokenController.setProviderSettings(providerSettings);
 
 		return http.build();
 	}
