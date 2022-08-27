@@ -1,0 +1,166 @@
+{
+  "accessToken": {
+    "tokenValue": "anonymousUser::admin::14e2bfa0-f04b-456e-a62c-40ac71dba9ba",
+    "issuedAt": "2022-08-27T05:52:32.306688700Z",
+    "expiresAt": "2022-08-27T17:52:32.306688700Z",
+    "tokenType": {
+      "value": "Bearer"
+    },
+    "scopes": [
+      "server"
+    ],
+    "claims": {
+      "sub": "admin",
+      "aud": [
+        "pig"
+      ],
+      "license": "https://pig4cloud.com",
+      "nbf": "2022-08-27T05:52:32.306688700Z",
+      "clientId": "pig",
+      "user_info": {
+        "password": null,
+        "username": "admin",
+        "authorities": [
+          {
+            "authority": "ROLE_1"
+          },
+          {
+            "authority": "gen_form_add"
+          },
+          {
+            "authority": "gen_form_del"
+          },
+          {
+            "authority": "gen_form_edit"
+          },
+          {
+            "authority": "sys_client_add"
+          },
+          {
+            "authority": "sys_client_del"
+          },
+          {
+            "authority": "sys_client_edit"
+          },
+          {
+            "authority": "sys_dept_add"
+          },
+          {
+            "authority": "sys_dept_del"
+          },
+          {
+            "authority": "sys_dept_edit"
+          },
+          {
+            "authority": "sys_dict_add"
+          },
+          {
+            "authority": "sys_dict_del"
+          },
+          {
+            "authority": "sys_dict_edit"
+          },
+          {
+            "authority": "sys_file_add"
+          },
+          {
+            "authority": "sys_file_del"
+          },
+          {
+            "authority": "sys_file_edit"
+          },
+          {
+            "authority": "sys_log_del"
+          },
+          {
+            "authority": "sys_log_import_export"
+          },
+          {
+            "authority": "sys_menu_add"
+          },
+          {
+            "authority": "sys_menu_del"
+          },
+          {
+            "authority": "sys_menu_edit"
+          },
+          {
+            "authority": "sys_post_add"
+          },
+          {
+            "authority": "sys_post_del"
+          },
+          {
+            "authority": "sys_post_edit"
+          },
+          {
+            "authority": "sys_post_get"
+          },
+          {
+            "authority": "sys_post_import_export"
+          },
+          {
+            "authority": "sys_publicparam_add"
+          },
+          {
+            "authority": "sys_publicparam_del"
+          },
+          {
+            "authority": "sys_publicparam_edit"
+          },
+          {
+            "authority": "sys_role_add"
+          },
+          {
+            "authority": "sys_role_del"
+          },
+          {
+            "authority": "sys_role_edit"
+          },
+          {
+            "authority": "sys_role_import_export"
+          },
+          {
+            "authority": "sys_role_perm"
+          },
+          {
+            "authority": "sys_token_del"
+          },
+          {
+            "authority": "sys_user_add"
+          },
+          {
+            "authority": "sys_user_del"
+          },
+          {
+            "authority": "sys_user_edit"
+          },
+          {
+            "authority": "sys_user_import_export"
+          }
+        ],
+        "accountNonExpired": true,
+        "accountNonLocked": true,
+        "credentialsNonExpired": true,
+        "enabled": true,
+        "id": "1",
+        "deptId": "1",
+        "phone": "17034642999",
+        "name": "admin",
+        "attributes": {}
+      },
+      "scope": [
+        "server"
+      ],
+      "iss": "https://pig4cloud.com",
+      "exp": "2022-08-27T17:52:32.306688700Z",
+      "iat": "2022-08-27T05:52:32.306688700Z",
+      "jti": "fd0b7743-c84f-442f-9fd5-fba848614ade"
+    }
+  },
+  "refreshToken": {
+    "tokenValue": "PtcjiUWkTpQznG_p8QKnYfarX8Z3aIhLLl3TbmsNhx7cuKkLTJiMqblB3OP0tDDL9nqJ4cMTqthUiSfbh9_clFkzOcnj5ea9is9x_hxd8xd2MeMuoAD6fq_noNYE2orQ",
+    "issuedAt": "2022-08-27T05:45:26.527700600Z",
+    "expiresAt": "2022-09-26T05:45:26.527700600Z"
+  }
+}

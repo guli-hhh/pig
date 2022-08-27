@@ -1,5 +1,6 @@
 package com.pig4cloud.pig.auth.endpoint;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -35,6 +36,7 @@ import java.util.Set;
  * @author xuxiaowei
  * @since 0.0.1
  */
+@Slf4j
 @RestController
 @RequestMapping("/token")
 public class TokenController {
@@ -64,6 +66,13 @@ public class TokenController {
 	}
 
 	/**
+	 * 刷新Token的URL：
+	 * http://localhost:3000/token/refresh?clientId=pig&clientSecret=pig&refreshToken=刷新Token
+	 *
+	 * 刷新Token可从Redis中获取，参见同文件夹下的：img.png
+	 *
+	 * 响应数据可查看同文件夹下的：response.json
+	 *
 	 * @see OAuth2RefreshTokenAuthenticationConverter
 	 * @see OAuth2RefreshTokenAuthenticationProvider
 	 * @param clientId
@@ -72,16 +81,25 @@ public class TokenController {
 	 * @return
 	 */
 	@RequestMapping("/refresh")
-	public Map<String, Object> refresh(HttpServletRequest request, String clientId, String clientSecret, String refreshToken) {
+	public Map<String, Object> refresh(HttpServletRequest request, String clientId, String clientSecret,
+			String refreshToken) {
 
 		Map<String, Object> map = new HashMap<>(4);
 
 		if (!StringUtils.hasText(refreshToken)) {
-			map.put("msg", "Token 不能为空");
+			map.put("msg", "刷新 Token 不能为空");
 			return map;
 		}
 
-		RegisteredClient registeredClient = registeredClientRepository.findByClientId(clientId);
+		RegisteredClient registeredClient;
+		try {
+			registeredClient = registeredClientRepository.findByClientId(clientId);
+		}
+		catch (Exception e) {
+			log.error("查询客户时异常", e);
+			map.put("msg", "查询客户时异常");
+			return map;
+		}
 		if (registeredClient == null) {
 			map.put("msg", "未找到客户");
 			return map;
