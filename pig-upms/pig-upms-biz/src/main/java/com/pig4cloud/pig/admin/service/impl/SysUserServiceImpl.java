@@ -85,6 +85,8 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impl
 	@Override
 	@Transactional(rollbackFor = Exception.class)
 	public Boolean saveUser(UserDTO userDto) {
+		Assert.isTrue(userDto.getPassword().length() >= 6, "密码长度最少为6位");
+		
 		SysUser sysUser = new SysUser();
 		BeanUtils.copyProperties(userDto, sysUser);
 		sysUser.setDelFlag(CommonConstants.STATUS_NORMAL);
@@ -196,6 +198,7 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impl
 		sysUser.setUpdateTime(LocalDateTime.now());
 
 		if (StrUtil.isNotBlank(userDto.getPassword())) {
+			Assert.isTrue(userDto.getPassword().length() >= 6, "密码长度最少为6位");
 			sysUser.setPassword(ENCODER.encode(userDto.getPassword()));
 		}
 		this.updateById(sysUser);
