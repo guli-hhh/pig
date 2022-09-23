@@ -110,9 +110,28 @@ public class PigRedisOAuth2AuthorizationService implements OAuth2AuthorizationSe
 	@Nullable
 	public OAuth2Authorization findByToken(String token, @Nullable OAuth2TokenType tokenType) {
 		Assert.hasText(token, "token cannot be empty");
-		Assert.notNull(tokenType, "tokenType cannot be empty");
-		redisTemplate.setValueSerializer(RedisSerializer.java());
-		return (OAuth2Authorization) redisTemplate.opsForValue().get(buildKey(tokenType.getValue(), token));
+        redisTemplate.setValueSerializer(RedisSerializer.java());
+        if (tokenType != null) {
+            return (OAuth2Authorization) redisTemplate.opsForValue().get(buildKey(tokenType.getValue(), token));
+        } else {
+            OAuth2Authorization accessAuthorization = (OAuth2Authorization) redisTemplate.opsForValue()
+                    .get(buildKey("access_token", token));
+            if (accessAuthorization != null){
+                return accessAuthorization;
+            }
+            OAuth2Authorization refreshAuthorization = (OAuth2Authorization) redisTemplate.opsForValue()
+                    .get(buildKey("refresh_token", token));
+            if (refreshAuthorization != null){
+                return refreshAuthorization;
+            }
+            OAuth2Authorization codeAuthorization = (OAuth2Authorization) redisTemplate.opsForValue()
+                    .get(buildKey("code", token));
+            if (codeAuthorization != null){
+                return codeAuthorization;
+            }
+            return (OAuth2Authorization) redisTemplate.opsForValue()
+                    .get(buildKey("state", token));
+        }
 	}
 
 	private String buildKey(String type, String id) {
