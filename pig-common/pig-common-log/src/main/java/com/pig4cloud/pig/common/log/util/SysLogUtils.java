@@ -20,6 +20,7 @@ import cn.hutool.core.util.URLUtil;
 import cn.hutool.extra.servlet.ServletUtil;
 import cn.hutool.http.HttpUtil;
 import com.pig4cloud.pig.admin.api.entity.SysLog;
+import com.pig4cloud.pig.common.core.util.WebUtils;
 import lombok.experimental.UtilityClass;
 import org.springframework.core.LocalVariableTableParameterNameDiscoverer;
 import org.springframework.expression.EvaluationContext;
@@ -32,7 +33,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
-import javax.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletRequest;
 import java.lang.reflect.Method;
 import java.util.Objects;
 
@@ -49,7 +50,7 @@ public class SysLogUtils {
 				.requireNonNull(RequestContextHolder.getRequestAttributes())).getRequest();
 		SysLog sysLog = new SysLog();
 		sysLog.setType(LogTypeEnum.NORMAL.getType());
-		sysLog.setRemoteAddr(ServletUtil.getClientIP(request));
+		sysLog.setRemoteAddr(WebUtils.getIpAddr(request));
 		sysLog.setRequestUri(URLUtil.getPath(request.getRequestURI()));
 		sysLog.setMethod(request.getMethod());
 		sysLog.setUserAgent(request.getHeader(HttpHeaders.USER_AGENT));

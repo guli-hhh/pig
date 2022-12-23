@@ -24,7 +24,7 @@ import org.springframework.security.oauth2.core.endpoint.OAuth2ParameterNames;
 import org.springframework.security.web.authentication.www.BasicAuthenticationConverter;
 import org.springframework.util.Assert;
 
-import javax.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletRequest;
 import java.util.Comparator;
 import java.util.Map;
 import java.util.Optional;
@@ -95,7 +95,7 @@ public class PigDaoAuthenticationProvider extends AbstractUserDetailsAuthenticat
 		HttpServletRequest request = WebUtils.getRequest().orElseThrow(
 				(Supplier<Throwable>) () -> new InternalAuthenticationServiceException("web request is empty"));
 
-		Map<String, String> paramMap = ServletUtil.getParamMap(request);
+		Map<String, String> paramMap = WebUtils.getMapParam(request);
 		String grantType = paramMap.get(OAuth2ParameterNames.GRANT_TYPE);
 		String clientId = paramMap.get(OAuth2ParameterNames.CLIENT_ID);
 

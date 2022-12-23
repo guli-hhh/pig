@@ -13,7 +13,8 @@
  * contributors may be used to endorse or promote products derived from
  * this software without specific prior written permission.
  * Author: lengleng (wangiegie@gmail.com)
- */
+ *//*
+
 
 package com.pig4cloud.pig.common.feign.sentinel;
 
@@ -32,12 +33,14 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Scope;
 
+*/
 /**
  * @author lengleng
  * @date 2020-02-12
  * <p>
  * sentinel 配置
- */
+ *//*
+
 @Configuration(proxyBeanMethods = false)
 @AutoConfigureBefore(SentinelFeignAutoConfiguration.class)
 public class SentinelAutoConfiguration {
@@ -63,3 +66,4 @@ public class SentinelAutoConfiguration {
 	}
 
 }
+*/

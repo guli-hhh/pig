@@ -12,7 +12,8 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- */
+ *//*
+
 
 package com.pig4cloud.pig.common.feign.sentinel.ext;
 
@@ -41,12 +42,14 @@ import java.util.Map;
 
 import static feign.Util.checkNotNull;
 
+*/
 /**
  * 支持自动降级注入 重写 {@link com.alibaba.cloud.sentinel.feign.SentinelInvocationHandler}
  *
  * @author lengleng
  * @date 2020/6/9
- */
+ *//*
+
 @Slf4j
 public class PigSentinelInvocationHandler implements InvocationHandler {
 
@@ -189,3 +192,4 @@ public class PigSentinelInvocationHandler implements InvocationHandler {
 	}
 
 }
+*/

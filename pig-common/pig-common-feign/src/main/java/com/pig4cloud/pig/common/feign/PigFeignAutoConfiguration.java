@@ -20,7 +20,7 @@ import com.alibaba.cloud.sentinel.feign.SentinelFeignAutoConfiguration;
 import com.alibaba.csp.sentinel.adapter.spring.webmvc.callback.BlockExceptionHandler;
 import com.alibaba.csp.sentinel.adapter.spring.webmvc.callback.RequestOriginParser;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.pig4cloud.pig.common.feign.sentinel.ext.PigSentinelFeign;
+//import com.pig4cloud.pig.common.feign.sentinel.ext.PigSentinelFeign;
 import com.pig4cloud.pig.common.feign.sentinel.handle.PigUrlBlockHandler;
 import com.pig4cloud.pig.common.feign.sentinel.parser.PigHeaderRequestOriginParser;
 import feign.Feign;
@@ -41,13 +41,13 @@ import org.springframework.context.annotation.Scope;
 @AutoConfigureBefore(SentinelFeignAutoConfiguration.class)
 public class PigFeignAutoConfiguration {
 
-	@Bean
+	/*@Bean
 	@Scope("prototype")
 	@ConditionalOnMissingBean
 	@ConditionalOnProperty(name = "feign.sentinel.enabled")
 	public Feign.Builder feignSentinelBuilder() {
 		return PigSentinelFeign.builder();
-	}
+	}*/
 
 	@Bean
 	@ConditionalOnMissingBean
