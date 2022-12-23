@@ -5,6 +5,9 @@ spring:
   application:
     name: @artifactId@
   cloud:
+    # 暂时修复因sentinel导致的无法启动
+    openfeign:
+      lazy-attributes-resolution: true
     nacos:
       discovery:
         server-addr: ${NACOS_HOST:pig-register}:${NACOS_PORT:8848}

@@ -12,7 +12,8 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- */
+ *//*
+
 
 package com.pig4cloud.pig.common.feign.sentinel.ext;
 
@@ -24,7 +25,7 @@ import feign.Target;
 import org.springframework.beans.BeansException;
 import org.springframework.cloud.openfeign.FallbackFactory;
 import org.springframework.cloud.openfeign.FeignClient;
-import org.springframework.cloud.openfeign.FeignContext;
+//import org.springframework.cloud.openfeign.FeignContext;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
 import org.springframework.core.annotation.AnnotationUtils;
@@ -36,12 +37,14 @@ import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;
 import java.util.Map;
 
+*/
 /**
  * 支持自动降级注入 重写 {@link com.alibaba.cloud.sentinel.feign.SentinelFeign}
  *
  * @author lengleng
  * @date 2020/6/9
- */
+ *//*
+
 public final class PigSentinelFeign {
 
 	private PigSentinelFeign() {
@@ -58,7 +61,8 @@ public final class PigSentinelFeign {
 
 		private ApplicationContext applicationContext;
 
-		private FeignContext feignContext;
+		// TODO 寻找代替方案FeignContext
+		// private FeignContext feignContext;
 
 		@Override
 		public Feign.Builder invocationHandlerFactory(InvocationHandlerFactory invocationHandlerFactory) {
@@ -104,7 +108,9 @@ public final class PigSentinelFeign {
 				}
 
 				private Object getFromContext(String name, String type, Class<?> fallbackType, Class<?> targetType) {
-					Object fallbackInstance = feignContext.getInstance(name, fallbackType);
+					// Object fallbackInstance = feignContext.getInstance(name,
+					// fallbackType);
+					Object fallbackInstance = null;
 					if (fallbackInstance == null) {
 						throw new IllegalStateException(String.format(
 								"No %s instance of type %s found for feign client %s", type, fallbackType, name));
@@ -138,9 +144,10 @@ public final class PigSentinelFeign {
 		@Override
 		public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
 			this.applicationContext = applicationContext;
-			feignContext = this.applicationContext.getBean(FeignContext.class);
+			// feignContext = this.applicationContext.getBean(FeignContext.class);
 		}
 
 	}
 
 }
+*/

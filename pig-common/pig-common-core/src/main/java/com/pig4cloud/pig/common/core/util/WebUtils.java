@@ -17,6 +17,7 @@
 package com.pig4cloud.pig.common.core.util;
 
 import cn.hutool.core.codec.Base64;
+import cn.hutool.core.util.ObjectUtil;
 import com.pig4cloud.pig.common.core.exception.CheckedException;
 import lombok.SneakyThrows;
 import lombok.experimental.UtilityClass;
@@ -28,11 +29,14 @@ import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 import org.springframework.web.method.HandlerMethod;
 
-import javax.servlet.http.Cookie;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.validation.constraints.NotNull;
+import jakarta.servlet.http.Cookie;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+import jakarta.validation.constraints.NotNull;
 import java.nio.charset.StandardCharsets;
+import java.util.Enumeration;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Optional;
 
 /**
@@ -163,6 +167,75 @@ public class WebUtils extends org.springframework.web.util.WebUtils {
 			throw new CheckedException("Invalid basic authentication token");
 		}
 		return new String[] { token.substring(0, delim), token.substring(delim + 1) };
+	}
+
+	/**
+	 * 获取客户端IP地址
+	 * @param request HttpServletRequest
+	 * @return String
+	 */
+	public static String getIpAddr(HttpServletRequest request) {
+
+		if (request == null) {
+			return "unknown";
+		}
+
+		String ip = null;
+
+		// X-Forwarded-For：Squid 服务代理
+		String ipAddresses = request.getHeader("X-Forwarded-For");
+		if (ObjectUtil.isEmpty(ipAddresses) || ipAddresses.length() == 0 || UNKNOWN.equalsIgnoreCase(ipAddresses)) {
+			// Proxy-Client-IP：apache 服务代理
+			ipAddresses = request.getHeader("Proxy-Client-IP");
+		}
+		if (ObjectUtil.isEmpty(ipAddresses) || ipAddresses.length() == 0 || UNKNOWN.equalsIgnoreCase(ipAddresses)) {
+			// WL-Proxy-Client-IP：weblogic 服务代理
+			ipAddresses = request.getHeader("WL-Proxy-Client-IP");
+		}
+		if (ObjectUtil.isEmpty(ipAddresses) || ipAddresses.length() == 0 || UNKNOWN.equalsIgnoreCase(ipAddresses)) {
+			// HTTP_CLIENT_IP：有些代理服务器
+			ipAddresses = request.getHeader("HTTP_CLIENT_IP");
+		}
+		if (ObjectUtil.isEmpty(ipAddresses) || ipAddresses.length() == 0 || UNKNOWN.equalsIgnoreCase(ipAddresses)) {
+			// X-Real-IP：nginx服务代理
+			ipAddresses = request.getHeader("X-Real-IP");
+		}
+
+		// 有些网络通过多层代理，那么获取到的ip就会有多个，一般都是通过逗号（,）分割开来，并且第一个ip为客户端的真实IP
+		if (ipAddresses != null && ipAddresses.length() != 0) {
+			ip = ipAddresses.split(",")[0];
+		}
+
+		// 还是不能获取到，最后再通过request.getRemoteAddr();获取
+		if (ip == null || ip.length() == 0 || UNKNOWN.equalsIgnoreCase(ipAddresses)) {
+			ip = request.getRemoteAddr();
+		}
+		return "0:0:0:0:0:0:0:1".equals(ip) ? "127.0.0.1" : ip;
+	}
+
+	/**
+	 * 获取json格式参数
+	 * @param httpServletRequest HttpServletRequest
+	 * @return Map
+	 */
+	public static Map<String, String> getMapParam(HttpServletRequest httpServletRequest) {
+		Map<String, String> map = new HashMap<>(6);
+		// 获取所有参数名称
+		Enumeration enu = httpServletRequest.getParameterNames();
+		// 遍历hash
+		while (enu.hasMoreElements()) {
+			String paramName = (String) enu.nextElement();
+			// 获取参数值
+			String[] paramValues = httpServletRequest.getParameterValues(paramName);
+			// 是否存在参数
+			if (paramValues.length == 1) {
+				String paramValue = paramValues[0];
+				if (paramValue.length() != 0) {
+					map.put(paramName, paramValue);
+				}
+			}
+		}
+		return map;
 	}
 
 }
