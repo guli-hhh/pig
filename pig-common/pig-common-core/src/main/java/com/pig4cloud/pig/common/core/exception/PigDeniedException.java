@@ -20,7 +20,7 @@ import lombok.NoArgsConstructor;
 
 /**
  * @author lengleng
- * @date 2018年06月22日16:22:03 403 授权拒绝
+ * @since 2018年06月22日16:22:03 403 授权拒绝
  */
 @NoArgsConstructor
 public class PigDeniedException extends RuntimeException {

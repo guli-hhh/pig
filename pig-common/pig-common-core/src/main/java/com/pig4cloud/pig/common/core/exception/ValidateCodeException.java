@@ -18,7 +18,7 @@ package com.pig4cloud.pig.common.core.exception;
 
 /**
  * @author lengleng
- * @date 2018年06月22日16:22:15
+ * @since 2018年06月22日16:22:15
  */
 public class ValidateCodeException extends RuntimeException {
 

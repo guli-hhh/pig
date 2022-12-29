@@ -8,7 +8,7 @@ import javax.validation.constraints.NotBlank;
  * 客户端请求验证码
  *
  * @author lengleng
- * @date 2022/10/13
+ * @since 2022/10/13
  */
 @Data
 public class AppSmsDTO {

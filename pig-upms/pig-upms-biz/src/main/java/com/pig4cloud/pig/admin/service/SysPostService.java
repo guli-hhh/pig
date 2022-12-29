@@ -29,7 +29,7 @@ import java.util.List;
  * 岗位管理 服务类
  *
  * @author fxz
- * @date 2022-03-15 17:18:40
+ * @since 2022-03-15 17:18:40
  */
 public interface SysPostService extends IService<SysPost> {
 

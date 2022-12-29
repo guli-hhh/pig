@@ -21,7 +21,7 @@ import lombok.RequiredArgsConstructor;
 
 /**
  * @author lengleng
- * @date 2018/8/15 社交登录类型
+ * @since 2018/8/15 社交登录类型
  */
 @Getter
 @RequiredArgsConstructor

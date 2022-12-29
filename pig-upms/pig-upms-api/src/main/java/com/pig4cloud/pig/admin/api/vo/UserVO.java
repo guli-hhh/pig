@@ -26,7 +26,7 @@ import java.util.List;
 
 /**
  * @author lengleng
- * @date 2019/2/1
+ * @since 2019/2/1
  */
 @Data
 public class UserVO implements Serializable {

@@ -28,7 +28,7 @@ import lombok.EqualsAndHashCode;
  * 岗位管理
  *
  * @author fxz
- * @date 2022-03-15 17:18:40
+ * @since 2022-03-15 17:18:40
  */
 @Data
 @TableName("sys_post")

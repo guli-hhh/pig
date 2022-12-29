@@ -27,7 +27,7 @@ import org.springframework.security.web.authentication.SavedRequestAwareAuthenti
  * WebSecurityConfigurer
  *
  * @author lishangbu
- * @date 2019/2/1
+ * @since 2019/2/1
  */
 @EnableWebSecurity
 public class WebSecurityConfigurer {

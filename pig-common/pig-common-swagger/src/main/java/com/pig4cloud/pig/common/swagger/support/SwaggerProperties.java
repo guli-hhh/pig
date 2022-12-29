@@ -27,7 +27,7 @@ import java.util.Map;
  * SwaggerProperties
  *
  * @author lengleng
- * @date 2018/7/25 14:00
+ * @since 2018/7/25 14:00
  */
 @Data
 @ConfigurationProperties("swagger")

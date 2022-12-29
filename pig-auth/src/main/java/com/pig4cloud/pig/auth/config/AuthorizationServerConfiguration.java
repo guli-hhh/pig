@@ -50,7 +50,7 @@ import java.util.Arrays;
 
 /**
  * @author lengleng
- * @date 2022/5/27
+ * @since 2022/5/27
  *
  * 认证服务器配置
  */
@@ -89,7 +89,7 @@ public class AuthorizationServerConfiguration {
 	}
 
 	/**
-	 * 令牌生成规则实现 </br>
+	 * 令牌生成规则实现 <br>
 	 * client:username:uuid
 	 * @return OAuth2TokenGenerator
 	 */
@@ -117,8 +117,8 @@ public class AuthorizationServerConfiguration {
 	/**
 	 * 注入授权模式实现提供方
 	 *
-	 * 1. 密码模式 </br>
-	 * 2. 短信登录 </br>
+	 * 1. 密码模式 <br>
+	 * 2. 短信登录 <br>
 	 *
 	 */
 	@SuppressWarnings("unchecked")

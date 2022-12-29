@@ -20,7 +20,7 @@ import java.util.zip.ZipOutputStream;
 
 /**
  * @author Fxz
- * @date 2022/7/21 02:45
+ * @since 2022/7/21 02:45
  */
 @Service("avue")
 public class AvueGenCodeServiceImpl implements GenCodeService {

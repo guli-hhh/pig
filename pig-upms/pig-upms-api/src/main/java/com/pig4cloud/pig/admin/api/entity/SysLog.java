@@ -33,7 +33,7 @@ import javax.validation.constraints.NotBlank;
 /**
  * <p>
  * 日志表
- * </p>
+ * <p>
  *
  * @author lengleng
  * @since 2019/2/1

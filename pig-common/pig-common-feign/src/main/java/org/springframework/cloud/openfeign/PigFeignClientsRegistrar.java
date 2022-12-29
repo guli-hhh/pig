@@ -42,7 +42,7 @@ import java.util.Map;
 
 /**
  * @author L.cm
- * @date 2020/2/8
+ * @since 2020/2/8
  * <p>
  * feign 自动配置功能 from mica
  */

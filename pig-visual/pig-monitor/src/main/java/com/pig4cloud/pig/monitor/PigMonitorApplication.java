@@ -23,7 +23,7 @@ import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 
 /**
  * @author lengleng
- * @date 2018年06月21日 监控中心
+ * @since 2018年06月21日 监控中心
  */
 @EnableAdminServer
 @EnableDiscoveryClient

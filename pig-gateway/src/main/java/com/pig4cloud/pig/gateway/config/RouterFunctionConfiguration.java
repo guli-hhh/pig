@@ -31,7 +31,7 @@ import org.springframework.web.reactive.function.server.ServerResponse;
  * 路由配置信息
  *
  * @author lengleng
- * @date 2020-06-11
+ * @since 2020-06-11
  */
 @Slf4j
 @Configuration(proxyBeanMethods = false)

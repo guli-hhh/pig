@@ -26,7 +26,7 @@ import java.util.List;
 
 /**
  * @author lengleng
- * @date 2019/2/1
+ * @since 2019/2/1
  * <p>
  * commit('SET_ROLES', data) commit('SET_NAME', data) commit('SET_AVATAR', data)
  * commit('SET_INTRODUCTION', data) commit('SET_PERMISSIONS', data)

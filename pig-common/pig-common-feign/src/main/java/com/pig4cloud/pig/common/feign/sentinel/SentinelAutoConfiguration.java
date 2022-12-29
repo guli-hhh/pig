@@ -34,7 +34,7 @@ import org.springframework.context.annotation.Scope;
 
 /**
  * @author lengleng
- * @date 2020-02-12
+ * @since 2020-02-12
  * <p>
  * sentinel 配置
  */

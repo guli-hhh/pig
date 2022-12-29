@@ -25,7 +25,7 @@ import java.util.Objects;
 
 /**
  * @author lengleng
- * @date 2019/2/1 路由限流配置
+ * @since 2019/2/1 路由限流配置
  */
 @Configuration(proxyBeanMethods = false)
 public class RateLimiterConfiguration {
@@ -33,7 +33,9 @@ public class RateLimiterConfiguration {
 	/**
 	 * Remote addr key resolver key resolver.
 	 *
-	 * @link {https://docs.spring.io/spring-cloud-gateway/docs/current/reference/html/#the-requestratelimiter-gatewayfilter-factory}
+	 * @see <a href=
+	 * "https://docs.spring.io/spring-cloud-gateway/docs/current/reference/html/#the-requestratelimiter-gatewayfilter-factory">The
+	 * RequestRateLimiter GatewayFilter Factory</a>
 	 */
 	@Bean
 	public KeyResolver remoteAddrKeyResolver() {

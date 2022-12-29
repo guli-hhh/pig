@@ -20,7 +20,7 @@ import lombok.Data;
 
 /**
  * @author lengleng
- * @date 2018/8/2 生成配置
+ * @since 2018/8/2 生成配置
  */
 @Data
 public class GenConfig {

@@ -22,7 +22,7 @@ import com.pig4cloud.pig.codegen.entity.GenDatasourceConf;
  * 数据源表
  *
  * @author lengleng
- * @date 2019-03-31 16:00:20
+ * @since 2019-03-31 16:00:20
  */
 public interface GenDatasourceConfService extends IService<GenDatasourceConf> {
 
@@ -43,7 +43,6 @@ public interface GenDatasourceConfService extends IService<GenDatasourceConf> {
 	/**
 	 * 更新动态数据的数据源列表
 	 * @param datasourceConf
-	 * @return
 	 */
 	void addDynamicDataSource(GenDatasourceConf datasourceConf);
 

@@ -27,7 +27,7 @@ import java.lang.annotation.*;
  * 开启 pig spring doc
  *
  * @author lengleng
- * @date 2022-03-26
+ * @since 2022-03-26
  */
 @Target({ ElementType.TYPE })
 @Retention(RetentionPolicy.RUNTIME)

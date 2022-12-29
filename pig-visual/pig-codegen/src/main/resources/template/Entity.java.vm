@@ -32,7 +32,7 @@ import java.math.BigDecimal;
  * ${comments}
  *
  * @author ${author}
- * @date ${datetime}
+ * @since ${datetime}
  */
 @Data
 @TableName("${tableName}")

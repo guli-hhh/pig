@@ -25,7 +25,7 @@ import java.util.List;
 /**
  * <p>
  * 部门管理 服务类
- * </p>
+ * <p>
  *
  * @author lengleng
  * @since 2019/2/1
@@ -68,7 +68,7 @@ public interface SysDeptService extends IService<SysDept> {
 	/**
 	 * 查找指定部门的子部门id列表
 	 * @param deptId 部门id
-	 * @return List<Long>
+	 * @return {@link List}
 	 */
 	List<Long> listChildDeptId(Long deptId);
 

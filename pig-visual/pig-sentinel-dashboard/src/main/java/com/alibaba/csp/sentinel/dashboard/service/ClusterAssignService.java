@@ -46,7 +46,7 @@ public interface ClusterAssignService {
 	/**
 	 * Apply cluster server and client assignment for provided app.
 	 * @param app app name
-	 * @param clusterMap cluster assign map (server -> clients)
+	 * @param clusterMap cluster assign map (server -&gt; clients)
 	 * @param remainingSet unassigned set of machine ID
 	 * @return assign result
 	 */

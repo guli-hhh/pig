@@ -20,7 +20,7 @@ import lombok.NoArgsConstructor;
 
 /**
  * @author lengleng
- * @date 😴2018年06月22日16:21:57
+ * @since 😴2018年06月22日16:21:57
  */
 @NoArgsConstructor
 public class CheckedException extends RuntimeException {

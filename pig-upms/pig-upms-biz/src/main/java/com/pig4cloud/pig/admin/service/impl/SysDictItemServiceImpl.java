@@ -34,7 +34,7 @@ import org.springframework.util.Assert;
  * 字典项
  *
  * @author lengleng
- * @date 2019/03/19
+ * @since 2019/03/19
  */
 @Service
 @RequiredArgsConstructor
@@ -45,7 +45,6 @@ public class SysDictItemServiceImpl extends ServiceImpl<SysDictItemMapper, SysDi
 	/**
 	 * 删除字典项
 	 * @param id 字典项ID
-	 * @return
 	 */
 	@Override
 	@CacheEvict(value = CacheConstants.DICT_DETAILS, allEntries = true)
@@ -62,7 +61,6 @@ public class SysDictItemServiceImpl extends ServiceImpl<SysDictItemMapper, SysDi
 	/**
 	 * 更新字典项
 	 * @param item 字典项
-	 * @return
 	 */
 	@Override
 	@CacheEvict(value = CacheConstants.DICT_DETAILS, key = "#item.type")

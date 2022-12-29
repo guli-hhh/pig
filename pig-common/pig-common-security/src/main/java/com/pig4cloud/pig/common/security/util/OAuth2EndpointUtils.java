@@ -11,13 +11,13 @@ import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 
 import javax.servlet.http.HttpServletRequest;
-import java.io.IOException;
 import java.time.temporal.ChronoUnit;
 import java.util.Map;
 
 /**
+ * OAuth2 端点工具
+ *
  * @author jumuning
- * @description OAuth2 端点工具
  */
 @UtilityClass
 public class OAuth2EndpointUtils {
@@ -54,7 +54,6 @@ public class OAuth2EndpointUtils {
 	 * @param authentication 用户认证信息
 	 * @param claims 扩展信息
 	 * @return
-	 * @throws IOException
 	 */
 	public OAuth2AccessTokenResponse sendAccessTokenResponse(OAuth2Authorization authentication,
 			Map<String, Object> claims) {

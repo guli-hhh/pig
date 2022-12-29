@@ -21,7 +21,7 @@ import lombok.RequiredArgsConstructor;
 
 /**
  * @author lengleng
- * @date 2020/7/30
+ * @since 2020/7/30
  * <p>
  * 日志类型
  */

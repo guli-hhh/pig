@@ -24,7 +24,7 @@ import org.apache.ibatis.annotations.Mapper;
  * 生成记录
  *
  * @author lengleng
- * @date 2019-08-12 15:55:35
+ * @since 2019-08-12 15:55:35
  */
 @Mapper
 public interface GenFormConfMapper extends BaseMapper<GenFormConf> {

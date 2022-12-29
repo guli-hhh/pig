@@ -29,11 +29,11 @@ import java.util.List;
 /**
  * <p>
  * The Servlet filter for authentication.
- * </p>
+ * <p>
  *
  * <p>
  * Note: some urls are excluded as they needn't auth, such as:
- * </p>
+ * <p>
  * <ul>
  * <li>index url: {@code /}</li>
  * <li>authentication request url: {@code /login}, {@code /logout}</li>

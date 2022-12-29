@@ -40,7 +40,7 @@ import java.util.stream.Collectors;
  * 岗位管理表 服务实现类
  *
  * @author pig code generator
- * @date 2022-03-15 17:18:40
+ * @since 2022-03-15 17:18:40
  */
 @Service
 public class SysPostServiceImpl extends ServiceImpl<SysPostMapper, SysPost> implements SysPostService {

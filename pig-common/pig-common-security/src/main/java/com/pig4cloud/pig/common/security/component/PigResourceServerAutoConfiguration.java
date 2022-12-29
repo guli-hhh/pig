@@ -26,7 +26,7 @@ import org.springframework.security.oauth2.server.resource.introspection.OpaqueT
 
 /**
  * @author lengleng
- * @date 2022-06-02
+ * @since 2022-06-02
  */
 @RequiredArgsConstructor
 @EnableConfigurationProperties(PermitAllUrlProperties.class)

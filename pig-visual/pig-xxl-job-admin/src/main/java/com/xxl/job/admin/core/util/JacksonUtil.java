@@ -9,6 +9,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
+import java.util.List;
 
 /**
  * Jackson util
@@ -28,10 +29,9 @@ public class JacksonUtil {
 	}
 
 	/**
-	 * bean、array、List、Map --> json
+	 * bean、array、List、Map --&gt; json
 	 * @param obj
 	 * @return json string
-	 * @throws Exception
 	 */
 	public static String writeValueAsString(Object obj) {
 		try {
@@ -50,11 +50,10 @@ public class JacksonUtil {
 	}
 
 	/**
-	 * string --> bean、Map、List(array)
+	 * string --&gt; bean、Map、List(array)
 	 * @param jsonStr
 	 * @param clazz
 	 * @return obj
-	 * @throws Exception
 	 */
 	public static <T> T readValue(String jsonStr, Class<T> clazz) {
 		try {
@@ -73,7 +72,7 @@ public class JacksonUtil {
 	}
 
 	/**
-	 * string --> List<Bean>...
+	 * string --&gt; {@link List}...
 	 * @param jsonStr
 	 * @param parametrized
 	 * @param parameterClasses

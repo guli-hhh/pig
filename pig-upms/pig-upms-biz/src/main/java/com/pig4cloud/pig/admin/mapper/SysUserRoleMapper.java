@@ -24,7 +24,7 @@ import org.apache.ibatis.annotations.Param;
 /**
  * <p>
  * 用户角色表 Mapper 接口
- * </p>
+ * <p>
  *
  * @author lengleng
  * @since 2019/2/1
@@ -37,7 +37,7 @@ public interface SysUserRoleMapper extends BaseMapper<SysUserRole> {
 	 * @param userId 用户ID
 	 * @return boolean
 	 * @author 寻欢·李
-	 * @date 2017年12月7日 16:31:38
+	 * @since 2017年12月7日 16:31:38
 	 */
 	Boolean deleteByUserId(@Param("userId") Long userId);
 

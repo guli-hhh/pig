@@ -21,7 +21,7 @@ import java.util.concurrent.TimeUnit;
 
 /**
  * @author lengleng
- * @date 2022/5/27
+ * @since 2022/5/27
  */
 @RequiredArgsConstructor
 public class PigRedisOAuth2AuthorizationService implements OAuth2AuthorizationService {

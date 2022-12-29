@@ -27,7 +27,7 @@ import java.util.List;
  * 岗位管理表 mapper接口
  *
  * @author fxz
- * @date 2022-03-15 17:18:40
+ * @since 2022-03-15 17:18:40
  */
 @Mapper
 public interface SysPostMapper extends BaseMapper<SysPost> {

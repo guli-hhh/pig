@@ -36,7 +36,7 @@ import org.springframework.util.Assert;
  * 字典表
  *
  * @author lengleng
- * @date 2019/03/19
+ * @since 2019/03/19
  */
 @Service
 @RequiredArgsConstructor
@@ -47,7 +47,6 @@ public class SysDictServiceImpl extends ServiceImpl<SysDictMapper, SysDict> impl
 	/**
 	 * 根据ID 删除字典
 	 * @param id 字典ID
-	 * @return
 	 */
 	@Override
 	@Transactional(rollbackFor = Exception.class)
@@ -64,7 +63,6 @@ public class SysDictServiceImpl extends ServiceImpl<SysDictMapper, SysDict> impl
 	/**
 	 * 更新字典
 	 * @param dict 字典
-	 * @return
 	 */
 	@Override
 	@CacheEvict(value = CacheConstants.DICT_DETAILS, key = "#dict.type")

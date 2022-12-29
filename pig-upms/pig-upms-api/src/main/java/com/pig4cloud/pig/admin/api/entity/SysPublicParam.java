@@ -28,7 +28,7 @@ import lombok.EqualsAndHashCode;
  * 公共参数配置
  *
  * @author Lucky
- * @date 2019-04-29
+ * @since 2019-04-29
  */
 @Data
 @Schema(description = "公共参数")

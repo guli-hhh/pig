@@ -10,7 +10,7 @@ import java.util.List;
 
 /**
  * @author Fxz
- * @date 2022/7/21 02:46
+ * @since 2022/7/21 02:46
  */
 @Service("element")
 public class EleGenCodeServiceImpl implements GenCodeService {

@@ -18,7 +18,7 @@ package com.pig4cloud.pig.common.core.constant;
 
 /**
  * @author lengleng
- * @date 2020年01月01日
+ * @since 2020年01月01日
  * <p>
  * 缓存的key 常量
  */

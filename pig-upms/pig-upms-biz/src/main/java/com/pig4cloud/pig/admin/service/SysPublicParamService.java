@@ -25,7 +25,7 @@ import com.pig4cloud.pig.common.core.util.R;
  * 公共参数配置
  *
  * @author Lucky
- * @date 2019-04-29
+ * @since 2019-04-29
  */
 public interface SysPublicParamService extends IService<SysPublicParam> {
 

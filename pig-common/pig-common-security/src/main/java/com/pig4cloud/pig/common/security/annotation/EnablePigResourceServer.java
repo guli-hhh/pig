@@ -26,7 +26,7 @@ import java.lang.annotation.*;
 
 /**
  * @author lengleng
- * @date 2022-06-04
+ * @since 2022-06-04
  * <p>
  * 资源服务注解
  */

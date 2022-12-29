@@ -24,7 +24,7 @@ import org.apache.ibatis.annotations.Mapper;
  * 公共参数配置
  *
  * @author Lucky
- * @date 2019-04-29
+ * @since 2019-04-29
  */
 @Mapper
 public interface SysPublicParamMapper extends BaseMapper<SysPublicParam> {

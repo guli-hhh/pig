@@ -21,7 +21,7 @@ import lombok.RequiredArgsConstructor;
 
 /**
  * @author lengleng
- * @date 2019-05-16
+ * @since 2019-05-16
  * <p>
  * 字典类型
  */

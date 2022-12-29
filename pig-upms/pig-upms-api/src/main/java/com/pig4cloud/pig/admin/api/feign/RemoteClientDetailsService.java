@@ -31,7 +31,7 @@ import java.util.List;
 
 /**
  * @author lengleng
- * @date 2020/12/05
+ * @since 2020/12/05
  */
 @FeignClient(contextId = "remoteClientDetailsService", value = ServiceNameConstants.UMPS_SERVICE)
 public interface RemoteClientDetailsService {

@@ -29,7 +29,7 @@ import java.util.Optional;
  * 查询客户端相关信息实现
  *
  * @author lengleng
- * @date 2022/5/29
+ * @since 2022/5/29
  */
 @RequiredArgsConstructor
 public class PigRemoteRegisteredClientRepository implements RegisteredClientRepository {

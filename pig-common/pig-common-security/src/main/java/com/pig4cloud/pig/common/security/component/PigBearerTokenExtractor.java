@@ -32,7 +32,7 @@ import java.util.regex.Pattern;
 
 /**
  * @author caiqy
- * @date 2020.05.15
+ * @since 2020.05.15
  */
 public class PigBearerTokenExtractor implements BearerTokenResolver {
 

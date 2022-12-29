@@ -47,7 +47,7 @@ import java.util.regex.Pattern;
  * NamespaceControllerV2.
  *
  * @author dongyafei
- * @date 2022/8/16
+ * @since 2022/8/16
  */
 @NacosApi
 @RestController

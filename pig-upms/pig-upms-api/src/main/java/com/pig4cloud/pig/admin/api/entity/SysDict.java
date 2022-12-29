@@ -27,7 +27,7 @@ import lombok.EqualsAndHashCode;
  * 字典表
  *
  * @author lengleng
- * @date 2019/03/19
+ * @since 2019/03/19
  */
 @Data
 @Schema(description = "字典类型")
