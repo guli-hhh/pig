@@ -42,7 +42,7 @@
 | Spring Cloud                | 2022   |
 | Spring Cloud Tencent        | 1.8.2  |
 | Spring Authorization Server | 1.0.0  |
-| Mybatis Plus                | 3.5.2  |
+| Mybatis Plus                | 3.5.3  |
 | hutool                      | 5.8.10 |
 
 ### 模块说明
