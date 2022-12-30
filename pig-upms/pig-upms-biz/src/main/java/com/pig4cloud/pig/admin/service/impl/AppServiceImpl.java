@@ -31,7 +31,7 @@ import com.pig4cloud.pig.common.core.util.R;
 import io.springboot.sms.core.SmsClient;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Service;
 
 import java.util.Objects;
@@ -48,7 +48,7 @@ import java.util.concurrent.TimeUnit;
 @AllArgsConstructor
 public class AppServiceImpl implements AppService {
 
-	private final RedisTemplate redisTemplate;
+	private final StringRedisTemplate stringRedisTemplate;
 
 	private final SysUserMapper userMapper;
 
@@ -61,10 +61,10 @@ public class AppServiceImpl implements AppService {
 	 */
 	@Override
 	public R<Boolean> sendSmsCode(AppSmsDTO sms) {
-		Object codeObj = redisTemplate.opsForValue().get(CacheConstants.DEFAULT_CODE_KEY + sms.getPhone());
+		String codeValue = stringRedisTemplate.opsForValue().get(CacheConstants.DEFAULT_CODE_KEY + sms.getPhone());
 
-		if (codeObj != null) {
-			log.info("手机号验证码未过期:{}，{}", sms.getPhone(), codeObj);
+		if (codeValue != null) {
+			log.info("手机号验证码未过期:{}，{}", sms.getPhone(), codeValue);
 			return R.ok(Boolean.FALSE, MsgUtils.getMessage(ErrorCodes.SYS_APP_SMS_OFTEN));
 		}
 
@@ -76,7 +76,7 @@ public class AppServiceImpl implements AppService {
 
 		String code = RandomUtil.randomNumbers(Integer.parseInt(SecurityConstants.CODE_SIZE));
 		log.info("手机号生成验证码成功:{},{}", sms.getPhone(), code);
-		redisTemplate.opsForValue().set(CacheConstants.DEFAULT_CODE_KEY + sms.getPhone(), code,
+		stringRedisTemplate.opsForValue().set(CacheConstants.DEFAULT_CODE_KEY + sms.getPhone(), code,
 				SecurityConstants.CODE_TIME, TimeUnit.SECONDS);
 
 		// 调用短信通道发送
@@ -92,12 +92,12 @@ public class AppServiceImpl implements AppService {
 	 */
 	@Override
 	public boolean check(String phone, String code) {
-		Object codeObj = redisTemplate.opsForValue().get(CacheConstants.DEFAULT_CODE_KEY + phone);
+		String codeValue = stringRedisTemplate.opsForValue().get(CacheConstants.DEFAULT_CODE_KEY + phone);
 
-		if (Objects.isNull(codeObj)) {
+		if (Objects.isNull(codeValue)) {
 			return false;
 		}
-		return codeObj.equals(code);
+		return codeValue.equals(code);
 	}
 
 }
