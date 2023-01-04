@@ -24,8 +24,7 @@ import com.pig4cloud.pig.common.core.util.R;
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.cache.Cache;
-import org.springframework.cache.CacheManager;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.security.core.userdetails.UserDetails;
 
 /**
@@ -39,8 +38,6 @@ public class PigAppUserDetailsServiceImpl implements PigUserDetailsService {
 
 	private final RemoteUserService remoteUserService;
 
-	private final CacheManager cacheManager;
-
 	/**
 	 * 手机号登录
 	 * @param phone 手机号
@@ -48,19 +45,10 @@ public class PigAppUserDetailsServiceImpl implements PigUserDetailsService {
 	 */
 	@Override
 	@SneakyThrows
+	@Cacheable(value = CacheConstants.USER_DETAILS, key = "#phone", unless = "#result == null")
 	public UserDetails loadUserByUsername(String phone) {
-		Cache cache = cacheManager.getCache(CacheConstants.USER_DETAILS);
-		if (cache != null && cache.get(phone) != null) {
-			return (PigUser) cache.get(phone).get();
-		}
-
 		R<UserInfo> result = remoteUserService.infoByMobile(phone);
-
-		UserDetails userDetails = getUserDetails(result);
-		if (cache != null) {
-			cache.put(phone, userDetails);
-		}
-		return userDetails;
+		return getUserDetails(result);
 	}
 
 	/**
