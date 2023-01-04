@@ -61,5 +61,11 @@
             <artifactId>spring-webmvc</artifactId>
             <scope>provided</scope>
         </dependency>
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-oauth2-authorization-server</artifactId>
+            <version>${spring.authorization.version}</version>
+            <scope>provided</scope>
+        </dependency>
     </dependencies>
 </project>
