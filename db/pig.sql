@@ -385,10 +385,9 @@ CREATE TABLE `sys_user_role` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC COMMENT='用户角色表';
 
 -- ----------------------------
--- Records of sys_user_role
+-- Records of sys_
 -- ----------------------------
 BEGIN;
 INSERT INTO `sys_user_role` VALUES (1, 1);
 COMMIT;
-
 SET FOREIGN_KEY_CHECKS = 1;
