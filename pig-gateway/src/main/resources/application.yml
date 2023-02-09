@@ -12,6 +12,9 @@ spring:
         server-addr: ${NACOS_HOST:pig-register}:${NACOS_PORT:8848}
       config:
         server-addr: ${spring.cloud.nacos.discovery.server-addr}
+    sentinel:
+      log:
+        dir: logs/${spring.application.name}/csp/sentinel
   config:
     import:
       - optional:nacos:application-@profiles.active@.yml
