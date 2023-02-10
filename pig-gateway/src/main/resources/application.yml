@@ -5,6 +5,9 @@ spring:
   application:
     name: @artifactId@
   cloud:
+    sentinel:
+      log:
+        dir: logs/${spring.application.name}/csp/sentinel
     nacos:
       username: @nacos.username@
       password: @nacos.password@
