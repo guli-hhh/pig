@@ -65,7 +65,7 @@ public class SysDictServiceImpl extends ServiceImpl<SysDictMapper, SysDict> impl
 	 * @param dict 字典
 	 */
 	@Override
-	@CacheEvict(value = CacheConstants.DICT_DETAILS, key = "#dict.type")
+	@CacheEvict(value = CacheConstants.DICT_DETAILS, key = "#dict.dictKey")
 	public void updateDict(SysDict dict) {
 		SysDict sysDict = this.getById(dict.getId());
 		// 系统内置
