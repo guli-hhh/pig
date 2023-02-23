@@ -60,15 +60,16 @@ public class ImageCodeHandler implements HandlerFunction<ServerResponse> {
 		// 使用 StringRedisTemplate 时，keySerializer 默认为 new
 		// StringRedisSerializer(StandardCharsets.UTF_8) ，可省略下面一行代码
 		// stringRedisTemplate.setKeySerializer(new StringRedisSerializer());
-		randomStr.ifPresent(s -> stringRedisTemplate.opsForValue().set(CacheConstants.DEFAULT_CODE_KEY + s, result,
-				SecurityConstants.CODE_TIME, TimeUnit.SECONDS));
+		randomStr.ifPresent(s -> stringRedisTemplate.opsForValue()
+			.set(CacheConstants.DEFAULT_CODE_KEY + s, result, SecurityConstants.CODE_TIME, TimeUnit.SECONDS));
 
 		// 转换流信息写出
 		FastByteArrayOutputStream os = new FastByteArrayOutputStream();
 		captcha.out(os);
 
-		return ServerResponse.status(HttpStatus.OK).contentType(MediaType.IMAGE_JPEG)
-				.body(BodyInserters.fromResource(new ByteArrayResource(os.toByteArray())));
+		return ServerResponse.status(HttpStatus.OK)
+			.contentType(MediaType.IMAGE_JPEG)
+			.body(BodyInserters.fromResource(new ByteArrayResource(os.toByteArray())));
 	}
 
 }
