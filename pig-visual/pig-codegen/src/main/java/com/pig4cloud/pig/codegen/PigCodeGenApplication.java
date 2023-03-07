@@ -26,7 +26,7 @@ import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 
 /**
  * @author lengleng
- * @date 2020/03/11 代码生成模块
+ * @since 2020/03/11 代码生成模块
  */
 @EnablePigDoc
 @EnableDynamicDataSource

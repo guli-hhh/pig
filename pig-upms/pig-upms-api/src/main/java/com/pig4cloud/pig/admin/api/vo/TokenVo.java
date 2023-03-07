@@ -6,7 +6,7 @@ import lombok.Data;
  * 前端展示令牌管理
  *
  * @author lengleng
- * @date 2022/6/2
+ * @since 2022/6/2
  */
 @Data
 public class TokenVo {

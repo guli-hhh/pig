@@ -30,7 +30,7 @@ import javax.validation.constraints.NotNull;
 /**
  * <p>
  * 菜单权限表
- * </p>
+ * <p>
  *
  * @author lengleng
  * @since 2019/2/1

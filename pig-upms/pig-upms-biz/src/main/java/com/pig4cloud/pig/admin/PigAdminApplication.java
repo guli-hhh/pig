@@ -25,7 +25,7 @@ import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 
 /**
  * @author lengleng
- * @date 2018年06月21日 用户统一管理系统
+ * @since 2018年06月21日 用户统一管理系统
  */
 @EnablePigDoc
 @EnablePigResourceServer

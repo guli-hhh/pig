@@ -24,7 +24,7 @@ import lombok.EqualsAndHashCode;
 /**
  * <p>
  * 部门关系表
- * </p>
+ * <p>
  *
  * @author lengleng
  * @since 2019/2/1

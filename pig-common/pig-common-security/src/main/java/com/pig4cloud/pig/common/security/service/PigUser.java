@@ -30,7 +30,7 @@ import java.util.Map;
 
 /**
  * @author lengleng
- * @date 2019/2/1 扩展用户信息
+ * @since 2019/2/1 扩展用户信息
  */
 public class PigUser extends User implements OAuth2AuthenticatedPrincipal {
 

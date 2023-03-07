@@ -24,7 +24,7 @@ import ${package}.${moduleName}.entity.${className};
  * ${comments}
  *
  * @author ${author}
- * @date ${datetime}
+ * @since ${datetime}
  */
 public interface ${className}Service extends IService<${className}> {
 

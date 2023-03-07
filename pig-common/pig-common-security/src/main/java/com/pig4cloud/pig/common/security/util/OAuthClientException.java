@@ -4,8 +4,9 @@ import org.springframework.security.oauth2.core.OAuth2AuthenticationException;
 import org.springframework.security.oauth2.core.OAuth2Error;
 
 /**
+ * OAuthClientException 异常信息
+ *
  * @author lengleng
- * @description OAuthClientException 异常信息
  */
 public class OAuthClientException extends OAuth2AuthenticationException {
 

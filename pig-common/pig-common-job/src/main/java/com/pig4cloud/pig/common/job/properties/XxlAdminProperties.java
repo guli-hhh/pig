@@ -6,7 +6,7 @@ import lombok.Data;
  * xxl-job管理平台配置
  *
  * @author lishangbu
- * @date 2020/9/14
+ * @since 2020/9/14
  */
 @Data
 public class XxlAdminProperties {

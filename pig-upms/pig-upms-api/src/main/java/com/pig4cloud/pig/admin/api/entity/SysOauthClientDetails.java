@@ -28,7 +28,7 @@ import javax.validation.constraints.NotBlank;
 /**
  * <p>
  * 客户端信息
- * </p>
+ * <p>
  *
  * @author lengleng
  * @since 2019/2/1

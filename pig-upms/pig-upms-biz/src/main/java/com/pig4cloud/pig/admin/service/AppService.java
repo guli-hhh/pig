@@ -22,7 +22,7 @@ import com.pig4cloud.pig.common.core.util.R;
 
 /**
  * @author lengleng
- * @date 2018/11/14
+ * @since 2018/11/14
  */
 public interface AppService {
 

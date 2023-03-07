@@ -43,7 +43,7 @@ import java.io.IOException;
 
 /**
  * @author lengleng
- * @date 2022-06-02
+ * @since 2022-06-02
  */
 @Slf4j
 public class PigAuthenticationFailureEventHandler implements AuthenticationFailureHandler {

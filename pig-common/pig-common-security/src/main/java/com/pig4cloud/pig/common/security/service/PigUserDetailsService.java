@@ -22,7 +22,7 @@ import java.util.Set;
 
 /**
  * @author lengleng
- * @date 2021/12/21
+ * @since 2021/12/21
  */
 public interface PigUserDetailsService extends UserDetailsService, Ordered {
 

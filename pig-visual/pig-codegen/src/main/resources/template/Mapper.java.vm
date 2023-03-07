@@ -25,7 +25,7 @@ import org.apache.ibatis.annotations.Mapper;
  * ${comments}
  *
  * @author ${author}
- * @date ${datetime}
+ * @since ${datetime}
  */
 @Mapper
 public interface ${className}Mapper extends BaseMapper<${className}> {

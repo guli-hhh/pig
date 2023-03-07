@@ -14,7 +14,7 @@ import java.util.List;
 
 /**
  * @author fxz
- * @date 2022/3/24 字典解析器
+ * @since 2022/3/24 字典解析器
  */
 @UtilityClass
 public class DictResolver {

@@ -4,7 +4,7 @@ package com.pig4cloud.pig.common.core.exception;
  * 错误编码
  *
  * @author lengleng
- * @date 2022/3/30
+ * @since 2022/3/30
  */
 public interface ErrorCodes {
 

@@ -34,7 +34,7 @@ import java.util.zip.ZipOutputStream;
  * 生成代码抽象
  *
  * @author Fxz
- * @date 2022/7/21 02:24
+ * @since 2022/7/21 02:24
  */
 public interface GenCodeService {
 

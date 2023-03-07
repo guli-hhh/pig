@@ -25,12 +25,12 @@ import java.util.concurrent.ConcurrentMap;
 /**
  * <p>
  * Dashboard local config support.
- * </p>
+ * <p>
  * <p>
  * Dashboard supports configuration loading by several ways by order:<br>
  * 1. System.properties<br>
  * 2. Env
- * </p>
+ * <p>
  *
  * @author jason
  * @since 1.5.0

@@ -21,7 +21,7 @@ import java.util.Collection;
  * 重新 OAuth2FeignRequestInterceptor ，官方实现部分常见不适用
  *
  * @author lengleng
- * @date 2022/5/29
+ * @since 2022/5/29
  */
 @Slf4j
 @RequiredArgsConstructor
@@ -30,9 +30,9 @@ public class PigOAuthRequestInterceptor implements RequestInterceptor {
 	private final BearerTokenResolver tokenResolver;
 
 	/**
-	 * Create a template with the header of provided name and extracted extract </br>
+	 * Create a template with the header of provided name and extracted extract <br>
 	 *
-	 * 1. 如果使用 非web 请求，header 区别 </br>
+	 * 1. 如果使用 非web 请求，header 区别 <br>
 	 *
 	 * 2. 根据authentication 还原请求token
 	 * @param template

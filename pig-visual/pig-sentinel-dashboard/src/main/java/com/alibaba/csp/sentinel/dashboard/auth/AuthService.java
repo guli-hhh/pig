@@ -75,7 +75,7 @@ public interface AuthService<R> {
 		 * This method will use return value to represent whether user has the specific
 		 * privileges to the target, but to throw a RuntimeException to represent no auth
 		 * is also a good way.
-		 * </p>
+		 * <p>
 		 * @param target the target to check
 		 * @param privilegeType the privilege type to check
 		 * @return if current user has the specific privileges to the target, return true,

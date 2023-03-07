@@ -44,7 +44,7 @@ import javax.servlet.http.HttpServletResponse;
  * 文件管理
  *
  * @author Luckly
- * @date 2021-09-11
+ * @since 2021-09-11
  */
 @RestController
 @RequiredArgsConstructor
@@ -96,7 +96,6 @@ public class FileController {
 	 * @param bucket 桶名称
 	 * @param fileName 文件空间/名称
 	 * @param response
-	 * @return
 	 */
 	@Inner(false)
 	@GetMapping("/{bucket}/{fileName}")

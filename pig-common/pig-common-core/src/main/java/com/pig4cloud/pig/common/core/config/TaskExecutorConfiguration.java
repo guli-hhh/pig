@@ -12,7 +12,7 @@ import java.util.concurrent.ThreadPoolExecutor;
 
 /**
  * @author lengleng
- * @date 2022/5/20
+ * @since 2022/5/20
  */
 @AutoConfiguration
 public class TaskExecutorConfiguration implements AsyncConfigurer {

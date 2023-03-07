@@ -32,7 +32,7 @@ import java.util.function.Supplier;
 
 /**
  * @author lengleng
- * @date 2022-06-04
+ * @since 2022-06-04
  */
 public class PigDaoAuthenticationProvider extends AbstractUserDetailsAuthenticationProvider {
 

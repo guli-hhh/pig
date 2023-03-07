@@ -53,7 +53,7 @@ import java.util.function.Function;
 
 /**
  * @author lengleng
- * @date 2019 /2/1 密码解密工具类
+ * @since 2019 /2/1 密码解密工具类
  */
 @Slf4j
 @RequiredArgsConstructor

@@ -31,25 +31,25 @@ import java.util.function.Predicate;
 
 /**
  * 简化{@code R<T>} 的访问操作,例子 <pre>
- * R<Integer> result = R.ok(0);
+ * R&lt;Integer&gt; result = R.ok(0);
  * // 使用场景1: 链式操作: 断言然后消费
  * RetOps.of(result)
- * 		.assertCode(-1,r -> new RuntimeException("error "+r.getCode()))
- * 		.assertDataNotEmpty(r -> new IllegalStateException("oops!"))
+ * 		.assertCode(-1,r -&gt; new RuntimeException("error "+r.getCode()))
+ * 		.assertDataNotEmpty(r -&gt; new IllegalStateException("oops!"))
  * 		.useData(System.out::println);
  *
  * // 使用场景2: 读取原始值(data),这里返回的是Optional
  * RetOps.of(result).getData().orElse(null);
  *
  * // 使用场景3: 类型转换
- * R<String> s = RetOps.of(result)
- *        .assertDataNotNull(r -> new IllegalStateException("nani??"))
- *        .map(i -> Integer.toHexString(i))
+ * R&lt;String&gt; s = RetOps.of(result)
+ *        .assertDataNotNull(r -&gt; new IllegalStateException("nani??"))
+ *        .map(i -&gt; Integer.toHexString(i))
  *        .peek();
  * </pre>
  *
  * @author CJ (power4j@outlook.com)
- * @date 2022/5/12
+ * @since 2022/5/12
  * @since 4.4
  */
 public class RetOps<T> {

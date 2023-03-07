@@ -48,7 +48,7 @@ import java.util.Map;
 
 /**
  * @author lengleng
- * @date 2022-06-02
+ * @since 2022-06-02
  */
 @Slf4j
 public class PigAuthenticationSuccessEventHandler implements AuthenticationSuccessHandler {
@@ -59,8 +59,8 @@ public class PigAuthenticationSuccessEventHandler implements AuthenticationSucce
 	 * Called when a user has been successfully authenticated.
 	 * @param request the request which caused the successful authentication
 	 * @param response the response
-	 * @param authentication the <tt>Authentication</tt> object which was created during
-	 * the authentication process.
+	 * @param authentication the <code>Authentication</code> object which was created
+	 * during the authentication process.
 	 */
 	@SneakyThrows
 	@Override

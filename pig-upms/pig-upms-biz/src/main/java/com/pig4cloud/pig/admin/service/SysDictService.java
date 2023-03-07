@@ -22,21 +22,19 @@ import com.pig4cloud.pig.admin.api.entity.SysDict;
  * 字典表
  *
  * @author lengleng
- * @date 2019/03/19
+ * @since 2019/03/19
  */
 public interface SysDictService extends IService<SysDict> {
 
 	/**
 	 * 根据ID 删除字典
 	 * @param id
-	 * @return
 	 */
 	void removeDict(Long id);
 
 	/**
 	 * 更新字典
 	 * @param sysDict 字典
-	 * @return
 	 */
 	void updateDict(SysDict sysDict);
 

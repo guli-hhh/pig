@@ -36,7 +36,7 @@ import org.springframework.web.bind.annotation.*;
  * ${comments}
  *
  * @author ${author}
- * @date ${datetime}
+ * @since ${datetime}
  */
 @RestController
 @RequiredArgsConstructor

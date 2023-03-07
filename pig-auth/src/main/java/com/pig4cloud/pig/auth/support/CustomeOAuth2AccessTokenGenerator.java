@@ -20,7 +20,7 @@ import java.util.UUID;
 
 /**
  * @author lengleng
- * @date 2022/5/29
+ * @since 2022/5/29
  */
 public class CustomeOAuth2AccessTokenGenerator implements OAuth2TokenGenerator<OAuth2AccessToken> {
 

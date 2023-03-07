@@ -29,7 +29,7 @@ import javax.validation.constraints.NotBlank;
 /**
  * <p>
  * 角色表
- * </p>
+ * <p>
  *
  * @author lengleng
  * @since 2019/2/1

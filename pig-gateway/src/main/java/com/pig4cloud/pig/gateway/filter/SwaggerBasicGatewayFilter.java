@@ -20,7 +20,7 @@ import java.nio.charset.StandardCharsets;
  * swagger 开启basic 认证
  *
  * @author edgar
- * @date 2022/5/8
+ * @since 2022/5/8
  */
 @Slf4j
 @RequiredArgsConstructor

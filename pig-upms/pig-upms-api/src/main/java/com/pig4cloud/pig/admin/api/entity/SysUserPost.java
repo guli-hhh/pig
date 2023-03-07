@@ -24,7 +24,7 @@ import lombok.EqualsAndHashCode;
 /**
  * <p>
  * 用户岗位表
- * </p>
+ * <p>
  *
  * @author fxz
  */

@@ -29,7 +29,7 @@ import org.springframework.security.web.SecurityFilterChain;
 
 /**
  * @author lengleng
- * @date 2022-06-04
+ * @since 2022-06-04
  *
  * 资源服务器认证授权配置
  */

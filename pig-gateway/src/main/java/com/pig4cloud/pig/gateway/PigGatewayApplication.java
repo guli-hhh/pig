@@ -22,7 +22,7 @@ import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 
 /**
  * @author lengleng
- * @date 2018年06月21日
+ * @since 2018年06月21日
  * <p>
  * 网关应用
  */

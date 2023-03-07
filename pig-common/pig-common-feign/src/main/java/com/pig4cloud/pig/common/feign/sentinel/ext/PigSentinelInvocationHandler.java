@@ -48,7 +48,7 @@ import static feign.Util.checkNotNull;
  * 支持自动降级注入 重写 {@link com.alibaba.cloud.sentinel.feign.SentinelInvocationHandler}
  *
  * @author lengleng
- * @date 2020/6/9
+ * @since 2020/6/9
  */
 @Slf4j
 public class PigSentinelInvocationHandler implements InvocationHandler {

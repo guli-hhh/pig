@@ -32,7 +32,6 @@ import java.util.function.Supplier;
 
 /**
  * @author jumuning
- * @description
  *
  * 处理自定义授权
  */

@@ -42,7 +42,7 @@ import java.util.List;
 /**
  * <p>
  * 字典表 前端控制器
- * </p>
+ * <p>
  *
  * @author lengleng
  * @since 2019-03-19
@@ -81,7 +81,6 @@ public class DictController {
 
 	/**
 	 * 通过字典类型查找字典
-	 * @param type 类型
 	 * @return 同类型字典
 	 */
 	@GetMapping("/key/{key}")

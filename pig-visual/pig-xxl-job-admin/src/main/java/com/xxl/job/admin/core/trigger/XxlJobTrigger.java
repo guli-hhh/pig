@@ -29,7 +29,7 @@ public class XxlJobTrigger {
 	 * trigger job
 	 * @param jobId
 	 * @param triggerType
-	 * @param failRetryCount >=0: use this param <0: use param from job info config
+	 * @param failRetryCount &gt;=0: use this param &lt;0: use param from job info config
 	 * @param executorShardingParam
 	 * @param executorParam null: use job param not null: cover job param
 	 * @param addressList null: use executor addressList not null: cover

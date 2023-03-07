@@ -30,7 +30,7 @@ import static org.springframework.boot.autoconfigure.condition.ConditionalOnWebA
 
 /**
  * @author lengleng
- * @date 2019-06-24
+ * @since 2019-06-24
  * <p>
  * 注入自自定义SQL 过滤
  */
@@ -41,9 +41,9 @@ public class WebMvcConfiguration implements WebMvcConfigurer {
 	/**
 	 * 增加GET请求参数中时间类型转换 {@link com.pig4cloud.pig.common.core.jackson.PigJavaTimeModule}
 	 * <ul>
-	 * <li>HH:mm:ss -> LocalTime</li>
-	 * <li>yyyy-MM-dd -> LocalDate</li>
-	 * <li>yyyy-MM-dd HH:mm:ss -> LocalDateTime</li>
+	 * <li>HH:mm:ss -&gt; LocalTime</li>
+	 * <li>yyyy-MM-dd -&gt; LocalDate</li>
+	 * <li>yyyy-MM-dd HH:mm:ss -&gt; LocalDateTime</li>
 	 * </ul>
 	 * @param registry
 	 */
