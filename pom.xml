@@ -22,13 +22,13 @@
     <groupId>com.pig4cloud</groupId>
     <artifactId>pig</artifactId>
     <name>${project.artifactId}</name>
-    <version>3.6.5</version>
+    <version>3.6.6</version>
     <packaging>pom</packaging>
     <url>https://www.pig4cloud.com</url>
 
     <properties>
         <spring-boot.version>2.7.9</spring-boot.version>
-        <spring-cloud.version>2021.0.5</spring-cloud.version>
+        <spring-cloud.version>2021.0.6</spring-cloud.version>
         <spring-cloud-alibaba.version>2021.0.4.0</spring-cloud-alibaba.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.source>1.8</maven.compiler.source>
@@ -40,7 +40,7 @@
         <velocity.version>2.3</velocity.version>
         <velocity.tool.version>3.1</velocity.tool.version>
         <configuration.version>1.10</configuration.version>
-        <jasypt.version>2.1.0</jasypt.version>
+        <jasypt.version>3.0.5</jasypt.version>
         <swagger.fox.version>3.0.0</swagger.fox.version>
         <knife4j.ui.version>3.0.3</knife4j.ui.version>
         <xxl-job.version>2.3.1</xxl-job.version>
