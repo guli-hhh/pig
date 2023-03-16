@@ -29,7 +29,6 @@ import com.pig4cloud.pig.admin.service.SysDeptRelationService;
 import com.pig4cloud.pig.admin.service.SysDeptService;
 import com.pig4cloud.pig.common.security.util.SecurityUtils;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -58,10 +57,8 @@ public class SysDeptServiceImpl extends ServiceImpl<SysDeptMapper, SysDept> impl
 	@Override
 	@Transactional(rollbackFor = Exception.class)
 	public Boolean saveDept(SysDept dept) {
-		SysDept sysDept = new SysDept();
-		BeanUtils.copyProperties(dept, sysDept);
-		this.save(sysDept);
-		sysDeptRelationService.saveDeptRelation(sysDept);
+		this.save(dept);
+		sysDeptRelationService.saveDeptRelation(dept);
 		return Boolean.TRUE;
 	}
 
@@ -162,7 +159,7 @@ public class SysDeptServiceImpl extends ServiceImpl<SysDeptMapper, SysDept> impl
 				treeNode.setName(dept.getName());
 				treeNode.setWeight(dept.getSortOrder());
 				// 扩展属性
-				Map<String, Object> extra = new HashMap<>(4);
+				Map<String, Object> extra = new HashMap<>(2);
 				extra.put("createTime", dept.getCreateTime());
 				treeNode.setExtra(extra);
 				return treeNode;
