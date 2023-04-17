@@ -22,7 +22,8 @@
 		select table_name tableName, engine, table_comment tableComment, table_collation tableCollation, create_time createTime from information_schema.tables
 			where table_schema = (select database())
 		<if test="tableName != null and tableName.trim() != ''">
-			and table_name like concat('%', #{tableName}, '%')
+			<bind name="tableNameLike" value="'%' + tableName + '%'"/>
+			and table_name like #{tableNameLike}
 		</if>
 		order by create_time desc
 	</select>
