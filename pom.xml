@@ -22,14 +22,14 @@
     <groupId>com.pig4cloud</groupId>
     <artifactId>pig</artifactId>
     <name>${project.artifactId}</name>
-    <version>3.6.6</version>
+    <version>3.6.7</version>
     <packaging>pom</packaging>
     <url>https://www.pig4cloud.com</url>
 
     <properties>
-        <spring-boot.version>2.7.9</spring-boot.version>
+        <spring-boot.version>2.7.10</spring-boot.version>
         <spring-cloud.version>2021.0.6</spring-cloud.version>
-        <spring-cloud-alibaba.version>2021.0.4.0</spring-cloud-alibaba.version>
+        <spring-cloud-alibaba.version>2021.0.5.0</spring-cloud-alibaba.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
@@ -43,7 +43,7 @@
         <jasypt.version>3.0.5</jasypt.version>
         <swagger.fox.version>3.0.0</swagger.fox.version>
         <knife4j.ui.version>3.0.3</knife4j.ui.version>
-        <xxl-job.version>2.3.1</xxl-job.version>
+        <xxl-job.version>2.4.0</xxl-job.version>
         <docker.plugin.version>0.32.0</docker.plugin.version>
         <docker.host>http://192.168.0.100:2375</docker.host>
         <docker.registry>192.168.0.100</docker.registry>
@@ -159,13 +159,6 @@
                             <enabled>true</enabled>
                         </layers>
                     </configuration>
-                    <executions>
-                        <execution>
-                            <goals>
-                                <goal>repackage</goal>
-                            </goals>
-                        </execution>
-                    </executions>
                 </plugin>
                 <plugin>
                     <groupId>io.fabric8</groupId>
@@ -240,8 +233,8 @@
             <properties>
                 <!-- 环境标识，需要与配置文件的名称相对应 -->
                 <profiles.active>dev</profiles.active>
-				<nacos.username>nacos</nacos.username>
-				<nacos.password>nacos</nacos.password>
+                <nacos.username>nacos</nacos.username>
+                <nacos.password>nacos</nacos.password>
             </properties>
             <activation>
                 <!-- 默认环境 -->

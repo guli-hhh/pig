@@ -23,6 +23,9 @@ package com.pig4cloud.pig.common.xss.core;
  */
 public class XssHolder {
 
+	private XssHolder() {
+	}
+
 	private static final ThreadLocal<Boolean> TL = new ThreadLocal<>();
 
 	private static final ThreadLocal<XssCleanIgnore> TL_IGNORE = new ThreadLocal<>();
