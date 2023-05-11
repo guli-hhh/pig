@@ -16,7 +16,6 @@
 
 package com.pig4cloud.pig.common.security.component;
 
-import cn.hutool.core.util.StrUtil;
 import com.pig4cloud.pig.common.core.constant.SecurityConstants;
 import com.pig4cloud.pig.common.security.annotation.Inner;
 import lombok.RequiredArgsConstructor;
@@ -26,10 +25,9 @@ import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.springframework.core.Ordered;
-import org.springframework.core.annotation.AnnotationUtils;
 import org.springframework.security.access.AccessDeniedException;
 
-import javax.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletRequest;
 
 /**
  * @author lengleng

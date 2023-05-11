@@ -1,14 +1,14 @@
 <p align="center">
  <img src="https://img.shields.io/badge/Pig-3.6-success.svg" alt="Build Status">
- <img src="https://img.shields.io/badge/Spring%20Cloud-2021-blue.svg" alt="Coverage Status">
- <img src="https://img.shields.io/badge/Spring%20Boot-2.7-blue.svg" alt="Downloads">
+ <img src="https://img.shields.io/badge/Spring%20Cloud-2022-blue.svg" alt="Coverage Status">
+ <img src="https://img.shields.io/badge/Spring%20Boot-3-blue.svg" alt="Downloads">
  <img src="https://img.shields.io/badge/Vue-3.2-blue.svg" alt="Downloads">
  <img src="https://img.shields.io/github/license/pig-mesh/pig"/>
 </p>
 
 ## 系统说明
 
-- 基于 Spring Cloud 2021 、Spring Boot 2.7、 OAuth2 的 RBAC **权限管理系统**
+- 基于 Spring Cloud 2022 、Spring Boot 3、 OAuth2 的 RBAC **权限管理系统**
 - 基于数据驱动视图的理念封装 element-plus，即使没有 vue 的使用经验也能快速上手
 - 提供对常见容器化支持 Docker、Kubernetes、Rancher2 支持
 - 提供 lambda 、stream api 、webflux 的生产实践
@@ -35,14 +35,12 @@
 ### 分支说明
 
 - master: java8 + springboot 2.7 + springcloud 2021
-- jdk17: java17 + springboot 3.0 + springcloud 2022
+- springboot3: java17 + springboot 3.0 + springcloud 2022
 
-| 分支              | 说明                                                               |
-|-----------------|------------------------------------------------------------------|
-| master          | java8 + springboot 2.7 + springcloud 2021                        |
-| sca-springboot3 | java17 + springboot 3.0 + springcloud 2022 |
-| sct-springboot3 | java17 + springboot 3.0 + springcloud 2022 |
-
+| 分支          | 说明                                                               |
+|-------------|------------------------------------------------------------------|
+| master      | java8 + springboot 2.7 + springcloud 2021                        |
+| springboot3 | java17 + springboot 3.0 + springcloud 2022 |
 
 ### 核心依赖
 

@@ -34,6 +34,8 @@ import com.pig4cloud.pig.common.security.annotation.Inner;
 import com.pig4cloud.pig.common.security.util.OAuth2EndpointUtils;
 import com.pig4cloud.pig.common.security.util.OAuth2ErrorCodesExpand;
 import com.pig4cloud.pig.common.security.util.OAuthClientException;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
@@ -59,8 +61,6 @@ import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import java.security.Principal;
 import java.util.List;
 import java.util.Map;

@@ -3,11 +3,9 @@ package com.pig4cloud.pig.gateway.config;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.pig4cloud.pig.gateway.filter.PasswordDecoderFilter;
 import com.pig4cloud.pig.gateway.filter.PigRequestGlobalFilter;
-import com.pig4cloud.pig.gateway.filter.SwaggerBasicGatewayFilter;
 import com.pig4cloud.pig.gateway.filter.ValidateCodeGatewayFilter;
 import com.pig4cloud.pig.gateway.handler.GlobalExceptionHandler;
 import com.pig4cloud.pig.gateway.handler.ImageCodeHandler;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -33,15 +31,8 @@ public class GatewayConfiguration {
 	}
 
 	@Bean
-	@ConditionalOnProperty(name = "swagger.basic.enabled")
-	public SwaggerBasicGatewayFilter swaggerBasicGatewayFilter(
-			SpringDocConfiguration.SwaggerDocProperties swaggerProperties) {
-		return new SwaggerBasicGatewayFilter(swaggerProperties);
-	}
-
-	@Bean
 	public ValidateCodeGatewayFilter validateCodeGatewayFilter(GatewayConfigProperties configProperties,
-			ObjectMapper objectMapper, RedisTemplate redisTemplate) {
+	                                                           ObjectMapper objectMapper, RedisTemplate redisTemplate) {
 		return new ValidateCodeGatewayFilter(configProperties, objectMapper, redisTemplate);
 	}
 
