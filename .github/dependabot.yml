@@ -38,6 +38,10 @@ updates:
         # spring-boot-admin 3.0 不支持 JDK 8
         versions:
           - ">= 3"
+      - dependency-name: de.codecentric:spring-boot-admin-starter-client
+        # spring-boot-admin 3.0 不支持 JDK 8
+        versions:
+          - ">= 3"
       - dependency-name: io.github.git-commit-id:git-commit-id-maven-plugin
         # git-commit-id-maven-plugin 5.0 不支持 JDK 8
         versions:
