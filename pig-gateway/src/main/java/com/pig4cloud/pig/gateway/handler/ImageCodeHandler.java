@@ -22,8 +22,7 @@ import com.pig4cloud.pig.common.core.constant.SecurityConstants;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.core.io.ByteArrayResource;
-import org.springframework.data.redis.core.RedisTemplate;
-import org.springframework.data.redis.serializer.StringRedisSerializer;
+import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.util.FastByteArrayOutputStream;
@@ -48,7 +47,7 @@ public class ImageCodeHandler implements HandlerFunction<ServerResponse> {
 
 	private static final Integer DEFAULT_IMAGE_HEIGHT = 40;
 
-	private final RedisTemplate<String, Object> redisTemplate;
+	private final StringRedisTemplate stringRedisTemplate;
 
 	@Override
 	public Mono<ServerResponse> handle(ServerRequest serverRequest) {
@@ -58,8 +57,10 @@ public class ImageCodeHandler implements HandlerFunction<ServerResponse> {
 
 		// 保存验证码信息
 		Optional<String> randomStr = serverRequest.queryParam("randomStr");
-		redisTemplate.setKeySerializer(new StringRedisSerializer());
-		randomStr.ifPresent(s -> redisTemplate.opsForValue()
+		// 使用 StringRedisTemplate 时，keySerializer 默认为 new
+		// StringRedisSerializer(StandardCharsets.UTF_8) ，可省略下面一行代码
+		// stringRedisTemplate.setKeySerializer(new StringRedisSerializer());
+		randomStr.ifPresent(s -> stringRedisTemplate.opsForValue()
 			.set(CacheConstants.DEFAULT_CODE_KEY + s, result, SecurityConstants.CODE_TIME, TimeUnit.SECONDS));
 
 		// 转换流信息写出
