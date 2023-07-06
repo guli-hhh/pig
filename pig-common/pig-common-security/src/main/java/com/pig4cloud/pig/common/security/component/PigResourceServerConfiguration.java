@@ -59,12 +59,8 @@ public class PigResourceServerConfiguration {
 					oauth2 -> oauth2.opaqueToken(token -> token.introspector(customOpaqueTokenIntrospector))
 						.authenticationEntryPoint(resourceAuthExceptionEntryPoint)
 						.bearerTokenResolver(pigBearerTokenExtractor))
-			.headers()
-			.frameOptions()
-			.disable()
-			.and()
-			.csrf()
-			.disable();
+			.headers(headers -> headers.frameOptions(frame -> frame.disable()))
+			.csrf(csrf -> csrf.disable());
 
 		return http.build();
 	}

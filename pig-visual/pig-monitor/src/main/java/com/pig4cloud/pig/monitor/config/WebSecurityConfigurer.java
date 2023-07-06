@@ -54,25 +54,17 @@ public class WebSecurityConfigurer {
 		SavedRequestAwareAuthenticationSuccessHandler successHandler = new SavedRequestAwareAuthenticationSuccessHandler();
 		successHandler.setTargetUrlParameter("redirectTo");
 		successHandler.setDefaultTargetUrl(adminContextPath + "/");
-		http.headers((header)->
-					header.frameOptions(HeadersConfigurer.FrameOptionsConfig::disable)
-				)
-			.authorizeHttpRequests((authorize)->authorize
-					.requestMatchers(adminContextPath + "/assets/**", adminContextPath + "/login",
-							adminContextPath + "/instances/**", adminContextPath + "/actuator/**")
-					.permitAll()
-					.anyRequest().authenticated()
-			)
-			.formLogin((formLogin)->formLogin
-					.loginPage(adminContextPath + "/login")
-					.successHandler(successHandler)
-			)
-			.logout((logout)->
-				logout.logoutUrl(adminContextPath + "/logout")
-			)
+		http.headers((header) -> header.frameOptions(HeadersConfigurer.FrameOptionsConfig::disable))
+			.authorizeHttpRequests((authorize) -> authorize
+				.requestMatchers(adminContextPath + "/assets/**", adminContextPath + "/login",
+						adminContextPath + "/instances/**", adminContextPath + "/actuator/**")
+				.permitAll()
+				.anyRequest()
+				.authenticated())
+			.formLogin((formLogin) -> formLogin.loginPage(adminContextPath + "/login").successHandler(successHandler))
+			.logout((logout) -> logout.logoutUrl(adminContextPath + "/logout"))
 			.httpBasic(withDefaults())
-			.csrf(AbstractHttpConfigurer::disable)
-			;
+			.csrf(AbstractHttpConfigurer::disable);
 		return http.build();
 	}
 

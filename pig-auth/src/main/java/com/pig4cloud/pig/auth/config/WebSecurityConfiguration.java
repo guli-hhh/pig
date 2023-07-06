@@ -44,12 +44,8 @@ public class WebSecurityConfiguration {
 		http.authorizeHttpRequests(authorizeRequests -> authorizeRequests.requestMatchers("/token/*")
 			.permitAll()// 开放自定义的部分端点
 			.anyRequest()
-			.authenticated())
-			.headers()
-			.frameOptions()
-			.sameOrigin()// 避免iframe同源无法登录
-			.and()
-			.apply(new FormIdentityLoginConfigurer()); // 表单登录个性化
+			.authenticated()).headers(header -> header.frameOptions(frameOption -> frameOption.sameOrigin())// 避免iframe同源无法登录许iframe
+		).apply(new FormIdentityLoginConfigurer()); // 表单登录个性化
 		// 处理 UsernamePasswordAuthenticationToken
 		http.authenticationProvider(new PigDaoAuthenticationProvider());
 		return http.build();
@@ -68,12 +64,9 @@ public class WebSecurityConfiguration {
 	SecurityFilterChain resources(HttpSecurity http) throws Exception {
 		http.securityMatchers((matchers) -> matchers.requestMatchers("/actuator/**", "/css/**", "/error"))
 			.authorizeHttpRequests((authorize) -> authorize.anyRequest().permitAll())
-			.requestCache()
-			.disable()
-			.securityContext()
-			.disable()
-			.sessionManagement()
-			.disable();
+			.requestCache(cache -> cache.disable())
+			.securityContext((securityContext) -> securityContext.disable())
+			.sessionManagement(sessionManagement -> sessionManagement.disable());
 		return http.build();
 	}
 
