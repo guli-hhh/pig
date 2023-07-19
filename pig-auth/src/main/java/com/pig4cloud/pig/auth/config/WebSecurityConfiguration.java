@@ -41,7 +41,7 @@ public class WebSecurityConfiguration {
 	 */
 	@Bean
 	SecurityFilterChain defaultSecurityFilterChain(HttpSecurity http) throws Exception {
-		http.authorizeRequests(authorizeRequests -> authorizeRequests.antMatchers("/token/*")
+		http.authorizeRequests(authorizeRequests -> authorizeRequests.antMatchers("/token/*","/maxkey/*")
 			.permitAll()// 开放自定义的部分端点
 			.anyRequest()
 			.authenticated())
