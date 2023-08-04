@@ -28,7 +28,6 @@ import org.springframework.security.config.annotation.web.configurers.AbstractHt
 import org.springframework.security.config.annotation.web.configurers.HeadersConfigurer;
 import org.springframework.security.oauth2.server.resource.introspection.OpaqueTokenIntrospector;
 import org.springframework.security.web.SecurityFilterChain;
-import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 /**
  * @author lengleng
@@ -53,16 +52,11 @@ public class PigResourceServerConfiguration {
 	@Bean
 	@Order(Ordered.HIGHEST_PRECEDENCE)
 	SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-		AntPathRequestMatcher[] requestMatchers = permitAllUrl.getUrls()
-			.stream()
-			.map(AntPathRequestMatcher::new)
-			.toList()
-			.toArray(new AntPathRequestMatcher[] {});
-
-		http.authorizeHttpRequests(authorizeRequests -> authorizeRequests.requestMatchers(requestMatchers)
-			.permitAll()
-			.anyRequest()
-			.authenticated())
+		http.authorizeHttpRequests(
+				authorizeRequests -> authorizeRequests.requestMatchers(permitAllUrl.getUrls().toArray(new String[] {}))
+					.permitAll()
+					.anyRequest()
+					.authenticated())
 			.oauth2ResourceServer(
 					oauth2 -> oauth2.opaqueToken(token -> token.introspector(customOpaqueTokenIntrospector))
 						.authenticationEntryPoint(resourceAuthExceptionEntryPoint)
