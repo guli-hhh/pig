@@ -17,9 +17,8 @@
 package com.pig4cloud.pig.admin.controller;
 
 import cn.hutool.core.util.StrUtil;
-import com.baomidou.mybatisplus.core.metadata.IPage;
-import com.baomidou.mybatisplus.core.toolkit.Wrappers;
-import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.mybatisflex.core.paginate.Page;
+import com.mybatisflex.core.query.QueryWrapper;
 import com.pig4cloud.pig.admin.api.entity.SysDict;
 import com.pig4cloud.pig.admin.api.entity.SysDictItem;
 import com.pig4cloud.pig.admin.service.SysDictItemService;
@@ -38,6 +37,10 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.List;
+
+import static com.mybatisflex.core.query.QueryMethods.noCondition;
+import static com.pig4cloud.pig.admin.api.entity.table.SysDictItemTableDef.SYS_DICT_ITEM;
+import static com.pig4cloud.pig.admin.api.entity.table.SysDictTableDef.SYS_DICT;
 
 /**
  * <p>
@@ -60,6 +63,7 @@ public class SysDictController {
 
 	/**
 	 * 通过ID查询字典信息
+	 *
 	 * @param id ID
 	 * @return 字典信息
 	 */
@@ -70,34 +74,36 @@ public class SysDictController {
 
 	/**
 	 * 分页查询字典信息
+	 *
 	 * @param page 分页对象
 	 * @return 分页对象
 	 */
-	@GetMapping("/page")
-	public R<IPage<SysDict>> getDictPage(Page page, SysDict sysDict) {
+	@GetMapping("/page" )
+	public R<Page<SysDict>> getDictPage(Page page, SysDict sysDict) {
 		return R.ok(sysDictService.page(page,
-				Wrappers.<SysDict>lambdaQuery()
-					.like(StrUtil.isNotBlank(sysDict.getDictKey()), SysDict::getDictKey, sysDict.getDictKey())
-					.eq(StrUtil.isNotBlank(sysDict.getSystemFlag()), SysDict::getSystemFlag, sysDict.getSystemFlag())
-					.orderByDesc(SysDict::getUpdateTime)));
+				QueryWrapper.create()
+						.where(StrUtil.isNotBlank(sysDict.getDictKey()) ? SYS_DICT.DICT_KEY.like(sysDict.getDictKey()) : noCondition())
+						.where(StrUtil.isNotBlank(sysDict.getSystemFlag()) ? SYS_DICT.SYSTEM_FLAG.eq(sysDict.getSystemFlag()) : noCondition())
+						.orderBy(SYS_DICT.UPDATE_TIME.desc())));
 	}
 
 	/**
 	 * 通过字典类型查找字典
+	 *
 	 * @param key 类型
 	 * @return 同类型字典
 	 */
 	@GetMapping("/key/{key}")
 	@Cacheable(value = CacheConstants.DICT_DETAILS, key = "#key")
 	public R<List<SysDictItem>> getDictByKey(@PathVariable String key) {
-		return R.ok(sysDictItemService.list(Wrappers.<SysDictItem>query()
-			.lambda()
-			.eq(SysDictItem::getDictKey, key)
-			.orderByAsc(SysDictItem::getSortOrder)));
+		return R.ok(sysDictItemService.list(QueryWrapper.create()
+				.where(SYS_DICT_ITEM.DICT_KEY.eq(key))
+				.orderBy(SYS_DICT_ITEM.SORT_ORDER.asc())));
 	}
 
 	/**
 	 * 添加字典
+	 *
 	 * @param sysDict 字典信息
 	 * @return success、false
 	 */
@@ -110,6 +116,7 @@ public class SysDictController {
 
 	/**
 	 * 删除字典，并且清除字典缓存
+	 *
 	 * @param id ID
 	 * @return R
 	 */
@@ -123,6 +130,7 @@ public class SysDictController {
 
 	/**
 	 * 修改字典
+	 *
 	 * @param sysDict 字典信息
 	 * @return success/false
 	 */
@@ -136,17 +144,19 @@ public class SysDictController {
 
 	/**
 	 * 分页查询
-	 * @param page 分页对象
+	 *
+	 * @param page        分页对象
 	 * @param sysDictItem 字典项
 	 * @return
 	 */
-	@GetMapping("/item/page")
-	public R<IPage<SysDictItem>> getSysDictItemPage(Page page, SysDictItem sysDictItem) {
-		return R.ok(sysDictItemService.page(page, Wrappers.query(sysDictItem)));
+	@GetMapping("/item/page" )
+	public R<Page<SysDictItem>> getSysDictItemPage(Page page, SysDictItem sysDictItem) {
+		return R.ok(sysDictItemService.page(page, QueryWrapper.create(sysDictItem)));
 	}
 
 	/**
 	 * 通过id查询字典项
+	 *
 	 * @param id id
 	 * @return R
 	 */
@@ -157,6 +167,7 @@ public class SysDictController {
 
 	/**
 	 * 新增字典项
+	 *
 	 * @param sysDictItem 字典项
 	 * @return R
 	 */
@@ -169,6 +180,7 @@ public class SysDictController {
 
 	/**
 	 * 修改字典项
+	 *
 	 * @param sysDictItem 字典项
 	 * @return R
 	 */
@@ -181,6 +193,7 @@ public class SysDictController {
 
 	/**
 	 * 通过id删除字典项
+	 *
 	 * @param id id
 	 * @return R
 	 */
