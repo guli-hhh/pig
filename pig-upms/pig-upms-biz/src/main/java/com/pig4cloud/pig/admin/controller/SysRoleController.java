@@ -16,9 +16,8 @@
 
 package com.pig4cloud.pig.admin.controller;
 
-import com.baomidou.mybatisplus.core.metadata.IPage;
-import com.baomidou.mybatisplus.core.toolkit.Wrappers;
-import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.mybatisflex.core.paginate.Page;
+import com.mybatisflex.core.query.QueryWrapper;
 import com.pig4cloud.pig.admin.api.entity.SysRole;
 import com.pig4cloud.pig.admin.api.vo.RoleExcelVO;
 import com.pig4cloud.pig.admin.api.vo.RoleVo;
@@ -56,6 +55,7 @@ public class SysRoleController {
 
 	/**
 	 * 通过ID查询角色信息
+	 *
 	 * @param id ID
 	 * @return 角色信息
 	 */
@@ -66,6 +66,7 @@ public class SysRoleController {
 
 	/**
 	 * 添加角色
+	 *
 	 * @param sysRole 角色信息
 	 * @return success、false
 	 */
@@ -78,6 +79,7 @@ public class SysRoleController {
 
 	/**
 	 * 修改角色
+	 *
 	 * @param sysRole 角色信息
 	 * @return success/false
 	 */
@@ -90,6 +92,7 @@ public class SysRoleController {
 
 	/**
 	 * 删除角色
+	 *
 	 * @param id
 	 * @return
 	 */
@@ -102,25 +105,28 @@ public class SysRoleController {
 
 	/**
 	 * 获取角色列表
+	 *
 	 * @return 角色列表
 	 */
 	@GetMapping("/list")
 	public R<List<SysRole>> listRoles() {
-		return R.ok(sysRoleService.list(Wrappers.emptyWrapper()));
+		return R.ok(sysRoleService.list(QueryWrapper.create()));
 	}
 
 	/**
 	 * 分页查询角色信息
+	 *
 	 * @param page 分页对象
 	 * @return 分页对象
 	 */
-	@GetMapping("/page")
-	public R<IPage<SysRole>> getRolePage(Page page) {
-		return R.ok(sysRoleService.page(page, Wrappers.emptyWrapper()));
+	@GetMapping("/page" )
+	public R<Page<SysRole>> getRolePage(Page page) {
+		return R.ok(sysRoleService.page(page, QueryWrapper.create()));
 	}
 
 	/**
 	 * 更新角色菜单
+	 *
 	 * @param roleVo 角色对象
 	 * @return success、false
 	 */
@@ -133,6 +139,7 @@ public class SysRoleController {
 
 	/**
 	 * 导出excel 表格
+	 *
 	 * @return
 	 */
 	@ResponseExcel
@@ -144,7 +151,8 @@ public class SysRoleController {
 
 	/**
 	 * 导入角色
-	 * @param excelVOList 角色列表
+	 *
+	 * @param excelVOList   角色列表
 	 * @param bindingResult 错误信息列表
 	 * @return ok fail
 	 */

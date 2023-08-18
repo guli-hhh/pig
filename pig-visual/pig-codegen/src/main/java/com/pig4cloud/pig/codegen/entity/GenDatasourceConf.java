@@ -15,10 +15,10 @@
  */
 package com.pig4cloud.pig.codegen.entity;
 
-import com.baomidou.mybatisplus.annotation.IdType;
-import com.baomidou.mybatisplus.annotation.TableId;
-import com.baomidou.mybatisplus.annotation.TableLogic;
-import com.baomidou.mybatisplus.annotation.TableName;
+import com.mybatisflex.annotation.Id;
+import com.mybatisflex.annotation.KeyType;
+import com.mybatisflex.annotation.Table;
+import com.mybatisflex.core.keygen.KeyGenerators;
 import com.pig4cloud.pig.common.mybatis.base.BaseEntity;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -30,14 +30,14 @@ import lombok.EqualsAndHashCode;
  * @date 2019-03-31 16:00:20
  */
 @Data
-@TableName("gen_datasource_conf")
+@Table(value = "gen_datasource_conf" , mapperGenerateEnable = false)
 @EqualsAndHashCode(callSuper = true)
 public class GenDatasourceConf extends BaseEntity {
 
 	/**
 	 * 主键
 	 */
-	@TableId(type = IdType.ASSIGN_ID)
+	@Id(keyType = KeyType.Generator, value = KeyGenerators.snowFlakeId)
 	private Long id;
 
 	/**
@@ -59,11 +59,5 @@ public class GenDatasourceConf extends BaseEntity {
 	 * 密码
 	 */
 	private String password;
-
-	/**
-	 * 删除标记
-	 */
-	@TableLogic
-	private String delFlag;
 
 }

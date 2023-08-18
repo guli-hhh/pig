@@ -16,10 +16,9 @@
 
 package com.pig4cloud.pig.admin.api.entity;
 
-import com.baomidou.mybatisplus.extension.activerecord.Model;
+import com.mybatisflex.annotation.Table;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
-import lombok.EqualsAndHashCode;
 
 /**
  * <p>
@@ -30,15 +29,15 @@ import lombok.EqualsAndHashCode;
  * @since 2019/2/1
  */
 @Data
-@EqualsAndHashCode(callSuper = true)
-public class SysRoleMenu extends Model<SysRoleMenu> {
+@Table("sys_role_menu" )
+public class SysRoleMenu {
 
 	private static final long serialVersionUID = 1L;
 
 	/**
 	 * 角色ID
 	 */
-	@Schema(description = "角色id")
+	@Schema(description = "角色id" )
 	private Long roleId;
 
 	/**

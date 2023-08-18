@@ -16,53 +16,36 @@
 
 package com.pig4cloud.pig.common.mybatis;
 
-import com.baomidou.mybatisplus.core.handlers.MetaObjectHandler;
-import com.baomidou.mybatisplus.extension.plugins.MybatisPlusInterceptor;
-import com.pig4cloud.pig.common.mybatis.config.MybatisPlusMetaObjectHandler;
-import com.pig4cloud.pig.common.mybatis.plugins.PigPaginationInnerInterceptor;
-import com.pig4cloud.pig.common.mybatis.resolver.SqlFilterArgumentResolver;
-import org.springframework.context.annotation.Bean;
+import com.mybatisflex.core.audit.AuditManager;
+import com.mybatisflex.core.mybatis.FlexConfiguration;
+import com.mybatisflex.spring.boot.ConfigurationCustomizer;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.web.method.support.HandlerMethodArgumentResolver;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
-
-import java.util.List;
 
 /**
- * @author lengleng
- * @date 2020-03-14
+ * @author Olver
+ * @date: 2023-8-16
  * <p>
- * mybatis plus 统一配置
+ * mybatis flex 统一配置
  */
 @Configuration(proxyBeanMethods = false)
-public class MybatisAutoConfiguration implements WebMvcConfigurer {
+public class MybatisAutoConfiguration implements ConfigurationCustomizer {
 
 	/**
-	 * SQL 过滤器避免SQL 注入
-	 * @param argumentResolvers
+	 * mybatis flex 统一配置
+	 * @param configuration
 	 */
 	@Override
-	public void addArgumentResolvers(List<HandlerMethodArgumentResolver> argumentResolvers) {
-		argumentResolvers.add(new SqlFilterArgumentResolver());
-	}
-
-	/**
-	 * 分页插件, 对于单一数据库类型来说,都建议配置该值,避免每次分页都去抓取数据库类型
-	 */
-	@Bean
-	public MybatisPlusInterceptor mybatisPlusInterceptor() {
-		MybatisPlusInterceptor interceptor = new MybatisPlusInterceptor();
-		interceptor.addInnerInterceptor(new PigPaginationInnerInterceptor());
-		return interceptor;
-	}
-
-	/**
-	 * 审计字段自动填充
-	 * @return {@link MetaObjectHandler}
-	 */
-	@Bean
-	public MybatisPlusMetaObjectHandler mybatisPlusMetaObjectHandler() {
-		return new MybatisPlusMetaObjectHandler();
+	public void customize(FlexConfiguration configuration) {
+		//开启sql日志审计
+		AuditManager.setAuditEnable(true);
+		//开启则开启 多租户插件
+//		MessageCollector collector = new ConsoleMessageCollector();
+//		AuditManager.setMessageCollector(collector);
+//		//租户配置
+//		TenantManager.setTenantFactory(() -> {
+//			//通过这里返回当前租户 ID
+//			return new String[]{"000000"};
+//		});
 	}
 
 }

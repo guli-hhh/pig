@@ -17,7 +17,7 @@
 
 package com.pig4cloud.pig.admin.mapper;
 
-import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.mybatisflex.core.BaseMapper;
 import com.pig4cloud.pig.admin.api.entity.SysPost;
 import org.apache.ibatis.annotations.Mapper;
 
@@ -34,6 +34,7 @@ public interface SysPostMapper extends BaseMapper<SysPost> {
 
 	/**
 	 * 通过用户ID，查询岗位信息
+	 *
 	 * @param userId 用户id
 	 * @return 岗位信息
 	 */

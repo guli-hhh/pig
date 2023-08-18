@@ -16,7 +16,7 @@
 
 package com.pig4cloud.pig.admin.mapper;
 
-import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.mybatisflex.core.BaseMapper;
 import com.pig4cloud.pig.admin.api.entity.SysOauthClientDetails;
 import org.apache.ibatis.annotations.Mapper;
 

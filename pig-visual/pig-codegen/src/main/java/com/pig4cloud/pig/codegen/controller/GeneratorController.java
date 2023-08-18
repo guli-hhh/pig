@@ -17,8 +17,7 @@
 package com.pig4cloud.pig.codegen.controller;
 
 import cn.hutool.core.io.IoUtil;
-import com.baomidou.mybatisplus.core.metadata.IPage;
-import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.mybatisflex.core.paginate.Page;
 import com.pig4cloud.pig.codegen.entity.GenConfig;
 import com.pig4cloud.pig.codegen.service.GeneratorService;
 import com.pig4cloud.pig.common.core.util.R;
@@ -50,17 +49,19 @@ public class GeneratorController {
 
 	/**
 	 * 列表
+	 *
 	 * @param tableName 参数集
-	 * @param dsName 数据源编号
+	 * @param dsName    数据源编号
 	 * @return 数据库表
 	 */
-	@GetMapping("/page")
-	public R<IPage<List<Map<String, Object>>>> getPage(Page page, String tableName, String dsName) {
+	@GetMapping("/page" )
+	public R<Page<List<Map<String, Object>>>> getPage(Page page, String tableName, String dsName) {
 		return R.ok(generatorService.getPage(page, tableName, dsName));
 	}
 
 	/**
 	 * 预览代码
+	 *
 	 * @param genConfig 数据表配置
 	 * @return
 	 */

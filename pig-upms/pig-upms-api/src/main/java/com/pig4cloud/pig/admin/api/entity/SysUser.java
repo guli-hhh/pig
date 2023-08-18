@@ -16,11 +16,13 @@
 
 package com.pig4cloud.pig.admin.api.entity;
 
-import com.baomidou.mybatisplus.annotation.IdType;
-import com.baomidou.mybatisplus.annotation.TableId;
-import com.baomidou.mybatisplus.annotation.TableLogic;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.mybatisflex.annotation.Id;
+import com.mybatisflex.annotation.KeyType;
+import com.mybatisflex.annotation.Table;
+import com.mybatisflex.core.keygen.KeyGenerators;
 import com.pig4cloud.pig.common.mybatis.base.BaseEntity;
+import com.pig4cloud.pig.common.mybatis.config.MybatisFlexBaseEntityInputListener;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -34,6 +36,9 @@ import lombok.EqualsAndHashCode;
  * @since 2019/2/1
  */
 @Data
+@Table(value = "sys_user" ,
+		onInsert = MybatisFlexBaseEntityInputListener.class,
+		onUpdate = MybatisFlexBaseEntityInputListener.class)
 @EqualsAndHashCode(callSuper = true)
 public class SysUser extends BaseEntity {
 
@@ -42,8 +47,8 @@ public class SysUser extends BaseEntity {
 	/**
 	 * 主键ID
 	 */
-	@TableId(value = "user_id", type = IdType.ASSIGN_ID)
-	@Schema(description = "主键id")
+	@Id(keyType = KeyType.Generator, value = KeyGenerators.snowFlakeId)
+	@Schema(description = "主键id" )
 	private Long userId;
 
 	/**
@@ -88,11 +93,5 @@ public class SysUser extends BaseEntity {
 	 */
 	@Schema(description = "用户所属部门id")
 	private Long deptId;
-
-	/**
-	 * 0-正常，1-删除
-	 */
-	@TableLogic
-	private String delFlag;
 
 }

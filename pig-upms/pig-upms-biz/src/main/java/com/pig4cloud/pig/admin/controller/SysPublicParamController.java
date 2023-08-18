@@ -18,8 +18,8 @@
 package com.pig4cloud.pig.admin.controller;
 
 import cn.hutool.core.util.StrUtil;
-import com.baomidou.mybatisplus.core.toolkit.Wrappers;
-import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.mybatisflex.core.paginate.Page;
+import com.mybatisflex.core.query.QueryWrapper;
 import com.pig4cloud.pig.admin.api.entity.SysPublicParam;
 import com.pig4cloud.pig.admin.service.SysPublicParamService;
 import com.pig4cloud.pig.common.core.util.R;
@@ -33,6 +33,8 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
+import static com.pig4cloud.pig.admin.api.entity.table.SysPublicParamTableDef.SYS_PUBLIC_PARAM;
+
 /**
  * 公共参数
  *
@@ -41,7 +43,7 @@ import org.springframework.web.bind.annotation.*;
  */
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/param")
+@RequestMapping("/param" )
 @Tag(name = "公共参数配置")
 @SecurityRequirement(name = HttpHeaders.AUTHORIZATION)
 public class SysPublicParamController {
@@ -50,6 +52,7 @@ public class SysPublicParamController {
 
 	/**
 	 * 通过key查询公共参数值
+	 *
 	 * @param publicKey
 	 * @return
 	 */
@@ -62,7 +65,8 @@ public class SysPublicParamController {
 
 	/**
 	 * 分页查询
-	 * @param page 分页对象
+	 *
+	 * @param page           分页对象
 	 * @param sysPublicParam 公共参数
 	 * @return
 	 */
@@ -70,15 +74,16 @@ public class SysPublicParamController {
 	@GetMapping("/page")
 	public R getSysPublicParamPage(Page page, SysPublicParam sysPublicParam) {
 		return R.ok(sysPublicParamService.page(page,
-				Wrappers.<SysPublicParam>lambdaQuery()
-					.like(StrUtil.isNotBlank(sysPublicParam.getPublicName()), SysPublicParam::getPublicName,
-							sysPublicParam.getPublicName())
-					.like(StrUtil.isNotBlank(sysPublicParam.getPublicKey()), SysPublicParam::getPublicKey,
-							sysPublicParam.getPublicKey())));
+				QueryWrapper.create()
+						.where(SYS_PUBLIC_PARAM.PUBLIC_NAME.like(sysPublicParam.getPublicName())
+								.when(StrUtil.isNotBlank(sysPublicParam.getPublicName())))
+						.and(SYS_PUBLIC_PARAM.PUBLIC_KEY.like(sysPublicParam.getPublicKey())
+								.when(StrUtil.isNotBlank(sysPublicParam.getPublicKey())))));
 	}
 
 	/**
 	 * 通过id查询公共参数
+	 *
 	 * @param publicId id
 	 * @return R
 	 */
@@ -90,6 +95,7 @@ public class SysPublicParamController {
 
 	/**
 	 * 新增公共参数
+	 *
 	 * @param sysPublicParam 公共参数
 	 * @return R
 	 */
@@ -103,6 +109,7 @@ public class SysPublicParamController {
 
 	/**
 	 * 修改公共参数
+	 *
 	 * @param sysPublicParam 公共参数
 	 * @return R
 	 */
@@ -116,6 +123,7 @@ public class SysPublicParamController {
 
 	/**
 	 * 通过id删除公共参数
+	 *
 	 * @param publicId id
 	 * @return R
 	 */
@@ -129,6 +137,7 @@ public class SysPublicParamController {
 
 	/**
 	 * 同步参数
+	 *
 	 * @return R
 	 */
 	@SysLog("同步参数")

@@ -16,9 +16,13 @@
 
 package com.pig4cloud.pig.admin.api.entity;
 
-import com.baomidou.mybatisplus.annotation.IdType;
-import com.baomidou.mybatisplus.annotation.TableId;
+
+import com.mybatisflex.annotation.Id;
+import com.mybatisflex.annotation.KeyType;
+import com.mybatisflex.annotation.Table;
+import com.mybatisflex.core.keygen.KeyGenerators;
 import com.pig4cloud.pig.common.mybatis.base.BaseEntity;
+import com.pig4cloud.pig.common.mybatis.config.MybatisFlexBaseEntityInputListener;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -35,6 +39,9 @@ import javax.validation.constraints.NotBlank;
  */
 @Data
 @EqualsAndHashCode(callSuper = true)
+@Table(value = "sys_oauth_client_details" ,
+		onInsert = MybatisFlexBaseEntityInputListener.class,
+		onUpdate = MybatisFlexBaseEntityInputListener.class)
 public class SysOauthClientDetails extends BaseEntity {
 
 	private static final long serialVersionUID = 1L;
@@ -42,9 +49,9 @@ public class SysOauthClientDetails extends BaseEntity {
 	/**
 	 * 客户端ID
 	 */
-	@NotBlank(message = "client_id 不能为空")
-	@TableId(value = "client_id", type = IdType.INPUT)
-	@Schema(description = "客户端id")
+	@NotBlank(message = "client_id 不能为空" )
+	@Id(keyType = KeyType.Generator, value = KeyGenerators.snowFlakeId)
+	@Schema(description = "客户端id" )
 	private String clientId;
 
 	/**

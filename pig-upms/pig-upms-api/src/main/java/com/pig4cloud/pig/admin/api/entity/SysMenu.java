@@ -16,10 +16,13 @@
 
 package com.pig4cloud.pig.admin.api.entity;
 
-import com.baomidou.mybatisplus.annotation.IdType;
-import com.baomidou.mybatisplus.annotation.TableId;
-import com.baomidou.mybatisplus.annotation.TableLogic;
+
+import com.mybatisflex.annotation.Id;
+import com.mybatisflex.annotation.KeyType;
+import com.mybatisflex.annotation.Table;
+import com.mybatisflex.core.keygen.KeyGenerators;
 import com.pig4cloud.pig.common.mybatis.base.BaseEntity;
+import com.pig4cloud.pig.common.mybatis.config.MybatisFlexBaseEntityInputListener;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -37,6 +40,9 @@ import javax.validation.constraints.NotNull;
  */
 @Data
 @EqualsAndHashCode(callSuper = true)
+@Table(value = "sys_menu" ,
+		onInsert = MybatisFlexBaseEntityInputListener.class,
+		onUpdate = MybatisFlexBaseEntityInputListener.class)
 public class SysMenu extends BaseEntity {
 
 	private static final long serialVersionUID = 1L;
@@ -44,8 +50,8 @@ public class SysMenu extends BaseEntity {
 	/**
 	 * 菜单ID
 	 */
-	@TableId(value = "menu_id", type = IdType.ASSIGN_ID)
-	@Schema(description = "菜单id")
+	@Id(keyType = KeyType.Generator, value = KeyGenerators.snowFlakeId)
+	@Schema(description = "菜单id" )
 	private Long menuId;
 
 	/**
@@ -97,11 +103,5 @@ public class SysMenu extends BaseEntity {
 	 */
 	@Schema(description = "路由缓冲")
 	private String keepAlive;
-
-	/**
-	 * 0--正常 1--删除
-	 */
-	@TableLogic
-	private String delFlag;
 
 }

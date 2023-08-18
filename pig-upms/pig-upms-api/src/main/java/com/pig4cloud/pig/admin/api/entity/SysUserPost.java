@@ -16,10 +16,9 @@
 
 package com.pig4cloud.pig.admin.api.entity;
 
-import com.baomidou.mybatisplus.extension.activerecord.Model;
+import com.mybatisflex.annotation.Table;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
-import lombok.EqualsAndHashCode;
 
 /**
  * <p>
@@ -29,15 +28,15 @@ import lombok.EqualsAndHashCode;
  * @author fxz
  */
 @Data
-@EqualsAndHashCode(callSuper = true)
-public class SysUserPost extends Model<SysUserPost> {
+@Table("sys_user_post" )
+public class SysUserPost {
 
 	private static final long serialVersionUID = 1L;
 
 	/**
 	 * 用户ID
 	 */
-	@Schema(description = "用户id")
+	@Schema(description = "用户id" )
 	private Long userId;
 
 	/**

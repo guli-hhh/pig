@@ -15,9 +15,8 @@
  */
 package com.pig4cloud.pig.codegen.controller;
 
-import com.baomidou.mybatisplus.core.metadata.IPage;
-import com.baomidou.mybatisplus.core.toolkit.Wrappers;
-import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.mybatisflex.core.paginate.Page;
+import com.mybatisflex.core.query.QueryWrapper;
 import com.pig4cloud.pig.codegen.entity.GenDatasourceConf;
 import com.pig4cloud.pig.codegen.service.GenDatasourceConfService;
 import com.pig4cloud.pig.common.core.util.R;
@@ -47,17 +46,19 @@ public class GenDsConfController {
 
 	/**
 	 * 分页查询
-	 * @param page 分页对象
+	 *
+	 * @param page           分页对象
 	 * @param datasourceConf 数据源表
 	 * @return
 	 */
-	@GetMapping("/page")
-	public R<IPage<GenDatasourceConf>> getSysDatasourceConfPage(Page page, GenDatasourceConf datasourceConf) {
-		return R.ok(datasourceConfService.page(page, Wrappers.query(datasourceConf)));
+	@GetMapping("/page" )
+	public R<Page<GenDatasourceConf>> getSysDatasourceConfPage(Page page, GenDatasourceConf datasourceConf) {
+		return R.ok(datasourceConfService.page(page, QueryWrapper.create(datasourceConf)));
 	}
 
 	/**
 	 * 查询全部数据源
+	 *
 	 * @return
 	 */
 	@GetMapping("/list")
@@ -67,6 +68,7 @@ public class GenDsConfController {
 
 	/**
 	 * 通过id查询数据源表
+	 *
 	 * @param id id
 	 * @return R
 	 */
@@ -77,6 +79,7 @@ public class GenDsConfController {
 
 	/**
 	 * 新增数据源表
+	 *
 	 * @param datasourceConf 数据源表
 	 * @return R
 	 */
@@ -88,6 +91,7 @@ public class GenDsConfController {
 
 	/**
 	 * 修改数据源表
+	 *
 	 * @param conf 数据源表
 	 * @return R
 	 */
@@ -99,6 +103,7 @@ public class GenDsConfController {
 
 	/**
 	 * 通过id删除数据源表
+	 *
 	 * @param id id
 	 * @return R
 	 */

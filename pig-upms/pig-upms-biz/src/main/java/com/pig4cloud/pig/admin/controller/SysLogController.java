@@ -15,8 +15,7 @@
  */
 package com.pig4cloud.pig.admin.controller;
 
-import com.baomidou.mybatisplus.core.metadata.IPage;
-import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.mybatisflex.core.paginate.Page;
 import com.pig4cloud.pig.admin.api.dto.SysLogDTO;
 import com.pig4cloud.pig.admin.api.entity.SysLog;
 import com.pig4cloud.pig.admin.service.SysLogService;
@@ -52,17 +51,19 @@ public class SysLogController {
 
 	/**
 	 * 简单分页查询
-	 * @param page 分页对象
+	 *
+	 * @param page   分页对象
 	 * @param sysLog 系统日志
 	 * @return
 	 */
-	@GetMapping("/page")
-	public R<IPage<SysLog>> getLogPage(Page page, SysLogDTO sysLog) {
+	@GetMapping("/page" )
+	public R<Page<SysLog>> getLogPage(Page page, SysLogDTO sysLog) {
 		return R.ok(sysLogService.getLogByPage(page, sysLog));
 	}
 
 	/**
 	 * 删除日志
+	 *
 	 * @param id ID
 	 * @return success/false
 	 */
@@ -74,10 +75,11 @@ public class SysLogController {
 
 	/**
 	 * 插入日志
+	 *
 	 * @param sysLog 日志实体
 	 * @return success/false
 	 */
-	@Inner
+	@Inner(value = false)
 	@PostMapping
 	public R<Boolean> save(@Valid @RequestBody SysLog sysLog) {
 		return R.ok(sysLogService.save(sysLog));
@@ -85,6 +87,7 @@ public class SysLogController {
 
 	/**
 	 * 导出excel 表格
+	 *
 	 * @param sysLog 查询条件
 	 * @return EXCEL
 	 */

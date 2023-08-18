@@ -1,6 +1,6 @@
 package com.pig4cloud.pig.admin.controller;
 
-import com.baomidou.mybatisplus.core.toolkit.Wrappers;
+import com.mybatisflex.core.query.QueryWrapper;
 import com.pig4cloud.pig.admin.api.dto.AppSmsDTO;
 import com.pig4cloud.pig.admin.api.dto.UserInfo;
 import com.pig4cloud.pig.admin.api.entity.SysUser;
@@ -18,14 +18,16 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 
+import static com.pig4cloud.pig.admin.api.entity.table.SysUserTableDef.SYS_USER;
+
 /**
  * @author lengleng
  * @date 2021/9/16 移动端登录
  */
 @RestController
 @AllArgsConstructor
-@RequestMapping("/app")
-@Tag(name = "移动端登录模块")
+@RequestMapping("/app" )
+@Tag(name = "移动端登录模块" )
 @SecurityRequirement(name = HttpHeaders.AUTHORIZATION)
 public class AppController {
 
@@ -35,6 +37,7 @@ public class AppController {
 
 	/**
 	 * 发送手机验证码
+	 *
 	 * @param sms 请求手机对象
 	 * @return code
 	 */
@@ -46,13 +49,14 @@ public class AppController {
 
 	/**
 	 * 获取指定用户全部信息
+	 *
 	 * @param phone 手机号
 	 * @return 用户信息
 	 */
 	@Inner
 	@GetMapping("/info/{phone}")
 	public R<UserInfo> infoByMobile(@PathVariable String phone) {
-		SysUser user = userService.getOne(Wrappers.<SysUser>query().lambda().eq(SysUser::getPhone, phone));
+		SysUser user = userService.getOne(QueryWrapper.create().where(SYS_USER.PHONE.eq(phone)));
 		if (user == null) {
 			return R.failed(MsgUtils.getMessage(ErrorCodes.SYS_USER_USERINFO_EMPTY, phone));
 		}

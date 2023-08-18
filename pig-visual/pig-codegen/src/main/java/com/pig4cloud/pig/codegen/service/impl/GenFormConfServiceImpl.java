@@ -17,8 +17,9 @@ package com.pig4cloud.pig.codegen.service.impl;
 
 import cn.hutool.core.util.CharsetUtil;
 import cn.hutool.core.util.StrUtil;
-import com.baomidou.mybatisplus.core.toolkit.Wrappers;
-import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.mybatisflex.core.datasource.DataSourceKey;
+import com.mybatisflex.core.query.QueryWrapper;
+import com.mybatisflex.spring.service.impl.ServiceImpl;
 import com.pig4cloud.pig.codegen.entity.ColumnEntity;
 import com.pig4cloud.pig.codegen.entity.GenFormConf;
 import com.pig4cloud.pig.codegen.mapper.GenFormConfMapper;
@@ -56,25 +57,27 @@ public class GenFormConfServiceImpl extends ServiceImpl<GenFormConfMapper, GenFo
 
 	/**
 	 * 1. 根据数据源、表名称，查询已配置表单信息 2. 不存在调用模板生成
-	 * @param dsName 数据源ID
+	 *
+	 * @param dsName    数据源ID
 	 * @param tableName 表名称
 	 * @return
 	 */
 	@Override
-	@SneakyThrows
+	@SneakyThrows(value = Exception.class)
 	public String getForm(String dsName, String tableName) {
-		GenFormConf form = getOne(Wrappers.<GenFormConf>lambdaQuery()
-			.eq(GenFormConf::getTableName, tableName)
-			.orderByDesc(GenFormConf::getCreateTime), false);
+		GenFormConf form = this.getOne(QueryWrapper.create());
+//		Wrappers.<GenFormConf>lambdaQuery()
+//				.eq(GenFormConf::getTableName, tableName)
+//				.orderByDesc(GenFormConf::getCreateTime)
 
 		if (form != null) {
 			return form.getFormInfo();
 		}
-
+		DataSourceKey.use(dsName );
 		List<Map<String, String>> columns = generatorMapper.queryColumns(tableName, dsName);
 		// 设置velocity资源加载器
 		Properties prop = new Properties();
-		prop.put("file.resource.loader.class", ClasspathResourceLoader.class.getName());
+		prop.put("file.resource.loader.class" , ClasspathResourceLoader.class.getName());
 		Velocity.init(prop);
 		Template template = Velocity.getTemplate("template/avue/crud.js.vm", CharsetUtil.UTF_8);
 		VelocityContext context = new VelocityContext();

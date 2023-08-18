@@ -15,7 +15,7 @@
  */
 package com.pig4cloud.pig.admin.service.impl;
 
-import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.mybatisflex.spring.service.impl.ServiceImpl;
 import com.pig4cloud.pig.admin.api.entity.SysDict;
 import com.pig4cloud.pig.admin.api.entity.SysDictItem;
 import com.pig4cloud.pig.admin.mapper.SysDictItemMapper;
@@ -44,6 +44,7 @@ public class SysDictItemServiceImpl extends ServiceImpl<SysDictItemMapper, SysDi
 
 	/**
 	 * 删除字典项
+	 *
 	 * @param id 字典项ID
 	 * @return
 	 */
@@ -61,6 +62,7 @@ public class SysDictItemServiceImpl extends ServiceImpl<SysDictItemMapper, SysDi
 
 	/**
 	 * 更新字典项
+	 *
 	 * @param item 字典项
 	 * @return
 	 */

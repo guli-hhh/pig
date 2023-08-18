@@ -15,10 +15,9 @@
  */
 package com.pig4cloud.pig.admin.service.impl;
 
-import com.baomidou.mybatisplus.core.toolkit.Wrappers;
-import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.mybatisflex.core.query.QueryWrapper;
+import com.mybatisflex.spring.service.impl.ServiceImpl;
 import com.pig4cloud.pig.admin.api.entity.SysDict;
-import com.pig4cloud.pig.admin.api.entity.SysDictItem;
 import com.pig4cloud.pig.admin.mapper.SysDictItemMapper;
 import com.pig4cloud.pig.admin.mapper.SysDictMapper;
 import com.pig4cloud.pig.admin.service.SysDictService;
@@ -31,6 +30,8 @@ import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
+
+import static com.pig4cloud.pig.admin.api.entity.table.SysDictItemTableDef.SYS_DICT_ITEM;
 
 /**
  * 字典表
@@ -46,6 +47,7 @@ public class SysDictServiceImpl extends ServiceImpl<SysDictMapper, SysDict> impl
 
 	/**
 	 * 根据ID 删除字典
+	 *
 	 * @param id 字典ID
 	 * @return
 	 */
@@ -57,12 +59,13 @@ public class SysDictServiceImpl extends ServiceImpl<SysDictMapper, SysDict> impl
 		// 系统内置
 		Assert.state(!DictTypeEnum.SYSTEM.getType().equals(dict.getSystemFlag()),
 				MsgUtils.getMessage(ErrorCodes.SYS_DICT_DELETE_SYSTEM));
-		baseMapper.deleteById(id);
-		dictItemMapper.delete(Wrappers.<SysDictItem>lambdaQuery().eq(SysDictItem::getDictId, id));
+		mapper.deleteById(id);
+		dictItemMapper.deleteByQuery(QueryWrapper.create().where(SYS_DICT_ITEM.DICT_ID.eq(id)));
 	}
 
 	/**
 	 * 更新字典
+	 *
 	 * @param dict 字典
 	 * @return
 	 */

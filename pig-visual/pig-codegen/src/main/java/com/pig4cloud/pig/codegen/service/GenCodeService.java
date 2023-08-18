@@ -39,7 +39,7 @@ import java.util.zip.ZipOutputStream;
 public interface GenCodeService {
 
 	default Map<String, String> gen(GenConfig genConfig, Map<String, String> table, List<Map<String, String>> columns,
-			ZipOutputStream zip, GenFormConf formConf) {
+									ZipOutputStream zip, GenFormConf formConf) {
 		// 构建表实体
 		TableEntity tableEntity = buildTableEntity(genConfig, table);
 
@@ -54,15 +54,16 @@ public interface GenCodeService {
 
 	/**
 	 * 渲染数据
-	 * @param genConfig 用户输入相关
-	 * @param zip 输出zip流
+	 *
+	 * @param genConfig   用户输入相关
+	 * @param zip         输出zip流
 	 * @param tableEntity 表格实体
-	 * @param map 参数集合
-	 * @param formConf 表单设计
+	 * @param map         参数集合
+	 * @param formConf    表单设计
 	 */
 	@SneakyThrows
 	default Map<String, String> renderData(GenConfig genConfig, ZipOutputStream zip, TableEntity tableEntity,
-			Map<String, Object> map, GenFormConf formConf) {
+										   Map<String, Object> map, GenFormConf formConf) {
 		// 设置velocity资源加载器
 		Properties prop = new Properties();
 		prop.put("file.resource.loader.class", "org.apache.velocity.runtime.resource.loader.ClasspathResourceLoader");
@@ -92,8 +93,7 @@ public interface GenCodeService {
 					zip.putNextEntry(new ZipEntry(Objects.requireNonNull(fileName)));
 					IoUtil.write(zip, StandardCharsets.UTF_8, false, sw.toString());
 					IoUtil.close(sw);
-				}
-				catch (ZipException zipException) {
+				} catch (ZipException zipException) {
 				}
 				zip.closeEntry();
 			}
@@ -105,18 +105,19 @@ public interface GenCodeService {
 
 	/**
 	 * 注入支持的模板列表
+	 *
 	 * @param config 用户输入
 	 * @return ListString
 	 */
 	default List<String> getTemplates(GenConfig config) {
 		List<String> templates = new ArrayList<>();
-		templates.add("template/Entity.java.vm");
-		templates.add("template/Mapper.java.vm");
-		templates.add("template/Mapper.xml.vm");
-		templates.add("template/Service.java.vm");
-		templates.add("template/ServiceImpl.java.vm");
-		templates.add("template/Controller.java.vm");
-		templates.add("template/menu.sql.vm");
+		templates.add("template/Entity.java.vm" );
+		templates.add("template/Mapper.java.vm" );
+		templates.add("template/Mapper.xml.vm" );
+		templates.add("template/Service.java.vm" );
+		templates.add("template/ServiceImpl.java.vm" );
+		templates.add("template/Controller.java.vm" );
+		templates.add("template/menu.sql.vm" );
 		return templates;
 	}
 
@@ -147,19 +148,16 @@ public interface GenCodeService {
 			return packagePath + "service" + File.separator + "impl" + File.separator + className + "ServiceImpl.java";
 		}
 
-		if (template.contains("Controller.java.vm")) {
+		if (template.contains("Controller.java.vm" )) {
 			return packagePath + "controller" + File.separator + className + "Controller.java";
 		}
-
-		if (template.contains("Mapper.xml.vm")) {
+		if (template.contains("Mapper.xml.vm" )) {
 			return CommonConstants.BACK_END_PROJECT + File.separator + "src" + File.separator + "main" + File.separator
 					+ "resources" + File.separator + "mapper" + File.separator + className + "Mapper.xml";
 		}
-
-		if (template.contains("menu.sql.vm")) {
+		if (template.contains("menu.sql.vm" )) {
 			return className.toLowerCase() + "_menu.sql";
 		}
-
 		return null;
 	}
 
@@ -176,30 +174,26 @@ public interface GenCodeService {
 
 		if (StrUtil.isNotBlank(genConfig.getComments())) {
 			map.put("comments", genConfig.getComments());
-		}
-		else {
+		} else {
 			map.put("comments", tableEntity.getComments());
 		}
 
 		if (StrUtil.isNotBlank(genConfig.getAuthor())) {
 			map.put("author", genConfig.getAuthor());
-		}
-		else {
+		} else {
 			map.put("author", getConfig().getString("author"));
 		}
 
 		if (StrUtil.isNotBlank(genConfig.getModuleName())) {
 			map.put("moduleName", genConfig.getModuleName());
-		}
-		else {
+		} else {
 			map.put("moduleName", getConfig().getString("moduleName"));
 		}
 
 		if (StrUtil.isNotBlank(genConfig.getPackageName())) {
 			map.put("package", genConfig.getPackageName());
 			map.put("mainPath", genConfig.getPackageName());
-		}
-		else {
+		} else {
 			map.put("package", getConfig().getString("package"));
 			map.put("mainPath", getConfig().getString("mainPath"));
 		}
@@ -209,6 +203,7 @@ public interface GenCodeService {
 
 	/**
 	 * 构建 ColumnEntity
+	 *
 	 * @param columns 列元信息
 	 */
 	default void buildColumnEntity(TableEntity tableEntity, List<Map<String, String>> columns) {
@@ -226,8 +221,7 @@ public interface GenCodeService {
 			// 隐藏不需要的在接口文档中展示的字段
 			if (hiddenColumns.contains(column.get("columnName"))) {
 				columnEntity.setHidden(Boolean.TRUE);
-			}
-			else {
+			} else {
 				columnEntity.setHidden(Boolean.FALSE);
 			}
 			// 列名转换成Java属性名
@@ -239,8 +233,7 @@ public interface GenCodeService {
 			if (StrUtil.isNotBlank(column.get("columnComment"))) {
 				// 注意去除换行符号
 				columnEntity.setComments(StrUtil.removeAllLineBreaks(column.get("columnComment")));
-			}
-			else {
+			} else {
 				columnEntity.setComments(columnEntity.getLowerAttrName());
 			}
 
@@ -266,8 +259,9 @@ public interface GenCodeService {
 
 	/**
 	 * 构建 TableEntity
+	 *
 	 * @param genConfig 用户输入相关
-	 * @param table 表元信息
+	 * @param table     表元信息
 	 * @return TableEntity
 	 */
 	default TableEntity buildTableEntity(GenConfig genConfig, Map<String, String> table) {
@@ -277,16 +271,14 @@ public interface GenCodeService {
 
 		if (StrUtil.isNotBlank(genConfig.getComments())) {
 			tableEntity.setComments(genConfig.getComments());
-		}
-		else {
+		} else {
 			tableEntity.setComments(table.get("tableComment"));
 		}
 
 		String tablePrefix;
 		if (StrUtil.isNotBlank(genConfig.getTablePrefix())) {
 			tablePrefix = genConfig.getTablePrefix();
-		}
-		else {
+		} else {
 			tablePrefix = getConfig().getString("tablePrefix");
 		}
 		// 表名转换成Java类名
@@ -303,8 +295,7 @@ public interface GenCodeService {
 	default Configuration getConfig() {
 		try {
 			return new PropertiesConfiguration("generator.properties");
-		}
-		catch (ConfigurationException e) {
+		} catch (ConfigurationException e) {
 			throw new CheckedException("获取配置文件失败，", e);
 		}
 	}
@@ -323,7 +314,7 @@ public interface GenCodeService {
 	 * 列名转换成Java属性名
 	 */
 	default String columnToJava(String columnName) {
-		return WordUtils.capitalizeFully(columnName, new char[] { '_' }).replace("_", "");
+		return WordUtils.capitalizeFully(columnName, new char[]{'_'}).replace("_", "");
 	}
 
 }

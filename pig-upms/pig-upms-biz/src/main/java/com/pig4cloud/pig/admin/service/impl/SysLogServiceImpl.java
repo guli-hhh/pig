@@ -17,11 +17,9 @@
 package com.pig4cloud.pig.admin.service.impl;
 
 import cn.hutool.core.util.ArrayUtil;
-import cn.hutool.core.util.StrUtil;
-import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
-import com.baomidou.mybatisplus.core.toolkit.Wrappers;
-import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.mybatisflex.core.paginate.Page;
+import com.mybatisflex.core.query.QueryWrapper;
+import com.mybatisflex.spring.service.impl.ServiceImpl;
 import com.pig4cloud.pig.admin.api.dto.SysLogDTO;
 import com.pig4cloud.pig.admin.api.entity.SysLog;
 import com.pig4cloud.pig.admin.mapper.SysLogMapper;
@@ -29,6 +27,8 @@ import com.pig4cloud.pig.admin.service.SysLogService;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+
+import static com.pig4cloud.pig.admin.api.entity.table.SysLogTableDef.SYS_LOG;
 
 /**
  * <p>
@@ -43,34 +43,33 @@ public class SysLogServiceImpl extends ServiceImpl<SysLogMapper, SysLog> impleme
 
 	@Override
 	public Page getLogByPage(Page page, SysLogDTO sysLog) {
-		return baseMapper.selectPage(page, buildQueryWrapper(sysLog));
+		return this.page(page, buildQueryWrapper(sysLog));
 	}
 
 	/**
 	 * 列表查询日志
+	 *
 	 * @param sysLog 查询条件
 	 * @return List
 	 */
 	@Override
 	public List getLogList(SysLogDTO sysLog) {
-		return baseMapper.selectList(buildQueryWrapper(sysLog));
+		return mapper.selectListByQuery(buildQueryWrapper(sysLog));
 	}
 
 	/**
 	 * 构建查询的 wrapper
+	 *
 	 * @param sysLog 查询条件
 	 * @return LambdaQueryWrapper
 	 */
-	private LambdaQueryWrapper buildQueryWrapper(SysLogDTO sysLog) {
-		LambdaQueryWrapper<SysLog> wrapper = Wrappers.<SysLog>lambdaQuery()
-			.eq(StrUtil.isNotBlank(sysLog.getType()), SysLog::getType, sysLog.getType())
-			.like(StrUtil.isNotBlank(sysLog.getRemoteAddr()), SysLog::getRemoteAddr, sysLog.getRemoteAddr());
-
+	private QueryWrapper buildQueryWrapper(SysLogDTO sysLog) {
+		QueryWrapper wrapper = QueryWrapper.create()
+				.where(SYS_LOG.TYPE.eq(sysLog.getType())).and(SYS_LOG.REMOTE_ADDR.like(sysLog.getRemoteAddr()));
 		if (ArrayUtil.isNotEmpty(sysLog.getCreateTime())) {
-			wrapper.ge(SysLog::getCreateTime, sysLog.getCreateTime()[0])
-				.le(SysLog::getCreateTime, sysLog.getCreateTime()[1]);
+			wrapper.and(SYS_LOG.CREATE_TIME.ge(sysLog.getCreateTime()[0]))
+					.and(SYS_LOG.CREATE_TIME.le(sysLog.getCreateTime()[1]));
 		}
-
 		return wrapper;
 	}
 

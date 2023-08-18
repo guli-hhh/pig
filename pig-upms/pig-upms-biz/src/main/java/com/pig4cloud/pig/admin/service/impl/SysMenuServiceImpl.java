@@ -21,8 +21,8 @@ import cn.hutool.core.lang.tree.Tree;
 import cn.hutool.core.lang.tree.TreeNode;
 import cn.hutool.core.lang.tree.TreeUtil;
 import cn.hutool.core.util.StrUtil;
-import com.baomidou.mybatisplus.core.toolkit.Wrappers;
-import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.mybatisflex.core.query.QueryWrapper;
+import com.mybatisflex.spring.service.impl.ServiceImpl;
 import com.pig4cloud.pig.admin.api.entity.SysMenu;
 import com.pig4cloud.pig.admin.api.entity.SysRoleMenu;
 import com.pig4cloud.pig.admin.mapper.SysMenuMapper;
@@ -48,6 +48,8 @@ import java.util.Set;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
+import static com.pig4cloud.pig.admin.api.entity.table.SysMenuTableDef.SYS_MENU;
+
 /**
  * <p>
  * 菜单权限表 服务实现类
@@ -65,11 +67,12 @@ public class SysMenuServiceImpl extends ServiceImpl<SysMenuMapper, SysMenu> impl
 	@Override
 	@Cacheable(value = CacheConstants.MENU_DETAILS, key = "#roleId  + '_menu'", unless = "#result == null")
 	public Set<SysMenu> findMenuByRoleId(Long roleId) {
-		return baseMapper.listMenusByRoleId(roleId);
+		return mapper.listMenusByRoleId(roleId);
 	}
 
 	/**
 	 * 级联删除菜单
+	 *
 	 * @param id 菜单ID
 	 * @return true成功, false失败
 	 */
@@ -78,11 +81,13 @@ public class SysMenuServiceImpl extends ServiceImpl<SysMenuMapper, SysMenu> impl
 	@CacheEvict(value = CacheConstants.MENU_DETAILS, allEntries = true)
 	public Boolean removeMenuById(Long id) {
 		// 查询父节点为当前节点的节点
-		List<SysMenu> menuList = this.list(Wrappers.<SysMenu>query().lambda().eq(SysMenu::getParentId, id));
+		List<SysMenu> menuList = this.list(QueryWrapper.create().select()
+				.where(SYS_MENU.PARENT_ID.eq(id)));
 
 		Assert.isTrue(CollUtil.isEmpty(menuList), MsgUtils.getMessage(ErrorCodes.SYS_MENU_DELETE_EXISTING));
-
-		sysRoleMenuMapper.delete(Wrappers.<SysRoleMenu>query().lambda().eq(SysRoleMenu::getMenuId, id));
+		SysRoleMenu sysRoleMenu = new SysRoleMenu();
+		sysRoleMenu.setMenuId(id);
+		sysRoleMenuMapper.deleteByQuery(QueryWrapper.create(sysRoleMenu));
 		// 删除当前菜单及其子菜单
 		return this.removeById(id);
 	}
@@ -95,47 +100,51 @@ public class SysMenuServiceImpl extends ServiceImpl<SysMenuMapper, SysMenu> impl
 
 	/**
 	 * 构建树查询 1. 不是懒加载情况，查询全部 2. 是懒加载，根据parentId 查询 2.1 父节点为空，则查询ID -1
-	 * @param lazy 是否是懒加载
+	 *
+	 * @param lazy     是否是懒加载
 	 * @param parentId 父节点ID
-	 * @return
+	 * @return List
 	 */
 	@Override
 	public List<Tree<Long>> treeMenu(boolean lazy, Long parentId) {
 		if (!lazy) {
-			List<TreeNode<Long>> collect = baseMapper
-				.selectList(Wrappers.<SysMenu>lambdaQuery().orderByAsc(SysMenu::getSortOrder))
-				.stream()
-				.map(getNodeFunction())
-				.collect(Collectors.toList());
+			List<TreeNode<Long>> collect = mapper
+					.selectListByQuery(QueryWrapper.create().select(SYS_MENU.DEFAULT_COLUMNS).orderBy(SYS_MENU.SORT_ORDER.asc()))
+					.stream()
+					.map(getNodeFunction())
+					.collect(Collectors.toList());
 
 			return TreeUtil.build(collect, CommonConstants.MENU_TREE_ROOT_ID);
 		}
 
 		Long parent = parentId == null ? CommonConstants.MENU_TREE_ROOT_ID : parentId;
 
-		List<TreeNode<Long>> collect = baseMapper
-			.selectList(
-					Wrappers.<SysMenu>lambdaQuery().eq(SysMenu::getParentId, parent).orderByAsc(SysMenu::getSortOrder))
-			.stream()
-			.map(getNodeFunction())
-			.collect(Collectors.toList());
+		List<TreeNode<Long>> collect = mapper
+				.selectListByQuery(QueryWrapper.create()
+						.select(SYS_MENU.DEFAULT_COLUMNS)
+						.where(SYS_MENU.PARENT_ID.eq(parent))
+						.orderBy(SYS_MENU.SORT_ORDER.asc()))
+				.stream()
+				.map(getNodeFunction())
+				.collect(Collectors.toList());
 
 		return TreeUtil.build(collect, parent);
 	}
 
 	/**
 	 * 查询菜单
-	 * @param all 全部菜单
+	 *
+	 * @param all      全部菜单
 	 * @param parentId 父节点ID
-	 * @return
+	 * @return List
 	 */
 	@Override
 	public List<Tree<Long>> filterMenu(Set<SysMenu> all, Long parentId) {
 		List<TreeNode<Long>> collect = all.stream()
-			.filter(menu -> MenuTypeEnum.LEFT_MENU.getType().equals(menu.getType()))
-			.filter(menu -> StrUtil.isNotBlank(menu.getPath()))
-			.map(getNodeFunction())
-			.collect(Collectors.toList());
+				.filter(menu -> MenuTypeEnum.LEFT_MENU.getType().equals(menu.getType()))
+				.filter(menu -> StrUtil.isNotBlank(menu.getPath()))
+				.map(getNodeFunction())
+				.collect(Collectors.toList());
 		Long parent = parentId == null ? CommonConstants.MENU_TREE_ROOT_ID : parentId;
 		return TreeUtil.build(collect, parent);
 	}
@@ -155,7 +164,7 @@ public class SysMenuServiceImpl extends ServiceImpl<SysMenuMapper, SysMenu> impl
 			node.setParentId(menu.getParentId());
 			node.setWeight(menu.getSortOrder());
 			// 扩展属性
-			Map<String, Object> extra = new HashMap<>();
+			Map<String, Object> extra = new HashMap<>(20);
 			extra.put("icon", menu.getIcon());
 			extra.put("path", menu.getPath());
 			extra.put("type", menu.getType());

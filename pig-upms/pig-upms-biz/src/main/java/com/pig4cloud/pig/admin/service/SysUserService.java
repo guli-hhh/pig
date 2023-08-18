@@ -16,9 +16,8 @@
 
 package com.pig4cloud.pig.admin.service;
 
-import com.baomidou.mybatisplus.core.metadata.IPage;
-import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.baomidou.mybatisplus.extension.service.IService;
+import com.mybatisflex.core.paginate.Page;
+import com.mybatisflex.core.service.IService;
 import com.pig4cloud.pig.admin.api.dto.UserDTO;
 import com.pig4cloud.pig.admin.api.dto.UserInfo;
 import com.pig4cloud.pig.admin.api.entity.SysUser;
@@ -38,6 +37,7 @@ public interface SysUserService extends IService<SysUser> {
 
 	/**
 	 * 查询用户信息
+	 *
 	 * @param sysUser 用户
 	 * @return userInfo
 	 */
@@ -45,14 +45,16 @@ public interface SysUserService extends IService<SysUser> {
 
 	/**
 	 * 分页查询用户信息（含有角色信息）
-	 * @param page 分页对象
+	 *
+	 * @param page    分页对象
 	 * @param userDTO 参数列表
 	 * @return
 	 */
-	IPage<UserVO> getUserWithRolePage(Page page, UserDTO userDTO);
+	Page<UserVO> getUserWithRolePage(Page<UserVO> page, UserDTO userDTO);
 
 	/**
 	 * 删除用户
+	 *
 	 * @param sysUser 用户
 	 * @return boolean
 	 */
@@ -60,6 +62,7 @@ public interface SysUserService extends IService<SysUser> {
 
 	/**
 	 * 更新当前用户基本信息
+	 *
 	 * @param userDto 用户信息
 	 * @return Boolean 操作成功返回true,操作失败返回false
 	 */
@@ -67,6 +70,7 @@ public interface SysUserService extends IService<SysUser> {
 
 	/**
 	 * 更新指定用户信息
+	 *
 	 * @param userDto 用户信息
 	 * @return
 	 */
@@ -74,6 +78,7 @@ public interface SysUserService extends IService<SysUser> {
 
 	/**
 	 * 通过ID查询用户信息
+	 *
 	 * @param id 用户ID
 	 * @return 用户信息
 	 */
@@ -81,6 +86,7 @@ public interface SysUserService extends IService<SysUser> {
 
 	/**
 	 * 查询上级部门的用户信息
+	 *
 	 * @param username 用户名
 	 * @return R
 	 */
@@ -88,6 +94,7 @@ public interface SysUserService extends IService<SysUser> {
 
 	/**
 	 * 保存用户信息
+	 *
 	 * @param userDto DTO 对象
 	 * @return success/fail
 	 */
@@ -95,6 +102,7 @@ public interface SysUserService extends IService<SysUser> {
 
 	/**
 	 * 查询全部的用户
+	 *
 	 * @param userDTO 查询条件
 	 * @return list
 	 */
@@ -102,7 +110,8 @@ public interface SysUserService extends IService<SysUser> {
 
 	/**
 	 * excel 导入用户
-	 * @param excelVOList excel 列表数据
+	 *
+	 * @param excelVOList   excel 列表数据
 	 * @param bindingResult 错误数据
 	 * @return ok fail
 	 */
@@ -110,6 +119,7 @@ public interface SysUserService extends IService<SysUser> {
 
 	/**
 	 * 根据部门 id 列表查询对应的用户 id 集合
+	 *
 	 * @param deptIds 部门 id 列表
 	 * @return userIdList
 	 */
@@ -117,6 +127,7 @@ public interface SysUserService extends IService<SysUser> {
 
 	/**
 	 * 注册用户
+	 *
 	 * @param userDto 用户信息
 	 * @return success/false
 	 */

@@ -16,7 +16,7 @@
 
 package com.pig4cloud.pig.admin.service.impl;
 
-import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.mybatisflex.spring.service.impl.ServiceImpl;
 import com.pig4cloud.pig.admin.api.entity.SysOauthClientDetails;
 import com.pig4cloud.pig.admin.mapper.SysOauthClientDetailsMapper;
 import com.pig4cloud.pig.admin.service.SysOauthClientDetailsService;
@@ -38,6 +38,7 @@ public class SysOauthClientDetailsServiceImpl extends ServiceImpl<SysOauthClient
 
 	/**
 	 * 通过ID删除客户端
+	 *
 	 * @param id
 	 * @return
 	 */
@@ -49,6 +50,7 @@ public class SysOauthClientDetailsServiceImpl extends ServiceImpl<SysOauthClient
 
 	/**
 	 * 根据客户端信息
+	 *
 	 * @param clientDetails
 	 * @return
 	 */

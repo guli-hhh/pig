@@ -14,13 +14,15 @@
  * this software without specific prior written permission.
  * Author: lengleng (wangiegie@gmail.com)
  */
-#set($excludeColumns = ["create_time","update_time","create_by","update_by"])
+#set($excludeColumns = ["create_time","update_time","create_by","update_by","tenant_id","del_flag"])
 package ${package}.${moduleName}.entity;
 
-import com.baomidou.mybatisplus.annotation.IdType;
-import com.baomidou.mybatisplus.annotation.TableId;
-import com.baomidou.mybatisplus.annotation.TableName;
+import com.mybatisflex.annotation.Id;
+import com.mybatisflex.annotation.KeyType;
+import com.mybatisflex.annotation.Table;
+import com.mybatisflex.core.keygen.KeyGenerators;
 import com.pig4cloud.pig.common.mybatis.base.BaseEntity;
+import com.pig4cloud.pig.common.mybatis.config.MybatisFlexBaseEntityInputListener;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -35,24 +37,27 @@ import java.math.BigDecimal;
  * @date ${datetime}
  */
 @Data
-@TableName("${tableName}")
+@Table(value = "${tableName}" ,
+        mapperGenerateEnable = true,
+        onInsert = MybatisFlexBaseEntityInputListener.class,
+        onUpdate = MybatisFlexBaseEntityInputListener.class)
 @EqualsAndHashCode(callSuper = true)
-@Schema(description = "${comments}")
-public class ${className} extends BaseEntity {
+@Schema(description = "${comments}" )
+public class ${className} extends BaseEntity{
 
 #foreach ($column in $columns)
-## 排除部分字段
-#if(!$excludeColumns.contains($column.columnName))
+    ## 排除部分字段
+    #if(!$excludeColumns.contains($column.columnName))
     /**
      * $column.comments
      */
-#if($column.columnName == $pk.columnName)
-    @TableId(type = IdType.ASSIGN_ID)
-#end
-    @Schema(description ="$column.comments"#if($column.hidden),hidden=$column.hidden#end)
+        #if($column.columnName == $pk.columnName)
+        @Id(keyType = KeyType.Generator, value = KeyGenerators.snowFlakeId)
+        #end
+    @Schema(description = "$column.comments"#if($column.hidden), hidden =$column.hidden#end)
     private $column.attrType $column.lowerAttrName;
 
-#end
+    #end
 #end
 
 }

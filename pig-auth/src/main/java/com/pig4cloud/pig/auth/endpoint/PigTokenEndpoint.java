@@ -20,7 +20,7 @@ import cn.hutool.core.date.DatePattern;
 import cn.hutool.core.date.TemporalAccessorUtil;
 import cn.hutool.core.map.MapUtil;
 import cn.hutool.core.util.StrUtil;
-import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.mybatisflex.core.paginate.Page;
 import com.pig4cloud.pig.admin.api.entity.SysOauthClientDetails;
 import com.pig4cloud.pig.admin.api.feign.RemoteClientDetailsService;
 import com.pig4cloud.pig.admin.api.vo.TokenVo;
@@ -225,7 +225,7 @@ public class PigTokenEndpoint {
 			return tokenVo;
 		}).collect(Collectors.toList());
 		result.setRecords(tokenVoList);
-		result.setTotal(keys.size());
+		result.setTotalRow(keys.size());
 		return R.ok(result);
 	}
 

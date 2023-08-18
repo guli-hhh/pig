@@ -20,8 +20,8 @@ import cn.hutool.core.collection.CollUtil;
 import cn.hutool.core.lang.tree.Tree;
 import cn.hutool.core.lang.tree.TreeNode;
 import cn.hutool.core.lang.tree.TreeUtil;
-import com.baomidou.mybatisplus.core.toolkit.Wrappers;
-import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.mybatisflex.core.query.QueryWrapper;
+import com.mybatisflex.spring.service.impl.ServiceImpl;
 import com.pig4cloud.pig.admin.api.entity.SysDept;
 import com.pig4cloud.pig.admin.api.entity.SysDeptRelation;
 import com.pig4cloud.pig.admin.mapper.SysDeptMapper;
@@ -34,6 +34,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.*;
 import java.util.stream.Collectors;
+
+import static com.pig4cloud.pig.admin.api.entity.table.SysDeptRelationTableDef.SYS_DEPT_RELATION;
 
 /**
  * <p>
@@ -51,8 +53,9 @@ public class SysDeptServiceImpl extends ServiceImpl<SysDeptMapper, SysDept> impl
 
 	/**
 	 * 添加信息部门
+	 *
 	 * @param dept 部门
-	 * @return
+	 * @return Boolean
 	 */
 	@Override
 	@Transactional(rollbackFor = Exception.class)
@@ -64,6 +67,7 @@ public class SysDeptServiceImpl extends ServiceImpl<SysDeptMapper, SysDept> impl
 
 	/**
 	 * 删除部门
+	 *
 	 * @param id 部门 ID
 	 * @return 成功、失败
 	 */
@@ -72,10 +76,10 @@ public class SysDeptServiceImpl extends ServiceImpl<SysDeptMapper, SysDept> impl
 	public Boolean removeDeptById(Long id) {
 		// 级联删除部门
 		List<Long> idList = sysDeptRelationService
-			.list(Wrappers.<SysDeptRelation>query().lambda().eq(SysDeptRelation::getAncestor, id))
-			.stream()
-			.map(SysDeptRelation::getDescendant)
-			.collect(Collectors.toList());
+				.list(QueryWrapper.create().where(SYS_DEPT_RELATION.ANCESTOR.eq(id)))
+				.stream()
+				.map(SysDeptRelation::getDescendant)
+				.collect(Collectors.toList());
 
 		if (CollUtil.isNotEmpty(idList)) {
 			this.removeByIds(idList);
@@ -88,6 +92,7 @@ public class SysDeptServiceImpl extends ServiceImpl<SysDeptMapper, SysDept> impl
 
 	/**
 	 * 更新部门
+	 *
 	 * @param sysDept 部门信息
 	 * @return 成功、失败
 	 */
@@ -106,9 +111,9 @@ public class SysDeptServiceImpl extends ServiceImpl<SysDeptMapper, SysDept> impl
 
 	@Override
 	public List<Long> listChildDeptId(Long deptId) {
-		List<SysDeptRelation> deptRelations = sysDeptRelationService.list(Wrappers.<SysDeptRelation>lambdaQuery()
-			.eq(SysDeptRelation::getAncestor, deptId)
-			.ne(SysDeptRelation::getDescendant, deptId));
+		List<SysDeptRelation> deptRelations = sysDeptRelationService.list(QueryWrapper.create()
+				.where(SYS_DEPT_RELATION.ANCESTOR.eq(deptId))
+				.and(SYS_DEPT_RELATION.DESCENDANT.ne(deptId)));
 		if (CollUtil.isNotEmpty(deptRelations)) {
 			return deptRelations.stream().map(SysDeptRelation::getDescendant).collect(Collectors.toList());
 		}
@@ -117,54 +122,58 @@ public class SysDeptServiceImpl extends ServiceImpl<SysDeptMapper, SysDept> impl
 
 	/**
 	 * 查询全部部门树
+	 *
 	 * @return 树
 	 */
 	@Override
 	public List<Tree<Long>> listDeptTrees() {
-		return getDeptTree(this.list(Wrappers.emptyWrapper()), 0L);
+		return getDeptTree(this.list(QueryWrapper.create()), 0L);
 	}
 
 	/**
 	 * 查询用户部门树
-	 * @return
+	 *
+	 * @return List
 	 */
 	@Override
 	public List<Tree<Long>> listCurrentUserDeptTrees() {
 		Long deptId = SecurityUtils.getUser().getDeptId();
 		List<Long> descendantIdList = sysDeptRelationService
-			.list(Wrappers.<SysDeptRelation>query().lambda().eq(SysDeptRelation::getAncestor, deptId))
-			.stream()
-			.map(SysDeptRelation::getDescendant)
-			.collect(Collectors.toList());
+				.list(QueryWrapper.create()
+						.where(SYS_DEPT_RELATION.ANCESTOR.eq(deptId)))
+				.stream()
+				.map(SysDeptRelation::getDescendant)
+				.collect(Collectors.toList());
 
-		List<SysDept> deptList = baseMapper.selectBatchIds(descendantIdList);
+		List<SysDept> deptList = mapper.selectListByIds(descendantIdList);
 		Optional<SysDept> dept = deptList.stream().filter(item -> item.getDeptId().intValue() == deptId).findFirst();
 		return getDeptTree(deptList, dept.isPresent() ? dept.get().getParentId() : 0L);
 	}
 
 	/**
 	 * 构建部门树
-	 * @param depts 部门
+	 *
+	 * @param deptList 部门
 	 * @param parentId 父级id
-	 * @return
+	 * @return List
 	 */
-	private List<Tree<Long>> getDeptTree(List<SysDept> depts, Long parentId) {
-		List<TreeNode<Long>> collect = depts.stream()
-			.filter(dept -> dept.getDeptId().intValue() != dept.getParentId())
-			.sorted(Comparator.comparingInt(SysDept::getSortOrder))
-			.map(dept -> {
-				TreeNode<Long> treeNode = new TreeNode();
-				treeNode.setId(dept.getDeptId());
-				treeNode.setParentId(dept.getParentId());
-				treeNode.setName(dept.getName());
-				treeNode.setWeight(dept.getSortOrder());
-				// 扩展属性
-				Map<String, Object> extra = new HashMap<>(2);
-				extra.put("createTime", dept.getCreateTime());
-				treeNode.setExtra(extra);
-				return treeNode;
-			})
-			.collect(Collectors.toList());
+	private List<Tree<Long>> getDeptTree(List<SysDept> deptList, Long parentId) {
+		List<TreeNode<Long>> collect = deptList.stream()
+				.filter(dept -> dept.getDeptId().intValue() != dept.getParentId())
+				.sorted(Comparator.comparingInt(SysDept::getSortOrder))
+				.map(dept -> {
+					TreeNode<Long> treeNode = new TreeNode<>();
+					treeNode.setId(dept.getDeptId());
+					treeNode.setParentId(dept.getParentId());
+					treeNode.setName(dept.getName());
+					treeNode.setWeight(dept.getSortOrder());
+					// 扩展属性
+					Map<String, Object> extra = new HashMap<>(2);
+					extra.put("createTime", dept.getCreateTime());
+					treeNode.setExtra(extra);
+					return treeNode;
+				})
+				.collect(Collectors.toList());
 
 		return TreeUtil.build(collect, parentId);
 	}

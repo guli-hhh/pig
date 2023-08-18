@@ -21,7 +21,7 @@ import cn.hutool.core.io.IoUtil;
 import cn.hutool.core.util.IdUtil;
 import cn.hutool.core.util.StrUtil;
 import com.amazonaws.services.s3.model.S3Object;
-import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.mybatisflex.spring.service.impl.ServiceImpl;
 import com.pig4cloud.pig.admin.api.entity.SysFile;
 import com.pig4cloud.pig.admin.mapper.SysFileMapper;
 import com.pig4cloud.pig.admin.service.SysFileService;
@@ -58,6 +58,7 @@ public class SysFileServiceImpl extends ServiceImpl<SysFileMapper, SysFile> impl
 
 	/**
 	 * 上传文件
+	 *
 	 * @param file
 	 * @return
 	 */
@@ -74,8 +75,7 @@ public class SysFileServiceImpl extends ServiceImpl<SysFileMapper, SysFile> impl
 					file.getInputStream());
 			// 文件管理数据记录,收集管理追踪文件
 			fileLog(file, fileName);
-		}
-		catch (Exception e) {
+		} catch (Exception e) {
 			log.error("上传失败", e);
 			return R.failed(e.getLocalizedMessage());
 		}
@@ -84,6 +84,7 @@ public class SysFileServiceImpl extends ServiceImpl<SysFileMapper, SysFile> impl
 
 	/**
 	 * 读取文件
+	 *
 	 * @param bucket
 	 * @param fileName
 	 * @param response
@@ -93,14 +94,14 @@ public class SysFileServiceImpl extends ServiceImpl<SysFileMapper, SysFile> impl
 		try (S3Object s3Object = ossTemplate.getObject(bucket, fileName)) {
 			response.setContentType("application/octet-stream; charset=UTF-8");
 			IoUtil.copy(s3Object.getObjectContent(), response.getOutputStream());
-		}
-		catch (Exception e) {
+		} catch (Exception e) {
 			log.error("文件读取异常: {}", e.getLocalizedMessage());
 		}
 	}
 
 	/**
 	 * 删除文件
+	 *
 	 * @param id
 	 * @return
 	 */
@@ -115,7 +116,8 @@ public class SysFileServiceImpl extends ServiceImpl<SysFileMapper, SysFile> impl
 
 	/**
 	 * 文件管理数据记录,收集管理追踪文件
-	 * @param file 上传文件格式
+	 *
+	 * @param file     上传文件格式
 	 * @param fileName 文件名
 	 */
 	private void fileLog(MultipartFile file, String fileName) {
@@ -130,6 +132,7 @@ public class SysFileServiceImpl extends ServiceImpl<SysFileMapper, SysFile> impl
 
 	/**
 	 * 默认获取文件的在线地址
+	 *
 	 * @param bucket
 	 * @param fileName
 	 * @return

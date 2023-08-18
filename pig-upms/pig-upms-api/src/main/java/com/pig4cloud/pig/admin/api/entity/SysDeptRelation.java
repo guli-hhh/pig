@@ -16,10 +16,9 @@
 
 package com.pig4cloud.pig.admin.api.entity;
 
-import com.baomidou.mybatisplus.extension.activerecord.Model;
+import com.mybatisflex.annotation.Table;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
-import lombok.EqualsAndHashCode;
 
 /**
  * <p>
@@ -31,8 +30,8 @@ import lombok.EqualsAndHashCode;
  */
 @Schema(description = "部门关系")
 @Data
-@EqualsAndHashCode(callSuper = true)
-public class SysDeptRelation extends Model<SysDeptRelation> {
+@Table(value = "sys_dept_relation" )
+public class SysDeptRelation {
 
 	private static final long serialVersionUID = 1L;
 

@@ -16,7 +16,7 @@
  */
 package ${package}.${moduleName}.service.impl;
 
-import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.mybatisflex.spring.service.impl.ServiceImpl;
 import ${package}.${moduleName}.entity.${className};
 import ${package}.${moduleName}.mapper.${className}Mapper;
 import ${package}.${moduleName}.service.${className}Service;

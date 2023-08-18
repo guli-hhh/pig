@@ -16,13 +16,17 @@
 
 package com.pig4cloud.pig.admin.api.entity;
 
-import com.baomidou.mybatisplus.annotation.IdType;
-import com.baomidou.mybatisplus.annotation.TableId;
-import com.baomidou.mybatisplus.annotation.TableLogic;
+import com.mybatisflex.annotation.Column;
+import com.mybatisflex.annotation.Id;
+import com.mybatisflex.annotation.KeyType;
+import com.mybatisflex.annotation.Table;
+import com.mybatisflex.core.keygen.KeyGenerators;
 import com.pig4cloud.pig.common.mybatis.base.BaseEntity;
+import com.pig4cloud.pig.common.mybatis.config.MybatisFlexBaseEntityInputListener;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import org.checkerframework.checker.units.qual.C;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
@@ -35,14 +39,17 @@ import javax.validation.constraints.NotNull;
  * @author lengleng
  * @since 2019/2/1
  */
-@Schema(description = "部门")
 @Data
+@Schema(description = "部门")
 @EqualsAndHashCode(callSuper = true)
+@Table(value = "sys_dept" ,
+		onInsert = MybatisFlexBaseEntityInputListener.class,
+		onUpdate = MybatisFlexBaseEntityInputListener.class)
 public class SysDept extends BaseEntity {
 
 	private static final long serialVersionUID = 1L;
 
-	@TableId(value = "dept_id", type = IdType.ASSIGN_ID)
+	@Id(keyType = KeyType.Generator, value = KeyGenerators.snowFlakeId)
 	@Schema(description = "部门id")
 	private Long deptId;
 
@@ -65,11 +72,5 @@ public class SysDept extends BaseEntity {
 	 */
 	@Schema(description = "父级部门id")
 	private Long parentId;
-
-	/**
-	 * 是否删除 -1：已删除 0：正常
-	 */
-	@TableLogic
-	private String delFlag;
 
 }

@@ -23,13 +23,13 @@
 
 <mapper namespace="${package}.${moduleName}.mapper.${className}Mapper">
 
-  <resultMap id="${classname}Map" type="${package}.${moduleName}.entity.${className}">
-#foreach($column in $columns)
-#if($column.lowerAttrName==$pk.lowerAttrName)
-    <id property="${pk.lowerAttrName}" column="${pk.columnName}"/>
-#else
-    <result property="${column.lowerAttrName}" column="${column.columnName}"/>
-#end
-#end
-  </resultMap>
+    <resultMap id="${classname}Map" type="${package}.${moduleName}.entity.${className}">
+        #foreach($column in $columns)
+            #if($column.lowerAttrName==$pk.lowerAttrName)
+                <id property="${pk.lowerAttrName}" column="${pk.columnName}"/>
+            #else
+                <result property="${column.lowerAttrName}" column="${column.columnName}"/>
+            #end
+        #end
+    </resultMap>
 </mapper>

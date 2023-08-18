@@ -16,7 +16,7 @@
 
 package com.pig4cloud.pig.admin.service;
 
-import com.baomidou.mybatisplus.extension.service.IService;
+import com.mybatisflex.core.service.IService;
 import com.pig4cloud.pig.admin.api.entity.SysRole;
 import com.pig4cloud.pig.admin.api.vo.RoleExcelVO;
 import com.pig4cloud.pig.common.core.util.R;
@@ -36,6 +36,7 @@ public interface SysRoleService extends IService<SysRole> {
 
 	/**
 	 * 通过角色ID，删除角色
+	 *
 	 * @param id
 	 * @return
 	 */
@@ -43,7 +44,8 @@ public interface SysRoleService extends IService<SysRole> {
 
 	/**
 	 * 导入角色
-	 * @param excelVOList 角色列表
+	 *
+	 * @param excelVOList   角色列表
 	 * @param bindingResult 错误信息列表
 	 * @return ok fail
 	 */
@@ -51,6 +53,7 @@ public interface SysRoleService extends IService<SysRole> {
 
 	/**
 	 * 查询全部的角色
+	 *
 	 * @return list
 	 */
 	List<RoleExcelVO> listRole();

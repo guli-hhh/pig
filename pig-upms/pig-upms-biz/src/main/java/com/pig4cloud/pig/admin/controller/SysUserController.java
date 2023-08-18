@@ -17,10 +17,8 @@
 package com.pig4cloud.pig.admin.controller;
 
 import cn.hutool.core.collection.CollUtil;
-import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.baomidou.mybatisplus.core.metadata.IPage;
-import com.baomidou.mybatisplus.core.toolkit.Wrappers;
-import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.mybatisflex.core.paginate.Page;
+import com.mybatisflex.core.query.QueryWrapper;
 import com.pig4cloud.pig.admin.api.dto.UserDTO;
 import com.pig4cloud.pig.admin.api.dto.UserInfo;
 import com.pig4cloud.pig.admin.api.entity.SysUser;
@@ -49,6 +47,8 @@ import javax.validation.Valid;
 import java.util.List;
 import java.util.Set;
 
+import static com.pig4cloud.pig.admin.api.entity.table.SysUserTableDef.SYS_USER;
+
 /**
  * @author lengleng
  * @date 2019/2/1
@@ -64,12 +64,15 @@ public class SysUserController {
 
 	/**
 	 * 获取当前用户全部信息
+	 *
 	 * @return 用户信息
 	 */
-	@GetMapping(value = { "/info" })
+	@GetMapping(value = {"/info"})
 	public R<UserInfoVO> info() {
 		String username = SecurityUtils.getUser().getUsername();
-		SysUser user = userService.getOne(Wrappers.<SysUser>query().lambda().eq(SysUser::getUsername, username));
+		SysUser user = userService.getOne(QueryWrapper.create()
+				.select(SYS_USER.DEFAULT_COLUMNS)
+				.where(SYS_USER.USERNAME.eq(username)));
 		if (user == null) {
 			return R.failed(MsgUtils.getMessage(ErrorCodes.SYS_USER_QUERY_ERROR));
 		}
@@ -83,12 +86,15 @@ public class SysUserController {
 
 	/**
 	 * 获取指定用户全部信息
+	 *
 	 * @return 用户信息
 	 */
-	@Inner
+	@Inner(value = false)
 	@GetMapping("/info/{username}")
 	public R<UserInfo> info(@PathVariable String username) {
-		SysUser user = userService.getOne(Wrappers.<SysUser>query().lambda().eq(SysUser::getUsername, username));
+		SysUser user = userService.getOne(QueryWrapper.create()
+				.select(SYS_USER.DEFAULT_COLUMNS)
+				.where(SYS_USER.USERNAME.eq(username)));
 		if (user == null) {
 			return R.failed(MsgUtils.getMessage(ErrorCodes.SYS_USER_USERINFO_EMPTY, username));
 		}
@@ -97,6 +103,7 @@ public class SysUserController {
 
 	/**
 	 * 根据部门id，查询对应的用户 id 集合
+	 *
 	 * @param deptIds 部门id 集合
 	 * @return 用户 id 集合
 	 */
@@ -108,6 +115,7 @@ public class SysUserController {
 
 	/**
 	 * 通过ID查询用户信息
+	 *
 	 * @param id ID
 	 * @return 用户信息
 	 */
@@ -118,13 +126,14 @@ public class SysUserController {
 
 	/**
 	 * 判断用户是否存在
+	 *
 	 * @param userDTO 查询条件
 	 * @return
 	 */
 	@Inner(false)
 	@GetMapping("/check/exist")
 	public R<Boolean> isExist(UserDTO userDTO) {
-		List<SysUser> sysUserList = userService.list(new QueryWrapper<>(userDTO));
+		List<SysUser> sysUserList = userService.list(QueryWrapper.create(userDTO));
 		if (CollUtil.isNotEmpty(sysUserList)) {
 			return R.ok(Boolean.TRUE, MsgUtils.getMessage(ErrorCodes.SYS_USER_EXISTING));
 		}
@@ -133,6 +142,7 @@ public class SysUserController {
 
 	/**
 	 * 删除用户信息
+	 *
 	 * @param id ID
 	 * @return R
 	 */
@@ -146,12 +156,13 @@ public class SysUserController {
 
 	/**
 	 * 添加用户
+	 *
 	 * @param userDto 用户信息
 	 * @return success/false
 	 */
 	@SysLog("添加用户")
 	@PostMapping
-	@XssCleanIgnore({ "password" })
+	@XssCleanIgnore({"password"})
 	@PreAuthorize("@pms.hasPermission('sys_user_add')")
 	public R<Boolean> user(@RequestBody UserDTO userDto) {
 		return R.ok(userService.saveUser(userDto));
@@ -159,12 +170,13 @@ public class SysUserController {
 
 	/**
 	 * 管理员更新用户信息
+	 *
 	 * @param userDto 用户信息
 	 * @return R
 	 */
 	@SysLog("更新用户信息")
 	@PutMapping
-	@XssCleanIgnore({ "password" })
+	@XssCleanIgnore({"password"})
 	@PreAuthorize("@pms.hasPermission('sys_user_edit')")
 	public R<Boolean> updateUser(@Valid @RequestBody UserDTO userDto) {
 		return userService.updateUser(userDto);
@@ -172,23 +184,25 @@ public class SysUserController {
 
 	/**
 	 * 分页查询用户
-	 * @param page 参数集
+	 *
+	 * @param page    参数集
 	 * @param userDTO 查询参数列表
 	 * @return 用户集合
 	 */
-	@GetMapping("/page")
-	public R<IPage<UserVO>> getUserPage(Page page, UserDTO userDTO) {
+	@GetMapping("/page" )
+	public R<Page<UserVO>> getUserPage(Page<UserVO> page, UserDTO userDTO) {
 		return R.ok(userService.getUserWithRolePage(page, userDTO));
 	}
 
 	/**
 	 * 个人修改个人信息
+	 *
 	 * @param userDto userDto
 	 * @return success/false
 	 */
 	@SysLog("修改个人信息")
 	@PutMapping("/edit")
-	@XssCleanIgnore({ "password", "newpassword1" })
+	@XssCleanIgnore({"password", "newpassword1"})
 	public R<Boolean> updateUserInfo(@Valid @RequestBody UserDTO userDto) {
 		userDto.setUsername(SecurityUtils.getUser().getUsername());
 		return userService.updateUserInfo(userDto);
@@ -205,6 +219,7 @@ public class SysUserController {
 
 	/**
 	 * 导出excel 表格
+	 *
 	 * @param userDTO 查询条件
 	 * @return
 	 */
@@ -217,7 +232,8 @@ public class SysUserController {
 
 	/**
 	 * 导入用户
-	 * @param excelVOList 用户列表
+	 *
+	 * @param excelVOList   用户列表
 	 * @param bindingResult 错误信息列表
 	 * @return R
 	 */

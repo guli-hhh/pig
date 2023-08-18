@@ -16,14 +16,15 @@
 
 package com.pig4cloud.pig.admin.api.entity;
 
-import com.alibaba.excel.annotation.ExcelIgnore;
 import com.alibaba.excel.annotation.ExcelProperty;
-import com.baomidou.mybatisplus.annotation.IdType;
-import com.baomidou.mybatisplus.annotation.TableId;
-import com.baomidou.mybatisplus.annotation.TableLogic;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
+import com.mybatisflex.annotation.Id;
+import com.mybatisflex.annotation.KeyType;
+import com.mybatisflex.annotation.Table;
+import com.mybatisflex.core.keygen.KeyGenerators;
 import com.pig4cloud.pig.common.mybatis.base.BaseEntity;
+import com.pig4cloud.pig.common.mybatis.config.MybatisFlexBaseEntityInputListener;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -40,6 +41,9 @@ import javax.validation.constraints.NotBlank;
  */
 @Data
 @EqualsAndHashCode(callSuper = true)
+@Table(value = "sys_log" ,
+		onInsert = MybatisFlexBaseEntityInputListener.class,
+		onUpdate = MybatisFlexBaseEntityInputListener.class)
 public class SysLog extends BaseEntity {
 
 	private static final long serialVersionUID = 1L;
@@ -47,10 +51,10 @@ public class SysLog extends BaseEntity {
 	/**
 	 * 编号
 	 */
-	@TableId(value = "id", type = IdType.ASSIGN_ID)
-	@ExcelProperty("日志编号")
+	@ExcelProperty("日志编号" )
 	@Schema(description = "日志编号")
 	@JsonSerialize(using = ToStringSerializer.class)
+	@Id(keyType = KeyType.Generator, value = KeyGenerators.snowFlakeId)
 	private Long id;
 
 	/**
@@ -124,12 +128,5 @@ public class SysLog extends BaseEntity {
 	@ExcelProperty("应用标识")
 	@Schema(description = "应用标识")
 	private String serviceId;
-
-	/**
-	 * 删除标记
-	 */
-	@TableLogic
-	@ExcelIgnore
-	private String delFlag;
 
 }

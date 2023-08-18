@@ -16,7 +16,7 @@
 package com.pig4cloud.pig.admin.controller;
 
 import cn.hutool.core.lang.tree.Tree;
-import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.mybatisflex.core.query.QueryWrapper;
 import com.pig4cloud.pig.admin.api.entity.SysDept;
 import com.pig4cloud.pig.admin.service.SysDeptService;
 import com.pig4cloud.pig.common.core.util.R;
@@ -51,6 +51,7 @@ public class SysDeptController {
 
 	/**
 	 * 通过ID查询
+	 *
 	 * @param id ID
 	 * @return SysDept
 	 */
@@ -61,6 +62,7 @@ public class SysDeptController {
 
 	/**
 	 * 返回树形菜单集合
+	 *
 	 * @return 树形菜单
 	 */
 	@GetMapping(value = "/tree")
@@ -70,6 +72,7 @@ public class SysDeptController {
 
 	/**
 	 * 返回当前用户树形菜单集合
+	 *
 	 * @return 树形菜单
 	 */
 	@GetMapping(value = "/user-tree")
@@ -79,6 +82,7 @@ public class SysDeptController {
 
 	/**
 	 * 添加
+	 *
 	 * @param sysDept 实体
 	 * @return success/false
 	 */
@@ -91,6 +95,7 @@ public class SysDeptController {
 
 	/**
 	 * 删除
+	 *
 	 * @param id ID
 	 * @return success/false
 	 */
@@ -103,6 +108,7 @@ public class SysDeptController {
 
 	/**
 	 * 编辑
+	 *
 	 * @param sysDept 实体
 	 * @return success/false
 	 */
@@ -115,6 +121,7 @@ public class SysDeptController {
 
 	/**
 	 * 根据部门名查询部门信息
+	 *
 	 * @param deptName 部门名
 	 * @return SysDept
 	 */
@@ -122,11 +129,12 @@ public class SysDeptController {
 	public R<SysDept> user(@PathVariable String deptName) {
 		SysDept condition = new SysDept();
 		condition.setName(deptName);
-		return R.ok(sysDeptService.getOne(new QueryWrapper<>(condition)));
+		return R.ok(sysDeptService.getOne(QueryWrapper.create(condition)));
 	}
 
 	/**
 	 * 查收子级id列表
+	 *
 	 * @return 返回子级id列表
 	 */
 	@Inner

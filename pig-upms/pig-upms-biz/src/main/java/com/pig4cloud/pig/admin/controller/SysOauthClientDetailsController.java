@@ -16,9 +16,8 @@
 
 package com.pig4cloud.pig.admin.controller;
 
-import com.baomidou.mybatisplus.core.metadata.IPage;
-import com.baomidou.mybatisplus.core.toolkit.Wrappers;
-import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.mybatisflex.core.paginate.Page;
+import com.mybatisflex.core.query.QueryWrapper;
 import com.pig4cloud.pig.admin.api.entity.SysOauthClientDetails;
 import com.pig4cloud.pig.admin.service.SysOauthClientDetailsService;
 import com.pig4cloud.pig.common.core.util.R;
@@ -33,6 +32,8 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.List;
+
+import static com.pig4cloud.pig.admin.api.entity.table.SysOauthClientDetailsTableDef.SYS_OAUTH_CLIENT_DETAILS;
 
 /**
  * <p>
@@ -53,29 +54,32 @@ public class SysOauthClientDetailsController {
 
 	/**
 	 * 通过ID查询
+	 *
 	 * @param clientId 客户端id
 	 * @return SysOauthClientDetails
 	 */
 	@GetMapping("/{clientId}")
 	public R<List<SysOauthClientDetails>> getByClientId(@PathVariable String clientId) {
 		return R.ok(sysOauthClientDetailsService
-			.list(Wrappers.<SysOauthClientDetails>lambdaQuery().eq(SysOauthClientDetails::getClientId, clientId)));
+				.list(QueryWrapper.create(SYS_OAUTH_CLIENT_DETAILS.CLIENT_ID.eq(clientId))));
 	}
 
 	/**
 	 * 简单分页查询
-	 * @param page 分页对象
+	 *
+	 * @param page                  分页对象
 	 * @param sysOauthClientDetails 系统终端
 	 * @return
 	 */
-	@GetMapping("/page")
-	public R<IPage<SysOauthClientDetails>> getOauthClientDetailsPage(Page page,
-			SysOauthClientDetails sysOauthClientDetails) {
-		return R.ok(sysOauthClientDetailsService.page(page, Wrappers.query(sysOauthClientDetails)));
+	@GetMapping("/page" )
+	public R<Page<SysOauthClientDetails>> getOauthClientDetailsPage(Page page,
+																	SysOauthClientDetails sysOauthClientDetails) {
+		return R.ok(sysOauthClientDetailsService.page(page, QueryWrapper.create(sysOauthClientDetails)));
 	}
 
 	/**
 	 * 添加
+	 *
 	 * @param sysOauthClientDetails 实体
 	 * @return success/false
 	 */
@@ -88,6 +92,7 @@ public class SysOauthClientDetailsController {
 
 	/**
 	 * 删除
+	 *
 	 * @param id ID
 	 * @return success/false
 	 */
@@ -100,6 +105,7 @@ public class SysOauthClientDetailsController {
 
 	/**
 	 * 编辑
+	 *
 	 * @param sysOauthClientDetails 实体
 	 * @return success/false
 	 */
@@ -118,11 +124,11 @@ public class SysOauthClientDetailsController {
 		return R.ok();
 	}
 
-	@Inner
+	@Inner(value = false)
 	@GetMapping("/getClientDetailsById/{clientId}")
 	public R getClientDetailsById(@PathVariable String clientId) {
-		return R.ok(sysOauthClientDetailsService.getOne(
-				Wrappers.<SysOauthClientDetails>lambdaQuery().eq(SysOauthClientDetails::getClientId, clientId), false));
+		return R.ok(sysOauthClientDetailsService.getOne(QueryWrapper.create()
+				.where(SYS_OAUTH_CLIENT_DETAILS.CLIENT_ID.eq(clientId))));
 	}
 
 }

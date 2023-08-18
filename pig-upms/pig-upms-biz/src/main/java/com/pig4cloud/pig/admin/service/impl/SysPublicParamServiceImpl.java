@@ -17,8 +17,8 @@
 
 package com.pig4cloud.pig.admin.service.impl;
 
-import com.baomidou.mybatisplus.core.toolkit.Wrappers;
-import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.mybatisflex.core.query.QueryWrapper;
+import com.mybatisflex.spring.service.impl.ServiceImpl;
 import com.pig4cloud.pig.admin.api.entity.SysPublicParam;
 import com.pig4cloud.pig.admin.mapper.SysPublicParamMapper;
 import com.pig4cloud.pig.admin.service.SysPublicParamService;
@@ -32,11 +32,13 @@ import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
+import static com.pig4cloud.pig.admin.api.entity.table.SysPublicParamTableDef.SYS_PUBLIC_PARAM;
+
 /**
  * 公共参数配置
  *
  * @author Lucky
- * @date 2019-04-29
+ * @date: 2019-04-29
  */
 @Service
 @AllArgsConstructor
@@ -46,9 +48,8 @@ public class SysPublicParamServiceImpl extends ServiceImpl<SysPublicParamMapper,
 	@Override
 	@Cacheable(value = CacheConstants.PARAMS_DETAILS, key = "#publicKey", unless = "#result == null ")
 	public String getSysPublicParamKeyToValue(String publicKey) {
-		SysPublicParam sysPublicParam = this.baseMapper
-			.selectOne(Wrappers.<SysPublicParam>lambdaQuery().eq(SysPublicParam::getPublicKey, publicKey));
-
+		SysPublicParam sysPublicParam = mapper
+				.selectOneByQuery(QueryWrapper.create().where(SYS_PUBLIC_PARAM.PUBLIC_KEY.eq(publicKey)));
 		if (sysPublicParam != null) {
 			return sysPublicParam.getPublicValue();
 		}
@@ -57,12 +58,13 @@ public class SysPublicParamServiceImpl extends ServiceImpl<SysPublicParamMapper,
 
 	/**
 	 * 更新参数
-	 * @param sysPublicParam
-	 * @return
+	 *
+	 * @param sysPublicParam 参数
+	 * @return R<Object>
 	 */
 	@Override
-	@CacheEvict(value = CacheConstants.PARAMS_DETAILS, key = "#sysPublicParam.publicKey")
-	public R updateParam(SysPublicParam sysPublicParam) {
+	@CacheEvict(value = CacheConstants.PARAMS_DETAILS, key = "#sysPublicParam.publicKey" )
+	public R<Object> updateParam(SysPublicParam sysPublicParam) {
 		SysPublicParam param = this.getById(sysPublicParam.getPublicId());
 		// 系统内置
 		if (DictTypeEnum.SYSTEM.getType().equals(param.getSystemFlag())) {
@@ -73,27 +75,29 @@ public class SysPublicParamServiceImpl extends ServiceImpl<SysPublicParamMapper,
 
 	/**
 	 * 删除参数
-	 * @param publicId
-	 * @return
+	 *
+	 * @param publicId 参数id
+	 * @return R
 	 */
 	@Override
 	@CacheEvict(value = CacheConstants.PARAMS_DETAILS, allEntries = true)
-	public R removeParam(Long publicId) {
+	public R<Object> removeParam(Long publicId) {
 		SysPublicParam param = this.getById(publicId);
 		// 系统内置
 		if (DictTypeEnum.SYSTEM.getType().equals(param.getSystemFlag())) {
-			return R.failed("系统内置参数不能删除");
+			return R.failed("系统内置参数不能删除" );
 		}
 		return R.ok(this.removeById(publicId));
 	}
 
 	/**
 	 * 同步缓存
+	 *
 	 * @return R
 	 */
 	@Override
 	@CacheEvict(value = CacheConstants.PARAMS_DETAILS, allEntries = true)
-	public R syncParamCache() {
+	public R<Object> syncParamCache() {
 		return R.ok();
 	}
 

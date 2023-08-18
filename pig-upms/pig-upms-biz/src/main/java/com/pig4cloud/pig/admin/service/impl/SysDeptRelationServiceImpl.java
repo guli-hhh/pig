@@ -17,8 +17,8 @@
 package com.pig4cloud.pig.admin.service.impl;
 
 import cn.hutool.core.collection.CollUtil;
-import com.baomidou.mybatisplus.core.toolkit.Wrappers;
-import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.mybatisflex.core.query.QueryWrapper;
+import com.mybatisflex.spring.service.impl.ServiceImpl;
 import com.pig4cloud.pig.admin.api.entity.SysDept;
 import com.pig4cloud.pig.admin.api.entity.SysDeptRelation;
 import com.pig4cloud.pig.admin.mapper.SysDeptRelationMapper;
@@ -29,6 +29,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.stream.Collectors;
+
+import static com.pig4cloud.pig.admin.api.entity.table.SysDeptRelationTableDef.SYS_DEPT_RELATION;
 
 /**
  * <p>
@@ -47,20 +49,18 @@ public class SysDeptRelationServiceImpl extends ServiceImpl<SysDeptRelationMappe
 
 	/**
 	 * 维护部门关系
+	 *
 	 * @param sysDept 部门
 	 */
 	@Override
 	@Transactional(rollbackFor = Exception.class)
 	public void saveDeptRelation(SysDept sysDept) {
 		// 增加部门关系表
-		List<SysDeptRelation> relationList = sysDeptRelationMapper.selectList(
-				Wrappers.<SysDeptRelation>query().lambda().eq(SysDeptRelation::getDescendant, sysDept.getParentId()))
-			.stream()
-			.map(relation -> {
-				relation.setDescendant(sysDept.getDeptId());
-				return relation;
-			})
-			.collect(Collectors.toList());
+		List<SysDeptRelation> relationList = sysDeptRelationMapper.selectListByQuery(
+						QueryWrapper.create().where(SYS_DEPT_RELATION.DESCENDANT.eq(sysDept.getParentId())))
+				.stream()
+				.peek(relation -> relation.setDescendant(sysDept.getDeptId()))
+				.collect(Collectors.toList());
 		if (CollUtil.isNotEmpty(relationList)) {
 			this.saveBatch(relationList);
 		}
@@ -74,22 +74,24 @@ public class SysDeptRelationServiceImpl extends ServiceImpl<SysDeptRelationMappe
 
 	/**
 	 * 通过ID删除部门关系
-	 * @param id
+	 *
+	 * @param id id
 	 */
 	@Override
 	public void removeDeptRelationById(Long id) {
-		baseMapper.deleteDeptRelationsById(id);
+		mapper.deleteDeptRelationsById(id);
 	}
 
 	/**
 	 * 更新部门关系
-	 * @param relation
+	 *
+	 * @param relation 部门关系
 	 */
 	@Override
 	@Transactional(rollbackFor = Exception.class)
 	public void updateDeptRelation(SysDeptRelation relation) {
-		baseMapper.deleteDeptRelations(relation);
-		baseMapper.insertDeptRelations(relation);
+		mapper.deleteDeptRelations(relation);
+		mapper.insertDeptRelations(relation);
 	}
 
 }

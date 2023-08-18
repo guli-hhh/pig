@@ -18,8 +18,8 @@ package com.pig4cloud.pig.admin.service.impl;
 
 import cn.hutool.core.bean.BeanUtil;
 import cn.hutool.core.collection.CollUtil;
-import com.baomidou.mybatisplus.core.toolkit.Wrappers;
-import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.mybatisflex.core.query.QueryWrapper;
+import com.mybatisflex.spring.service.impl.ServiceImpl;
 import com.pig4cloud.pig.admin.api.entity.SysPost;
 import com.pig4cloud.pig.admin.api.vo.PostExcelVO;
 import com.pig4cloud.pig.admin.mapper.SysPostMapper;
@@ -47,7 +47,8 @@ public class SysPostServiceImpl extends ServiceImpl<SysPostMapper, SysPost> impl
 
 	/**
 	 * 导入岗位
-	 * @param excelVOList 岗位列表
+	 *
+	 * @param excelVOList   岗位列表
 	 * @param bindingResult 错误信息列表
 	 * @return ok fail
 	 */
@@ -64,8 +65,8 @@ public class SysPostServiceImpl extends ServiceImpl<SysPostMapper, SysPost> impl
 			Set<String> errorMsg = new HashSet<>();
 			// 检验岗位名称或者岗位编码是否存在
 			boolean existPost = postList.stream()
-				.anyMatch(post -> excel.getPostName().equals(post.getPostName())
-						|| excel.getPostCode().equals(post.getPostCode()));
+					.anyMatch(post -> excel.getPostName().equals(post.getPostName())
+							|| excel.getPostCode().equals(post.getPostCode()));
 
 			if (existPost) {
 				errorMsg.add(MsgUtils.getMessage(ErrorCodes.SYS_POST_NAMEORCODE_EXISTING, excel.getPostName(),
@@ -75,8 +76,7 @@ public class SysPostServiceImpl extends ServiceImpl<SysPostMapper, SysPost> impl
 			// 数据合法情况
 			if (CollUtil.isEmpty(errorMsg)) {
 				insertExcelPost(excel);
-			}
-			else {
+			} else {
 				// 数据不合法
 				errorMessageList.add(new ErrorMessage(excel.getLineNum(), errorMsg));
 			}
@@ -89,11 +89,12 @@ public class SysPostServiceImpl extends ServiceImpl<SysPostMapper, SysPost> impl
 
 	/**
 	 * 导出excel 表格
+	 *
 	 * @return
 	 */
 	@Override
 	public List<PostExcelVO> listPost() {
-		List<SysPost> postList = this.list(Wrappers.emptyWrapper());
+		List<SysPost> postList = this.list(new QueryWrapper());
 		// 转换成execl 对象输出
 		return postList.stream().map(post -> {
 			PostExcelVO postExcelVO = new PostExcelVO();

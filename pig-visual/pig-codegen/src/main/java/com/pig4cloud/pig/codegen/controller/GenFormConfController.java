@@ -15,10 +15,8 @@
  */
 
 package com.pig4cloud.pig.codegen.controller;
-
-import com.baomidou.mybatisplus.core.metadata.IPage;
-import com.baomidou.mybatisplus.core.toolkit.Wrappers;
-import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.mybatisflex.core.paginate.Page;
+import com.mybatisflex.core.query.QueryWrapper;
 import com.pig4cloud.pig.codegen.entity.GenFormConf;
 import com.pig4cloud.pig.codegen.service.GenFormConfService;
 import com.pig4cloud.pig.common.core.util.R;
@@ -48,18 +46,20 @@ public class GenFormConfController {
 
 	/**
 	 * 分页查询
-	 * @param page 分页对象
+	 *
+	 * @param page     分页对象
 	 * @param formConf 生成记录
 	 * @return
 	 */
-	@Operation(summary = "分页查询", description = "分页查询")
-	@GetMapping("/page")
-	public R<IPage<GenFormConf>> getGenFormConfPage(Page page, GenFormConf formConf) {
-		return R.ok(genRecordService.page(page, Wrappers.query(formConf)));
+	@Operation(summary = "分页查询" , description = "分页查询" )
+	@GetMapping("/page" )
+	public R<Page<GenFormConf>> getGenFormConfPage(Page page, GenFormConf formConf) {
+		return R.ok(genRecordService.page(page, QueryWrapper.create(formConf)));
 	}
 
 	/**
 	 * 通过id查询生成记录
+	 *
 	 * @param id id
 	 * @return R
 	 */
@@ -71,7 +71,8 @@ public class GenFormConfController {
 
 	/**
 	 * 通过id查询生成记录
-	 * @param dsName 数据源ID
+	 *
+	 * @param dsName    数据源ID
 	 * @param tableName tableName
 	 * @return R
 	 */
@@ -83,6 +84,7 @@ public class GenFormConfController {
 
 	/**
 	 * 新增生成记录
+	 *
 	 * @param formConf 生成记录
 	 * @return R
 	 */
@@ -96,6 +98,7 @@ public class GenFormConfController {
 
 	/**
 	 * 通过id删除生成记录
+	 *
 	 * @param id id
 	 * @return R
 	 */

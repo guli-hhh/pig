@@ -16,10 +16,13 @@
  */
 package com.pig4cloud.pig.admin.api.entity;
 
-import com.baomidou.mybatisplus.annotation.IdType;
-import com.baomidou.mybatisplus.annotation.TableId;
-import com.baomidou.mybatisplus.annotation.TableName;
+
+import com.mybatisflex.annotation.Id;
+import com.mybatisflex.annotation.KeyType;
+import com.mybatisflex.annotation.Table;
+import com.mybatisflex.core.keygen.KeyGenerators;
 import com.pig4cloud.pig.common.mybatis.base.BaseEntity;
+import com.pig4cloud.pig.common.mybatis.config.MybatisFlexBaseEntityInputListener;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -31,7 +34,9 @@ import lombok.EqualsAndHashCode;
  * @date 2022-03-15 17:18:40
  */
 @Data
-@TableName("sys_post")
+@Table(value = "sys_post" ,
+		onInsert = MybatisFlexBaseEntityInputListener.class,
+		onUpdate = MybatisFlexBaseEntityInputListener.class)
 @EqualsAndHashCode(callSuper = true)
 @Schema(description = "岗位信息表")
 public class SysPost extends BaseEntity {
@@ -41,8 +46,8 @@ public class SysPost extends BaseEntity {
 	/**
 	 * 岗位ID
 	 */
-	@TableId(type = IdType.ASSIGN_ID)
-	@Schema(description = "岗位ID")
+	@Id(keyType = KeyType.Generator, value = KeyGenerators.snowFlakeId)
+	@Schema(description = "岗位ID" )
 	private Long postId;
 
 	/**
@@ -62,12 +67,6 @@ public class SysPost extends BaseEntity {
 	 */
 	@Schema(description = "岗位排序")
 	private Integer postSort;
-
-	/**
-	 * 是否删除 -1：已删除 0：正常
-	 */
-	@Schema(description = "是否删除  -1：已删除  0：正常")
-	private String delFlag;
 
 	/**
 	 * 备注信息

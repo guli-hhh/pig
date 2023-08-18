@@ -16,7 +16,7 @@
 
 package com.pig4cloud.pig.codegen.mapper;
 
-import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.mybatisflex.core.BaseMapper;
 import com.pig4cloud.pig.codegen.entity.GenFormConf;
 import org.apache.ibatis.annotations.Mapper;
 

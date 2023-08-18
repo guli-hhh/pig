@@ -16,13 +16,18 @@
 
 package com.pig4cloud.pig.codegen;
 
+import com.mybatisflex.spring.datasource.DataSourceAdvice;
 import com.pig4cloud.pig.common.datasource.annotation.EnableDynamicDataSource;
 import com.pig4cloud.pig.common.feign.annotation.EnablePigFeignClients;
 import com.pig4cloud.pig.common.security.annotation.EnablePigResourceServer;
 import com.pig4cloud.pig.common.swagger.annotation.EnablePigDoc;
+import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Role;
 
 /**
  * @author lengleng
@@ -40,4 +45,10 @@ public class PigCodeGenApplication {
 		SpringApplication.run(PigCodeGenApplication.class, args);
 	}
 
+	@Bean
+	@ConditionalOnMissingBean
+	@Role(BeanDefinition.ROLE_INFRASTRUCTURE)
+	public DataSourceAdvice dataSourceAdvice() {
+		return new DataSourceAdvice();
+	}
 }

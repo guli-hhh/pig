@@ -17,7 +17,7 @@
 
 package com.pig4cloud.pig.admin.service;
 
-import com.baomidou.mybatisplus.extension.service.IService;
+import com.mybatisflex.core.service.IService;
 import com.pig4cloud.pig.admin.api.entity.SysFile;
 import com.pig4cloud.pig.common.core.util.R;
 import org.springframework.web.multipart.MultipartFile;
@@ -34,6 +34,7 @@ public interface SysFileService extends IService<SysFile> {
 
 	/**
 	 * 上传文件
+	 *
 	 * @param file
 	 * @return
 	 */
@@ -41,7 +42,8 @@ public interface SysFileService extends IService<SysFile> {
 
 	/**
 	 * 读取文件
-	 * @param bucket 桶名称
+	 *
+	 * @param bucket   桶名称
 	 * @param fileName 文件名称
 	 * @param response 输出流
 	 */
@@ -49,6 +51,7 @@ public interface SysFileService extends IService<SysFile> {
 
 	/**
 	 * 删除文件
+	 *
 	 * @param id
 	 * @return
 	 */
@@ -56,6 +59,7 @@ public interface SysFileService extends IService<SysFile> {
 
 	/**
 	 * 获取外网访问地址
+	 *
 	 * @param bucket
 	 * @param fileName
 	 * @return

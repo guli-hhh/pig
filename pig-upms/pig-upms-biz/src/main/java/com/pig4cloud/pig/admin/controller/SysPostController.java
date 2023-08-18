@@ -17,8 +17,8 @@
 
 package com.pig4cloud.pig.admin.controller;
 
-import com.baomidou.mybatisplus.core.toolkit.Wrappers;
-import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.mybatisflex.core.paginate.Page;
+import com.mybatisflex.core.query.QueryWrapper;
 import com.pig4cloud.pig.admin.api.entity.SysPost;
 import com.pig4cloud.pig.admin.api.vo.PostExcelVO;
 import com.pig4cloud.pig.admin.service.SysPostService;
@@ -37,14 +37,16 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+import static com.pig4cloud.pig.admin.api.entity.table.SysPostTableDef.SYS_POST;
+
 /**
  * @author fxz
- * @date 2022-03-15 17:18:40
+ * @date: 2022-03-15 17:18:40
  */
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/post")
-@Tag(name = "岗位管理模块")
+@RequestMapping("/post" )
+@Tag(name = "岗位管理模块" )
 @SecurityRequirement(name = HttpHeaders.AUTHORIZATION)
 public class SysPostController {
 
@@ -52,15 +54,17 @@ public class SysPostController {
 
 	/**
 	 * 获取岗位列表
+	 *
 	 * @return 岗位列表
 	 */
 	@GetMapping("/list")
 	public R<List<SysPost>> listPosts() {
-		return R.ok(sysPostService.list(Wrappers.emptyWrapper()));
+		return R.ok(sysPostService.list(QueryWrapper.create()));
 	}
 
 	/**
 	 * 分页查询
+	 *
 	 * @param page 分页对象
 	 * @return
 	 */
@@ -68,11 +72,12 @@ public class SysPostController {
 	@GetMapping("/page")
 	@PreAuthorize("@pms.hasPermission('sys_post_get')")
 	public R getSysPostPage(Page page) {
-		return R.ok(sysPostService.page(page, Wrappers.<SysPost>lambdaQuery().orderByAsc(SysPost::getPostSort)));
+		return R.ok(sysPostService.page(page, QueryWrapper.create().orderBy(SYS_POST.POST_SORT.asc())));
 	}
 
 	/**
 	 * 通过id查询岗位信息表
+	 *
 	 * @param postId id
 	 * @return R
 	 */
@@ -85,6 +90,7 @@ public class SysPostController {
 
 	/**
 	 * 新增岗位信息表
+	 *
 	 * @param sysPost 岗位信息表
 	 * @return R
 	 */
@@ -98,6 +104,7 @@ public class SysPostController {
 
 	/**
 	 * 修改岗位信息表
+	 *
 	 * @param sysPost 岗位信息表
 	 * @return R
 	 */
@@ -111,6 +118,7 @@ public class SysPostController {
 
 	/**
 	 * 通过id删除岗位信息表
+	 *
 	 * @param postId id
 	 * @return R
 	 */
@@ -124,6 +132,7 @@ public class SysPostController {
 
 	/**
 	 * 导出excel 表格
+	 *
 	 * @return
 	 */
 	@ResponseExcel
@@ -135,7 +144,8 @@ public class SysPostController {
 
 	/**
 	 * 导入岗位
-	 * @param excelVOList 岗位列表
+	 *
+	 * @param excelVOList   岗位列表
 	 * @param bindingResult 错误信息列表
 	 * @return ok fail
 	 */

@@ -17,7 +17,7 @@
 
 package com.pig4cloud.pig.admin.service;
 
-import com.baomidou.mybatisplus.extension.service.IService;
+import com.mybatisflex.core.service.IService;
 import com.pig4cloud.pig.admin.api.entity.SysPublicParam;
 import com.pig4cloud.pig.common.core.util.R;
 
@@ -31,6 +31,7 @@ public interface SysPublicParamService extends IService<SysPublicParam> {
 
 	/**
 	 * 通过key查询公共参数指定值
+	 *
 	 * @param publicKey
 	 * @return
 	 */
@@ -38,6 +39,7 @@ public interface SysPublicParamService extends IService<SysPublicParam> {
 
 	/**
 	 * 更新参数
+	 *
 	 * @param sysPublicParam
 	 * @return
 	 */
@@ -45,6 +47,7 @@ public interface SysPublicParamService extends IService<SysPublicParam> {
 
 	/**
 	 * 删除参数
+	 *
 	 * @param publicId
 	 * @return
 	 */
@@ -52,6 +55,7 @@ public interface SysPublicParamService extends IService<SysPublicParam> {
 
 	/**
 	 * 同步缓存
+	 *
 	 * @return R
 	 */
 	R syncParamCache();

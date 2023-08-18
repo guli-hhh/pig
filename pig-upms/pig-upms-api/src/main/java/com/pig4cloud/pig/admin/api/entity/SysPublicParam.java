@@ -17,9 +17,13 @@
 
 package com.pig4cloud.pig.admin.api.entity;
 
-import com.baomidou.mybatisplus.annotation.IdType;
-import com.baomidou.mybatisplus.annotation.TableId;
+
+import com.mybatisflex.annotation.Id;
+import com.mybatisflex.annotation.KeyType;
+import com.mybatisflex.annotation.Table;
+import com.mybatisflex.core.keygen.KeyGenerators;
 import com.pig4cloud.pig.common.mybatis.base.BaseEntity;
+import com.pig4cloud.pig.common.mybatis.config.MybatisFlexBaseEntityInputListener;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -31,7 +35,10 @@ import lombok.EqualsAndHashCode;
  * @date 2019-04-29
  */
 @Data
-@Schema(description = "公共参数")
+@Schema(description = "公共参数" )
+@Table(value = "sys_public_param" ,
+		onInsert = MybatisFlexBaseEntityInputListener.class,
+		onUpdate = MybatisFlexBaseEntityInputListener.class)
 @EqualsAndHashCode(callSuper = true)
 public class SysPublicParam extends BaseEntity {
 
@@ -40,8 +47,8 @@ public class SysPublicParam extends BaseEntity {
 	/**
 	 * 编号
 	 */
-	@TableId(type = IdType.ASSIGN_ID)
-	@Schema(description = "公共参数编号")
+	@Id(keyType = KeyType.Generator, value = KeyGenerators.snowFlakeId)
+	@Schema(description = "公共参数编号" )
 	private Long publicId;
 
 	/**

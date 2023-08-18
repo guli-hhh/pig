@@ -25,7 +25,7 @@
         <fastjson.version>1.2.83</fastjson.version>
         <springdoc.version>1.6.9</springdoc.version>
         <swagger.core.version>2.2.0</swagger.core.version>
-        <mybatis-plus.version>3.5.3.1</mybatis-plus.version>
+        <mybatis-flex.version>1.5.7</mybatis-flex.version>
         <mysql.version>8.0.33</mysql.version>
         <seata.version>1.6.1</seata.version>
         <excel.version>1.2.6</excel.version>
@@ -153,21 +153,17 @@
                 <version>${seata.version}</version>
             </dependency>
             <!--orm 相关-->
-            <dependency>
-                <groupId>com.baomidou</groupId>
-                <artifactId>mybatis-plus-boot-starter</artifactId>
-                <version>${mybatis-plus.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.baomidou</groupId>
-                <artifactId>mybatis-plus-extension</artifactId>
-                <version>${mybatis-plus.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.baomidou</groupId>
-                <artifactId>mybatis-plus-annotation</artifactId>
-                <version>${mybatis-plus.version}</version>
-            </dependency>
+			<dependency>
+				<groupId>com.mybatis-flex</groupId>
+				<artifactId>mybatis-flex-spring-boot-starter</artifactId>
+				<version>${mybatis-flex.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.mybatis-flex</groupId>
+				<artifactId>mybatis-flex-processor</artifactId>
+				<version>${mybatis-flex.version}</version>
+				<scope>provided</scope>
+			</dependency>
             <!--hutool bom 工具类-->
             <dependency>
                 <groupId>cn.hutool</groupId>
