@@ -203,6 +203,9 @@
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>${maven-compiler-plugin.version}</version>
                 <configuration>
+                    <!-- 使用 JDK 17 编译：防止开发者在 settings.xml 中配置 profile 对项目造成影响，导致编译工具无法编译 -->
+                    <source>17</source>
+                    <target>17</target>
                     <debug>false</debug>
                     <compilerArgs>
                         <arg>-parameters</arg>
