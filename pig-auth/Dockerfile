@@ -1,4 +1,4 @@
-FROM alibabadragonwell/dragonwell:17-anolis
+FROM sapmachine:21
 
 WORKDIR /pig-auth
 
