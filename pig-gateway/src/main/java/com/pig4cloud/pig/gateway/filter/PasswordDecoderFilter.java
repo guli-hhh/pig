@@ -118,7 +118,7 @@ public class PasswordDecoderFilter extends AbstractGatewayFilterFactory {
     private Function decryptAES() {
         return s -> {
             // 构建前端对应解密AES 因子
-            AES aes = new AES(Mode.CFB, Padding.NoPadding,
+            AES aes = new AES(Mode.CBC, Padding.PKCS5Padding,
                     new SecretKeySpec(gatewayConfig.getEncodeKey().getBytes(), KEY_ALGORITHM),
                     new IvParameterSpec(gatewayConfig.getEncodeKey().getBytes()));
 
