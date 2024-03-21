@@ -31,7 +31,14 @@
 
 
     <dependencies>
-        <!--工具类核心包-->
+		<!-- Sa-Token 权限认证, 在线文档：https://sa-token.cc/ -->
+		<dependency>
+			<groupId>cn.dev33</groupId>
+			<artifactId>sa-token-spring-boot-starter</artifactId>
+			<version>1.18.0</version>
+		</dependency>
+
+		<!--工具类核心包-->
         <dependency>
             <groupId>com.pig4cloud</groupId>
             <artifactId>pig-common-core</artifactId>

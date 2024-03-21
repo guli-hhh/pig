@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.pig4cloud.pig.mocuser.mapper.mocUserMapper">
+
+  <resultMap id="mocUserMap" type="com.pig4cloud.pig.mocuser.entity.mocUserEntity">
+        <id property="id" column="id"/>
+        <id property="name" column="name"/>
+        <id property="uuid" column="uuid"/>
+        <id property="age" column="age"/>
+        <id property="regtime" column="regtime"/>
+        <id property="lv" column="lv"/>
+        <id property="pwd" column="pwd"/>
+        <id property="phone" column="phone"/>
+        <id property="email" column="email"/>
+        <id property="qq" column="qq"/>
+        <id property="wchat" column="wchat"/>
+        <id property="douyin" column="douyin"/>
+        <id property="kuaishou" column="kuaishou"/>
+        <id property="bilibili" column="bilibili"/>
+  </resultMap>
+</mapper>
