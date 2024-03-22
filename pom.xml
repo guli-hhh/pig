@@ -111,6 +111,8 @@
         <module>pig-upms</module>
         <module>pig-common</module>
         <module>pig-visual</module>
+		<module>mocuser</module>
+		<module>sa-token-demo-sso-server</module>
     </modules>
 
     <dependencyManagement>

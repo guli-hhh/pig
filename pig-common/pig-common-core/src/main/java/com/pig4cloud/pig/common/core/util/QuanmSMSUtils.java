@@ -27,7 +27,7 @@ public class QuanmSMSUtils {
     private final int defModelID;
     private final String apiGateway;
 
-    private QuanmSMSUtils() {
+    public QuanmSMSUtils() {
         this.openID ="712";
         this.apiKey = "771d6214d52511eea3f40242ac110004";
         this.defModelID = 0;
