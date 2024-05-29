@@ -30,35 +30,85 @@
     <description>pig 单体版本启动</description>
 
     <dependencies>
-        <!--必备：认证中心模块-->
-        <dependency>
-            <groupId>com.pig4cloud</groupId>
-            <artifactId>pig-auth</artifactId>
-            <version>${revision}</version>
-        </dependency>
-        <!--必备：用户管理模块-->
-        <dependency>
-            <groupId>com.pig4cloud</groupId>
-            <artifactId>pig-upms-biz</artifactId>
-            <version>${revision}</version>
-        </dependency>
+		<!--必备：认证中心模块-->
+		<dependency>
+			<groupId>com.pig4cloud</groupId>
+			<artifactId>pig-auth</artifactId>
+			<version>${revision}</version>
+			<exclusions>
+				<exclusion>
+					<groupId>com.alibaba.cloud</groupId>
+					<artifactId>*</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>org.springframework.cloud</groupId>
+					<artifactId>*</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+		<!--必备：用户管理模块-->
+		<dependency>
+			<groupId>com.pig4cloud</groupId>
+			<artifactId>pig-upms-biz</artifactId>
+			<version>${revision}</version>
+			<exclusions>
+				<exclusion>
+					<groupId>com.alibaba.cloud</groupId>
+					<artifactId>*</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>org.springframework.cloud</groupId>
+					<artifactId>*</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
         <!--可选：代码生成模块-->
         <dependency>
             <groupId>com.pig4cloud</groupId>
             <artifactId>pig-codegen</artifactId>
             <version>${revision}</version>
+			<exclusions>
+				<exclusion>
+					<groupId>com.alibaba.cloud</groupId>
+					<artifactId>*</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>org.springframework.cloud</groupId>
+					<artifactId>*</artifactId>
+				</exclusion>
+			</exclusions>
         </dependency>
         <!--可选：定时任务模块-->
         <dependency>
             <groupId>com.pig4cloud</groupId>
             <artifactId>pig-quartz</artifactId>
             <version>${revision}</version>
+			<exclusions>
+				<exclusion>
+					<groupId>com.alibaba.cloud</groupId>
+					<artifactId>*</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>org.springframework.cloud</groupId>
+					<artifactId>*</artifactId>
+				</exclusion>
+			</exclusions>
         </dependency>
-        <!--安全模块-->
-        <dependency>
-            <groupId>com.pig4cloud</groupId>
-            <artifactId>pig-common-security</artifactId>
-        </dependency>
+		<!--安全模块-->
+		<dependency>
+			<groupId>com.pig4cloud</groupId>
+			<artifactId>pig-common-security</artifactId>
+			<exclusions>
+				<exclusion>
+					<groupId>com.alibaba.cloud</groupId>
+					<artifactId>*</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>org.springframework.cloud</groupId>
+					<artifactId>*</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
         <!--接口文档-->
         <dependency>
             <groupId>com.pig4cloud</groupId>
